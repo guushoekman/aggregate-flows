@@ -44,6 +44,7 @@
 
      <!-- semi-manufacuring -->
      <rect x="21.167" width="5.2917" height="3.0163" fill="#5aa02c" class="node" data-name="sheet-and-plate"/>
+     <rect x="21.167" y="3.0162" width="5.2917" height="1.6933" fill="#aade87" class="node" data-name="foil"/>
      <rect x="21.167" y="6.2442" width="5.2917" height="4.5773" fill="#3771c8" class="node" data-name="extrusion"/>
      <rect x="21.167" y="10.821" width="5.2917" height="1.5346" fill="#80b3ff" class="node" data-name="wire-and-cable"/>
      <rect x="21.167" y="12.356" width="5.2917" height="5.7415" fill="#de8787" class="node" data-name="shape-casting"/>
@@ -53,7 +54,7 @@
      <rect x="34.396" y="3.2015" width="5.2917" height="2.0373" fill="#a40" class="node" data-name="man-tau"/>
      <rect x="34.396" y="5.2388" width="5.2917" height="2.3548" fill="#9c60af" class="node" data-name="man-eca"/>
 
-     <rect x="34.396" y="7.5935" width="5.2917" height="2.4042" fill="#cda7d9"/>
+     <rect x="34.396" y="7.5935" width="5.2917" height="2.4042" fill="#cda7d9" class="node" data-name="man-eot"/>
      <rect x="34.396" y="9.9978" width="5.2917" height="3.7154" fill="#4ea6a6"/>
 
      <rect x="26.458" width="7.9375" height=".44979" fill="#5aa02c" class="flow" data-from="sheet-and-plate" data-to="man-bc"/>
@@ -64,11 +65,24 @@
       <rect x="33.073" y="5.2388" width="1.3229" height="1.233"/>
      </g>
 
+     <g fill="#5aa02c" class="flow" data-from="sheet-and-plate" data-to="man-eot">
+      <rect x="26.458" y="2.0532" width=".8957" height=".96573"/>
+      <rect x="33.5" y="7.5935" width=".8957" height=".96573"/>
+      <rect transform="matrix(.75319 .6578 -.59798 .80151 0 0)" x="23.221" y="-16.496" width="8.8428" height=".86002"/>
+     </g>
+
      <g fill="#5aa02c" class="flow" data-from="sheet-and-plate" data-to="man-tau">
       <rect x="26.458" y=".44979" width="1.3229" height=".37042"/>
       <path transform="matrix(.88732 .46116 -.22891 .97345 0 0)" x="28.005777" y="-12.805376" width="6.0503669" height="0.34094641" d="m28.006-12.805h6.0504v0.34095h-6.0504z" sodipodi:type="rect"/>
       <rect x="33.073" y="3.2015" width="1.3229" height=".37042"/>
      </g>
+
+     <g fill="#aade87" class="flow" data-from="foil" data-to="man-tau">
+      <rect x="26.458" y="3.0189" width=".44213" height=".52917"/>
+      <rect transform="rotate(4.5091)" x="27.055" y=".89473" width="7.1165" height=".52429"/>
+      <rect x="33.954" y="3.5719" width=".44213" height=".52917"/>
+     </g>
+
      <g fill="#3771c8" class="flow" data-from="extrusion" data-to="man-bc">
       <rect x="26.458" y="6.2442" width="1.3229" height="1.3859"/>
       <rect transform="matrix(.70768 -.70653 .82167 .56996 0 0)" x="9.7385" y="24.073" width="9.0446" height="1.386"/>
@@ -90,7 +104,6 @@
      <rect x="21.167" y="18.098" width="5.2917" height=".26458" fill="#faa"/>
      <rect x="21.167" y="18.362" width="5.2917" height=".21167" fill="#ffb380"/>
      <rect x="21.167" y="18.574" width="5.2917" height=".34396" fill="#ac9393"/>
-     <rect x="21.167" y="3.0162" width="5.2917" height="1.6933" fill="#aade87"/>
      <rect x="21.167" y="4.7096" width="5.2917" height="1.5346" fill="#c6e9af"/>
      <path x="4.6730042e-05" y="9.4191675" width="2.1695838" height="0.47624999" d="m4.673e-5 9.4192h2.1696v0.47625h-2.1696z" fill="#a00" sodipodi:type="rect"/>
      <path transform="rotate(90)" x="9.4191675" y="-2.5914078" width="1.3229166" height="0.47624999" d="m9.6806-2.5914h1.0615v0.47625h-1.3229v-0.21481a0.26144 0.26144 135 0 1 0.26144-0.26144z" fill="#a00" inkscape:path-effect="#path-effect1965-1" sodipodi:type="rect"/>
