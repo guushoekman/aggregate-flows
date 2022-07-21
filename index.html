@@ -4,24 +4,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aggregate Flows</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <style>
     svg {
       width: 100%;
       height: auto;
     }
 
+    .flow,
     .node {
       cursor: pointer;
     }
 
-    .node:hover {
-      opacity: .8;
-    }
-
     .flow.opaque {
       opacity: .1;
+    }
+
+    .popover-header,
+    .popover-body {
+      padding: 6px 12px;
+    }
+
+    .node.active {
+      stroke: #000;
+    }
+
+    text {
+      pointer-events: none;
+    }
+
+    table.table {
+      margin-bottom: 0;
     }
   </style>
 </head>
@@ -35,98 +48,357 @@
     </div>
   </nav>
   <div class="container pt-4">
-    <svg viewBox="0 0 39.687 18.918" xmlns="http://www.w3.org/2000/svg">
-     <rect width="5.2917" height="9.3662" fill="#a00"/>
-     <rect x="5.2917" width="5.2917" height="7.8846" fill="#faa"/>
-     <rect x="10.583" width="5.2917" height="7.8581" fill="#cd87de"/>
-     <rect x="15.875" width="5.2917" height="18.918" fill="#f2f2f2"/>
+    <svg width="2000" height="500" viewBox="0 0 505.88 132.03" xmlns="http://www.w3.org/2000/svg">
+      <!-- reserves to extraction -->
+      <rect class="flow" data-index="0" x="40.217" y="42.598" width="52.917" height="24.342"/>
+      <rect class="flow" data-index="1" x="40.217" y="66.94" width="52.917" height="11.642"/>
+      <rect class="flow" data-index="2" x="40.217" y="78.581" width="52.917" height="4.2333"/>
 
+      <!-- extraction to processing -->
+      <rect class="flow" data-index="3" x="133.35" y="47.625" width="52.917" height="8.7312"/>
+      <rect class="flow" data-index="4" x="133.35" y="56.356" width="52.917" height="21.431"/>
 
-     <!-- semi-manufacuring -->
-     <rect x="21.167" width="5.2917" height="3.0163" fill="#5aa02c" class="node" data-name="sheet-and-plate"/>
-     <rect x="21.167" y="3.0162" width="5.2917" height="1.6933" fill="#aade87" class="node" data-name="foil"/>
-     <rect x="21.167" y="6.2442" width="5.2917" height="4.5773" fill="#3771c8" class="node" data-name="extrusion"/>
-     <rect x="21.167" y="10.821" width="5.2917" height="1.5346" fill="#80b3ff" class="node" data-name="wire-and-cable"/>
-     <rect x="21.167" y="12.356" width="5.2917" height="5.7415" fill="#de8787" class="node" data-name="shape-casting"/>
+      <!-- extraction to waste -->
+      <path class="flow" data-index="5" d="m109.01 82.814v49.213h379.68v-49.213h-2.9103v46.302h-373.86v-46.302z"/>
 
-     <!-- manufacuring -->
-     <rect x="34.396" width="5.2917" height="3.2015" fill="#afc6e9" class="node" data-name="man-bc"/>
-     <rect x="34.396" y="3.2015" width="5.2917" height="2.0373" fill="#a40" class="node" data-name="man-tau"/>
-     <rect x="34.396" y="5.2388" width="5.2917" height="2.3548" fill="#9c60af" class="node" data-name="man-eca"/>
+      <!-- extraction to use -->
+      <path class="flow" data-index="6" d="m114.56 82.815v43.127h288.66v-43.127h-2.9104v40.217h-282.84v-40.217z"/>
 
-     <rect x="34.396" y="7.5935" width="5.2917" height="2.4042" fill="#cda7d9" class="node" data-name="man-eot"/>
-     <rect x="34.396" y="9.9978" width="5.2917" height="3.7154" fill="#4ea6a6"/>
+      <!-- processing to manufacturing -->
+      <rect class="flow" data-index="7" x="226.48" y="52.387" width="52.917" height="3.175"/>
+      <rect class="flow" data-index="8" x="226.48" y="55.562" width="52.917" height="3.175"/>
+      <rect class="flow" data-index="9" x="226.48" y="58.737" width="52.917" height="5.0271"/>
+      <rect class="flow" data-index="10" x="226.48" y="63.765" width="52.917" height=".79375"/>
+      <rect class="flow" data-index="11" x="226.48" y="64.558" width="52.917" height=".79375"/>
+      <rect class="flow" data-index="12" x="226.48" y="65.352" width="52.917" height="1.3229"/>
+      <rect class="flow" data-index="13" x="226.48" y="66.675" width="52.917" height="1.8521"/>
 
-     <rect x="26.458" width="7.9375" height=".44979" fill="#5aa02c" class="flow" data-from="sheet-and-plate" data-to="man-bc"/>
+      <!-- processing to export -->
+      <rect class="flow" data-index="14" x="191.56" width="1.5875" height="42.598"/>
 
-     <g fill="#5aa02c" class="flow" data-from="sheet-and-plate" data-to="man-eca">
-      <rect x="26.458" y=".82021" width="1.3229" height="1.233"/>
-      <rect transform="rotate(38.296)" x="22.312" y="-16.573" width="7.6554" height="1.1561" ry="0"/>
-      <rect x="33.073" y="5.2388" width="1.3229" height="1.233"/>
-     </g>
+      <!-- processing to waste -->
+      <path class="flow" data-index="15" d="m192.62 82.815v37.835h290.51v-37.835h-3.175v34.66h-284.16v-34.66z"/>
 
-     <g fill="#5aa02c" class="flow" data-from="sheet-and-plate" data-to="man-eot">
-      <rect x="26.458" y="2.0532" width=".8957" height=".96573"/>
-      <rect x="33.5" y="7.5935" width=".8957" height=".96573"/>
-      <rect transform="matrix(.75319 .6578 -.59798 .80151 0 0)" x="23.221" y="-16.496" width="8.8428" height=".86002"/>
-     </g>
+      <!-- processing to use -->
+      <path class="flow" data-index="16" d="m200.55 82.815v31.485h193.67v-31.485h-2.6458v28.84h-188.38v-28.84z"/>
+      <path class="flow" data-index="17" d="m203.2 82.815v28.84h188.39v-7.6729h-6e-3v-21.167h-7.6729v21.167h-173.04v-21.167z"/>
 
-     <g fill="#5aa02c" class="flow" data-from="sheet-and-plate" data-to="man-tau">
-      <rect x="26.458" y=".44979" width="1.3229" height=".37042"/>
-      <path transform="matrix(.88732 .46116 -.22891 .97345 0 0)" x="28.005777" y="-12.805376" width="6.0503669" height="0.34094641" d="m28.006-12.805h6.0504v0.34095h-6.0504z" sodipodi:type="rect"/>
-      <rect x="33.073" y="3.2015" width="1.3229" height=".37042"/>
-     </g>
+      <!-- waste to processing -->
+      <path class="flow" data-index="18" d="m205.58 24.077v18.521h10.848v-7.6729h275.17v7.6729h10.848v-18.521h-10.848z"/>
+      <path class="flow" data-index="19" d="m216.43 34.925v7.6729h1.5875v-6.0854h271.99v6.0854h1.5875v-7.6729h-273.58z"/>
 
-     <g fill="#aade87" class="flow" data-from="foil" data-to="man-tau">
-      <rect x="26.458" y="3.0189" width=".44213" height=".52917"/>
-      <rect transform="rotate(4.5091)" x="27.055" y=".89473" width="7.1165" height=".52429"/>
-      <rect x="33.954" y="3.5719" width=".44213" height=".52917"/>
-     </g>
+      <!-- manufacturing to use -->
+      <rect class="flow" data-index="20" x="319.62" y="60.854" width="52.917" height="1.0583"/>
+      <rect class="flow" data-index="21" x="319.62" y="61.912" width="52.917" height="4.2333"/>
 
-     <g fill="#3771c8" class="flow" data-from="extrusion" data-to="man-bc">
-      <rect x="26.458" y="6.2442" width="1.3229" height="1.3859"/>
-      <rect transform="matrix(.70768 -.70653 .82167 .56996 0 0)" x="9.7385" y="24.073" width="9.0446" height="1.386"/>
-      <rect x="33.073" y=".44979" width="1.3229" height="1.3859"/>
-     </g>
+      <!-- manufacturing to waste -->
+      <path class="flow" data-index="22" d="m297.92 82.815v14.817h179.92v-14.817h-2.9104v11.906h-174.1v-11.906z"/>
 
-     <g fill="#80b3ff" class="flow" data-from="wire-and-cable" data-to="man-bc">
-      <rect x="26.458" y="10.821" width="1.3229" height=".54104"/>
-      <rect transform="matrix(.55132 -.83429 .78836 .61522 0 0)" x="8.159" y="29.188" width="11.164" height=".34587"/>
-      <rect x="33.633" y="1.8357" width=".76252" height=".54104"/>
-     </g>
+      <!-- import to manufacturing -->
+      <rect class="flow" data-index="23" x="297.92" width="2.1167" height="42.598"/>
 
-     <g fill="#de8787" class="flow" data-from="shape-casting" data-to="man-bc">
-      <rect x="26.458" y="12.356" width="1.3229" height=".56376"/>
-      <rect transform="matrix(.53241 -.84648 .79349 .60859 0 0)" x="6.6843" y="30.081" width="12.135" height=".44543"/>
-      <rect transform="scale(-1,1)" x="-34.396" y="2.3768" width=".51293" height=".56376"/>
-     </g>
+      <!-- import to use -->
+      <rect class="flow" data-index="24" x="385.43" width="2.3812" height="44.319"/>
 
-     <rect x="21.167" y="18.098" width="5.2917" height=".26458" fill="#faa"/>
-     <rect x="21.167" y="18.362" width="5.2917" height=".21167" fill="#ffb380"/>
-     <rect x="21.167" y="18.574" width="5.2917" height=".34396" fill="#ac9393"/>
-     <rect x="21.167" y="4.7096" width="5.2917" height="1.5346" fill="#c6e9af"/>
-     <path x="4.6730042e-05" y="9.4191675" width="2.1695838" height="0.47624999" d="m4.673e-5 9.4192h2.1696v0.47625h-2.1696z" fill="#a00" sodipodi:type="rect"/>
-     <path transform="rotate(90)" x="9.4191675" y="-2.5914078" width="1.3229166" height="0.47624999" d="m9.6806-2.5914h1.0615v0.47625h-1.3229v-0.21481a0.26144 0.26144 135 0 1 0.26144-0.26144z" fill="#a00" inkscape:path-effect="#path-effect1965-1" sodipodi:type="rect"/>
-     <path x="5.291666" y="7.9522505" width="2.1695838" height="1.4140002" d="m5.2917 7.9523h2.1696v1.414h-2.1696z" fill="#faa" sodipodi:type="rect"/>
-     <path transform="rotate(90)" x="7.9522505" y="-8.8899994" width="2.5250001" height="1.4816667" d="m8.2137-8.89h2.2636v1.4817h-2.525v-1.2202a0.26144 0.26144 135 0 1 0.26144-0.26144z" fill="#faa" inkscape:path-effect="#path-effect1965-1-8" sodipodi:type="rect"/>
+      <!-- use to waste -->
+      <rect class="flow" data-index="25" x="412.75" y="59.531" width="52.917" height="7.4083"/>
+
+      <!-- waste to use -->
+      <path class="flow" data-index="26" d="m393.7 37.306v5.2917h1.3229v-3.9688h90.488v3.9688h1.3229v-5.2917h-91.81z"/>
+
+      <!--  -->
+      <rect class="node" data-name="Reserves" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
+      <text x="6.8749571" y="65.075249"><tspan x="6.8749571" y="65.075249" style="fill:#000000;font-family:FreeSans;font-size:6.35px;" sodipodi:role="line">Reserves</tspan></text>
+
+      <rect class="node" data-name="Extraction" x="93.133" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
+      <text x="99.389206" y="65.075249"><tspan x="99.389206" y="65.075249" style="fill:#000000;font-family:FreeSans;font-size:6.35px;" sodipodi:role="line">Extraction</tspan></text>
+
+      <rect class="node" data-name="Processing / production" x="186.27" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
+      <text x="206.89563" y="60.359631"><tspan x="206.89563" y="60.359631" style="fill:#000000;font-family:FreeSans;font-size:6.35px;text-align:center;text-anchor:middle" sodipodi:role="line">Processing / </tspan><tspan x="206.89563" y="68.55262" style="fill:#000000;font-family:FreeSans;font-size:6.35px;text-align:center;text-anchor:middle" sodipodi:role="line">production</tspan></text>
+
+      <rect class="node" data-name="Manufacturing" x="279.4" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
+      <text x="299.45193" y="64.284325"><tspan x="299.45193" y="64.284325" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle" sodipodi:role="line">Manufacturing</tspan></text>
+
+      <rect class="node" data-name="Use" x="372.53" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
+      <text x="392.58527" y="64.284325"><tspan x="392.58527" y="64.284325" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle" sodipodi:role="line">Use</tspan></text>
+
+      <rect class="node" data-name="Waste management" x="465.67" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
+      <text x="485.66217" y="60.634529"><tspan x="485.66217" y="60.634529" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle" sodipodi:role="line">Waste</tspan><tspan x="485.66217" y="67.917183" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle" sodipodi:role="line">management</tspan></text>
     </svg>
 
-    <hr class="my-4">
+    <div class="row mt-4 pt-4" id="inputs-ouputs" hidden>
+      <div class="col">
+        <h3>Inputs</h3>
+        <div class="border border-bottom-0">
+          <table class="table" id="table-input">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>From</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
 
-    <img class="img-fluid" src="chart.png">
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="col">
+        <h3>Outputs</h3>
+        <div class="border border-bottom-0">
+          <table class="table" id="table-output">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>To</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   <script>
+    const flows = [
+     {
+       "label": "Land won crushed rock",
+       "from": "Reserves",
+       "to": "Extraction",
+       "value": 92195,
+       "color": "green"
+     },
+     {
+       "label": "Land won sand and gravel",
+       "from": "Reserves",
+       "to": "Extraction",
+       "value": 44124,
+       "color": "pink"
+     },
+     {
+       "label": "Marine dredged sand and gravel",
+       "from": "Reserves",
+       "to": "Extraction",
+       "value": 15946,
+       "color": "lime"
+     },
+     {
+       "label": "Raw sand and gravel",
+       "from": "Extraction",
+       "to": "Processing / production",
+       "value": 33419,
+       "color": "skyblue"
+     },
+     {
+       "label": "Raw crushed rock",
+       "from": "Extraction",
+       "to": "Processing / production",
+       "value": 81488,
+       "color": "blue"
+     },
+     {
+       "label": "Overburden / interburden",
+       "from": "Extraction",
+       "to": "Waste management",
+       "value": 10706,
+       "color": "blue"
+     },
+     {
+       "label": "Aggregates used as fill",
+       "from": "Extraction",
+       "to": "Use",
+       "value": 10633,
+       "color": "skyblue"
+     },
+     {
+       "label": "Concreting crushed rock",
+       "from": "Processing / production",
+       "to": "Manufacturing",
+       "value": 11886,
+       "color": "teal"
+     },
+     {
+       "label": "Concreting gravel",
+       "from": "Processing / production",
+       "to": "Manufacturing",
+       "value": 11563,
+       "color": "purple"
+     },
+     {
+       "label": "Concreting sand",
+       "from": "Processing / production",
+       "to": "Manufacturing",
+       "value": 19106,
+       "color": "maroon"
+     },
+     {
+       "label": "Asphalt sand",
+       "from": "Processing / production",
+       "to": "Manufacturing",
+       "value": 929,
+       "color": "orange"
+     },
+     {
+       "label": "Asphalt gravel",
+       "from": "Processing / production",
+       "to": "Manufacturing",
+       "value": 458,
+       "color": "red"
+     },
+     {
+       "label": "Asphalt crushed rock",
+       "from": "Processing / production",
+       "to": "Manufacturing",
+       "value": 4025,
+       "color": "gold"
+     },
+     {
+       "label": "Mortal sand",
+       "from": "Processing / production",
+       "to": "Manufacturing",
+       "value": 5634,
+       "color": "yellow"
+     },
+     {
+       "label": "Exports of processed sand, gravel and crushed rock",
+       "from": "Processing / production",
+       "to": "Export",
+       "value": 4949,
+       "color": "pink"
+     },
+     {
+       "label": "Scalping and fines",
+       "from": "Processing / production",
+       "to": "Waste management",
+       "value": 11886,
+       "color": "skyblue"
+     },
+     {
+       "label": "Non-aggregate use",
+       "from": "Processing / production",
+       "to": "Use",
+       "value": 9909,
+       "color": "orange"
+     },
+     {
+       "label": "Other aggregates",
+       "from": "Processing / production",
+       "to": "Use",
+       "value": 29127,
+       "color": "red"
+     },
+     {
+       "label": "Recycled C&D flows",
+       "from": "Waste management",
+       "to": "Processing / production",
+       "value": 40790,
+       "color": "blue"
+     },
+     {
+       "label": "Recycled processing / production waste",
+       "from": "Waste management",
+       "to": "Processing / production",
+       "value": 6535,
+       "color": "orange"
+     },
+     {
+       "label": "Concrete, asphalt and mortar for infrastructure",
+       "from": "Manufacturing",
+       "to": "Use",
+       "value": 676,
+       "color": "yellow"
+     },
+     {
+       "label": "Concrete, asphalt and mortar for building",
+       "from": "Manufacturing",
+       "to": "Use",
+       "value": 15564,
+       "color": "green"
+     },
+     {
+       "label": "Manufacturing waste",
+       "from": "Manufacturing",
+       "to": "Waste management",
+       "value": 10666,
+       "color": "green"
+     },
+     {
+       "label": "Imports of processed sand, gravel and crushed rock",
+       "from": "Import",
+       "to": "Manufacturing",
+       "value": 8467,
+       "color": "maroon"
+     },
+     {
+       "label": "Processed crushed rock imports",
+       "from": "Import",
+       "to": "Use",
+       "value": 8922,
+       "color": "red"
+     },
+     {
+       "label": "End-of-life",
+       "from": "Use",
+       "to": "Waste management",
+       "value": 28024,
+       "color": "green"
+     },
+     {
+       "label": "Recycling deconstruction flows",
+       "from": "Waste management",
+       "to": "Use",
+       "value": 5237,
+       "color": "green"
+     }
+    ]
+
+    $(flows).each(function(index, flow) {
+      $(".flow[data-index='" + index + "']").attr({
+        "data-bs-toggle": "popover",
+        "data-bs-trigger": "hover focus",
+        "data-bs-placement": "left",
+        "data-bs-title": flow.label,
+        "data-bs-content": flow.from + " → " + flow.to + ": " + flow.value + "kt",
+        "fill": flow.color,
+      })
+    })
+
+    // enable popups
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
     $(".node").click(function() {
       let node = $(this);
       let name = node.data("name");
 
+      $(".node").removeClass("active")
+      $(this).addClass("active")
+
       $(".flow").addClass("opaque")
 
-      $(".flow[data-to='" + name + "'], .flow[data-from='" + name + "']").removeClass("opaque").appendTo("svg")
+      $("#inputs-ouputs").removeAttr("hidden");
+
+      // clear input/output tables
+      $("#inputs-ouputs tbody").html("");
+
+      $(flows).each(function(index, flow) {
+        if (flow.to == name) {
+          $(".flow[data-index='" + index + "']").removeClass("opaque")
+          $("#table-input tbody").append("<tr><td>" + flow.label + "</td><td>" + flow.from + "</td><td>" + flow.value + "kt</td></tr>")
+        } else if (flow.from == name) {
+          $(".flow[data-index='" + index + "']").removeClass("opaque")
+          $("#table-output tbody").append("<tr><td>" + flow.label + "</td><td>" + flow.to + "</td><td>" + flow.value + "kt</td></tr>")
+        }
+      })
     })
   </script>
 </body>
