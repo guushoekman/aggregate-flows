@@ -42,13 +42,17 @@
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
       <a class="navbar-brand" href="#">Aggregate flows</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded=false aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </nav>
   <div class="container pt-4">
     <svg width="2000" height="500" viewBox="0 0 505.88 132.03" xmlns="http://www.w3.org/2000/svg">
+      <text x="196" y="5" font-size="6">Export</text>
+      <text x="302" y="5" font-size="6">Import</text>
+      <text x="390" y="5" font-size="6">Import</text>
+
       <!-- reserves to extraction -->
       <rect class="flow" data-index="0" x="40.217" y="42.598" width="52.917" height="24.342"/>
       <rect class="flow" data-index="1" x="40.217" y="66.94" width="52.917" height="11.642"/>
@@ -106,7 +110,7 @@
       <!-- waste to use -->
       <path class="flow" data-index="26" d="m393.7 37.306v5.2917h1.3229v-3.9688h90.488v3.9688h1.3229v-5.2917h-91.81z"/>
 
-      <!--  -->
+      <!-- nodes -->
       <rect class="node" data-name="Reserves" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
       <text x="6.8749571" y="65.075249"><tspan x="6.8749571" y="65.075249" style="fill:#000000;font-family:FreeSans;font-size:6.35px;" sodipodi:role="line">Reserves</tspan></text>
 
@@ -127,8 +131,9 @@
     </svg>
 
     <div class="row mt-4 pt-4" id="inputs-ouputs" hidden>
+      <h2 id="node-title"></h2>
       <div class="col">
-        <h3>Inputs</h3>
+        <h5>Inputs</h5>
         <div class="border border-bottom-0">
           <table class="table" id="table-input">
             <thead>
@@ -147,7 +152,7 @@
       </div>
 
       <div class="col">
-        <h3>Outputs</h3>
+        <h5>Outputs</h5>
         <div class="border border-bottom-0">
           <table class="table" id="table-output">
             <thead>
@@ -164,6 +169,25 @@
         </div>
       </div>
     </div>
+
+    <div class="mt-4 pt-4" id="category" hidden>
+      <h2 id="category-title"></h2>
+      <div class="border border-bottom-0">
+        <table class="table" id="table-category">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -175,189 +199,216 @@
        "from": "Reserves",
        "to": "Extraction",
        "value": 92195,
-       "color": "green"
+       "category": "Rock",
+       "color": "#e41a1c"
      },
      {
        "label": "Land won sand and gravel",
        "from": "Reserves",
        "to": "Extraction",
        "value": 44124,
-       "color": "pink"
+       "category": "Sand and gravel",
+       "color": "#377eb8"
      },
      {
        "label": "Marine dredged sand and gravel",
        "from": "Reserves",
        "to": "Extraction",
        "value": 15946,
-       "color": "lime"
+       "category": "Sand and gravel",
+       "color": "#308edb"
      },
      {
        "label": "Raw sand and gravel",
        "from": "Extraction",
        "to": "Processing / production",
        "value": 33419,
-       "color": "skyblue"
+       "category": "Sand and gravel",
+       "color": "#377eb8"
      },
      {
        "label": "Raw crushed rock",
        "from": "Extraction",
        "to": "Processing / production",
        "value": 81488,
-       "color": "blue"
+       "category": "Rock",
+       "color": "#e41a1c"
      },
      {
        "label": "Overburden / interburden",
        "from": "Extraction",
        "to": "Waste management",
        "value": 10706,
-       "color": "blue"
+       "category": false,
+       "color": "#b2b260"
      },
      {
        "label": "Aggregates used as fill",
        "from": "Extraction",
        "to": "Use",
        "value": 10633,
-       "color": "skyblue"
+       "category": false,
+       "color": "#8e8e39"
      },
      {
        "label": "Concreting crushed rock",
        "from": "Processing / production",
        "to": "Manufacturing",
        "value": 11886,
-       "color": "teal"
+       "category": "Rock",
+       "color": "#e41a1c"
      },
      {
        "label": "Concreting gravel",
        "from": "Processing / production",
        "to": "Manufacturing",
        "value": 11563,
-       "color": "purple"
+       "category": "Sand and gravel",
+       "color": "#377eb8"
      },
      {
        "label": "Concreting sand",
        "from": "Processing / production",
        "to": "Manufacturing",
        "value": 19106,
-       "color": "maroon"
+       "category": "Sand and gravel",
+       "color": "#a6cee3"
      },
      {
        "label": "Asphalt sand",
        "from": "Processing / production",
        "to": "Manufacturing",
        "value": 929,
-       "color": "orange"
+       "category": "Sand and gravel",
+       "color": "#a6cee3"
      },
      {
        "label": "Asphalt gravel",
        "from": "Processing / production",
        "to": "Manufacturing",
        "value": 458,
-       "color": "red"
+       "category": "Sand and gravel",
+       "color": "#377eb8"
      },
      {
        "label": "Asphalt crushed rock",
        "from": "Processing / production",
        "to": "Manufacturing",
        "value": 4025,
-       "color": "gold"
+       "category": "Rock",
+       "color": "#e41a1c"
      },
      {
        "label": "Mortal sand",
        "from": "Processing / production",
        "to": "Manufacturing",
        "value": 5634,
-       "color": "yellow"
+       "category": "Sand and gravel",
+       "color": "#a6cee3"
      },
      {
        "label": "Exports of processed sand, gravel and crushed rock",
        "from": "Processing / production",
        "to": "Export",
        "value": 4949,
-       "color": "pink"
+       "category": false,
+       "color": "#b15928"
      },
      {
        "label": "Scalping and fines",
        "from": "Processing / production",
        "to": "Waste management",
        "value": 11886,
-       "color": "skyblue"
+       "category": false,
+       "color": "#967630"
      },
      {
        "label": "Non-aggregate use",
        "from": "Processing / production",
        "to": "Use",
        "value": 9909,
-       "color": "orange"
+       "category": false,
+       "color": "#c93c7b"
      },
      {
        "label": "Other aggregates",
        "from": "Processing / production",
        "to": "Use",
        "value": 29127,
-       "color": "red"
+       "category": false,
+       "color": "#96305e"
      },
      {
        "label": "Recycled C&D flows",
        "from": "Waste management",
        "to": "Processing / production",
        "value": 40790,
-       "color": "blue"
+       "category": false,
+       "color": "#96305e"
      },
      {
        "label": "Recycled processing / production waste",
        "from": "Waste management",
        "to": "Processing / production",
        "value": 6535,
-       "color": "orange"
+       "category": false,
+       "color": "#458926"
      },
      {
        "label": "Concrete, asphalt and mortar for infrastructure",
        "from": "Manufacturing",
        "to": "Use",
        "value": 676,
-       "color": "yellow"
+       "category": "Concrete, asphalt and mortar ",
+       "color": "#c63574"
      },
      {
        "label": "Concrete, asphalt and mortar for building",
        "from": "Manufacturing",
        "to": "Use",
        "value": 15564,
-       "color": "green"
+       "category": "Concrete, asphalt and mortar ",
+       "color": "#ba7895"
      },
      {
        "label": "Manufacturing waste",
        "from": "Manufacturing",
        "to": "Waste management",
        "value": 10666,
-       "color": "green"
+       "category": false,
+       "color": "#7a7a56"
      },
      {
        "label": "Imports of processed sand, gravel and crushed rock",
        "from": "Import",
        "to": "Manufacturing",
        "value": 8467,
-       "color": "maroon"
+       "category": false,
+       "color": "#6a3d9a"
      },
      {
        "label": "Processed crushed rock imports",
        "from": "Import",
        "to": "Use",
        "value": 8922,
-       "color": "red"
+       "category": "Rock",
+       "color": "#e41a1c"
      },
      {
        "label": "End-of-life",
        "from": "Use",
        "to": "Waste management",
        "value": 28024,
-       "color": "green"
+       "category": false,
+       "color": "#7a7a56"
      },
      {
        "label": "Recycling deconstruction flows",
        "from": "Waste management",
        "to": "Use",
        "value": 5237,
-       "color": "green"
+       "category": false,
+       "color": "#7a7a56"
      }
     ]
 
@@ -385,7 +436,9 @@
 
       $(".flow").addClass("opaque")
 
-      $("#inputs-ouputs").removeAttr("hidden");
+      $("#category").attr("hidden", "hidden");
+
+      $("#node-title").text(name);
 
       // clear input/output tables
       $("#inputs-ouputs tbody").html("");
@@ -399,6 +452,41 @@
           $("#table-output tbody").append("<tr><td>" + flow.label + "</td><td>" + flow.to + "</td><td>" + flow.value + "kt</td></tr>")
         }
       })
+
+      $("#inputs-ouputs").removeAttr("hidden");
+    })
+
+    $(".flow").click(function() {
+      let flow = $(this);
+      let index = flow.data("index");
+
+      $(".flow").addClass("opaque")
+      $(".node").removeClass("active")
+
+      $("#inputs-ouputs").attr("hidden", "hidden");
+      $("#category").removeAttr("hidden");
+
+      // clear input/output tables
+      $("#inputs-ouputs tbody").html("");
+
+      let category = flows[index].category
+
+      // clear category table
+      $("#table-category tbody").html("");
+
+      if (category) {
+        $("#category-title").text(category);
+        $(flows).each(function(i, flow) {
+          if (flow.category == category) {
+            $(".flow[data-index='" + i + "']").removeClass("opaque")
+            $("#table-category tbody").append("<tr><td>" + flow.label + "</td><td>" + flow.from + "</td><td>" + flow.to + "</td><td>" + flow.value + "kt</td></tr>")
+          }
+        })
+      } else {
+        $("#category-title").text(flows[index].label);
+        $(".flow[data-index='" + index + "']").removeClass("opaque")
+        $("#table-category tbody").append("<tr><td>" + flows[index].label + "</td><td>" + flows[index].from + "</td><td>" + flows[index].to + "</td><td>" + flows[index].value + "kt</td></tr>")
+      }
     })
   </script>
 </body>
