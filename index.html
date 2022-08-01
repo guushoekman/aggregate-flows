@@ -683,8 +683,8 @@
       valuesuffix: "kt",
       valueformat: ",",
       node: {
-        label: ["Manufacturing", "Sand", "Gravel", "Rock", "Crushed rock", "Roads", "Commerical buildings", "Social buildings", "Residential buildings", "Rock chippings"],
-        color: ["#ececec","gold","gray","#e41a1c","#e41a1c","#ececec","#ececec","#ececec","#ececec","pink"],
+        label: ["Manufacturing", "Sand", "Gravel", "Rock", "Crushed rock", "Roads", "Commercial buildings", "Social buildings", "Residential buildings", "Rock chippings", "Waste"],
+        color: ["#ececec","gold","gray","#e41a1c","#e41a1c","#ececec","#ececec","#ececec","#ececec","pink", "#ececec"],
         pad: 10,
         thickness: 50,
         line: {
@@ -693,10 +693,10 @@
       },
       link: {
         // label: [],
-        color:  ["gold","gray","#e41a1c","pink","gold","gold","gold","gold","gray","gray","gray","gray","#e41a1c","#e41a1c","#e41a1c","#e41a1c","pink"],
-        source: [0,0,0,0,1,1,1,1,2,2,2,2,4,4,4,4,9],
-        target: [1,2,4,9,5,6,7,8,5,6,7,8,5,6,7,8,5],
-        value:  [5520,5514,5205,12,334,1731,1729,1727,324,1730,1731,1729,6,1727,1730,1731,12]}
+        color:  ["gold","gray","#e41a1c","pink","gold","gold","gold","gold","gray","gray","gray","gray","#e41a1c","#e41a1c","#e41a1c","#e41a1c","pink", "gold", "gray", "#e41a1c", "gold", "gray", "#e41a1c", "gold", "gray", "#e41a1c"],
+        source: [0,0,0,0,1,1,1,1,2,2,2,2,4,4,4,4,9,6,7,8,10,10,10,5],
+        target: [1,2,4,9,5,6,7,8,5,6,7,8,5,6,7,8,5,10,10,10,6,7,8,10],
+        value:  [5520,5514,5205,12,334,1731,1729,1727,324,1730,1731,1729,6,1727,1730,1731,12,1200,1200,1200,900,900,900,20]}
       }]
   </script>
 </body>
