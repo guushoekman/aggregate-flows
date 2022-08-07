@@ -83,6 +83,11 @@
       background-color: #efefef;
       cursor: pointer;
       padding: .25rem .5rem;
+      font-size: 12px;
+    }
+
+    .back-sankey i {
+      margin-right: .25rem;
     }
 
     .x-button {
@@ -108,25 +113,21 @@
     </div>
   </nav>
   <div class="container pt-4">
+<!--
     <h2>Highlight by material</h2>
     <div class="row mb-4">
       <div class="col-md-3">
-        <div class="select-material btn btn-outline-secondary active" data-material="all">
-          <i class="fal fa-fw me-1 fa-circle"></i> All
+        <div class="select-material btn btn-outline-primary" data-material="Sand and gravel">
+          <i class="fal fa-fw me-1 fa-umbrella-beach"></i> Sand and gravel
         </div>
       </div>
       <div class="col-md-3">
-        <div class="select-material btn btn-outline-primary" data-material="sand">
-          <i class="fal fa-fw me-1 fa-umbrella-beach"></i> Sand
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="select-material btn btn-outline-danger" data-material="rock">
+        <div class="select-material btn btn-outline-danger" data-material="Rock">
           <i class="fal fa-fw me-1 fa-mountain"></i> Rock
         </div>
       </div>
     </div>
-
+ -->
     <div class="row">
       <div id="col-svg" class="col-12">
         <div class="svg-wrapper position-relative p-3">
@@ -226,6 +227,7 @@
         <div class="nodesankey" data-name="Manufacturing" hidden>Manufacturing</div>
 
         <div class="nodesankey" data-name="Use" hidden>
+          <h4 class="text-center">Use</h4>
           <svg data-name="Use" viewBox="0 0 1025 340" xmlns="http://www.w3.org/2000/svg">
            <path class="flow" data-index="0" d="m90 126.01c189 0 189 15 378 15v37.5c-189 0-189-15-378-15z" style="fill:#ffd700"/>
            <path class="flow" data-index="1" d="m90 163.51c189 0 189 15 378 15v18.75c-189 0-189-15-378-15z" style="fill:#f00"/>
@@ -276,9 +278,6 @@
 
            <rect class="node" data-name="Other" x="468" y="302.26" width="90" height="18.75" style="fill:#ececec"/>
            <text class="node-label" x="497.80957" y="315.91928" style="fill:#444444;font-family:'Open Sans', sans-serif;font-size:12px;white-space:pre" data-notex="1">Other</text>
-
-           <rect x="377.98" y=".50455" width="269.04" height="338.99" style="fill:none;stroke-width:1.0091;stroke:#000"/>
-           <text x="476.2793" y="37.524742" style="fill:#000000;font-family:sans-serif;font-size:40px;line-height:1.25" xml:space="preserve"><tspan x="476.2793" y="37.524742" style="font-family:'Open Sans', sans-serif" sodipodi:role="line">Use</tspan></text>
           </svg>
         </div>
 
@@ -307,7 +306,7 @@
            <path class="flow" data-index="18" d="m648 41.733c234 0 234 10 468 10v7.6473c-234 0-234-10-468-10z" style="fill:#a52a2a;stroke-width:0px"/>
            <path class="flow" data-index="19" d="m648 134.82c234 0 234-34.367 468-34.367v7.6473c-234 0-234 34.367-468 34.367z" style="fill:#a52a2a;stroke-width:0px"/>
            <path class="flow" data-index="20" d="m648 227.99c234 0 234-78.734 468-78.734v7.6473c-234 0-234 78.734-468 78.734z" style="fill:#a52a2a;stroke-width:0px"/>
-           <rect class="node" data-name="Manufacturing" x="5e-7" y="12.525" width="90" height="249.95" style="fill:#ececec;stroke-width:0px"/>
+           <rect class="open-node node" data-name="Manufacturing" x="5e-7" y="12.525" width="90" height="249.95" style="fill:#ececec;stroke-width:0px"/>
            <text class="node-label" x="6.8730474" y="140.60483" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1">Manufacturing</text>
            <rect class="node" data-name="Commercial buildings" x="558" y="5e-7" width="90" height="83.747" style="fill:#ececec;stroke-width:0px"/>
            <text class="node-label" x="603.09668" y="37.476135" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1"><tspan x="603.09668" y="37.476135" style="text-align:center;text-anchor:middle" sodipodi:role="line">Commercial</tspan><tspan x="603.09668" y="52.476135" style="text-align:center;text-anchor:middle" sodipodi:role="line">buildings</tspan></text>
@@ -317,7 +316,7 @@
            <text class="node-label" x="602.90918" y="224.01869" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;text-align:center;text-anchor:middle;white-space:pre" data-notex="1"><tspan x="602.90918" y="224.01869" sodipodi:role="line">Residential</tspan><tspan x="602.90918" y="239.01869" sodipodi:role="line">buildings</tspan></text>
            <rect class="node" data-name="Stock" x="1116" y="166.9" width="90" height="103.1" style="fill:#ececec;stroke-width:0px"/>
            <text class="node-label" x="1175.7246" y="222.73785" text-anchor="end" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1">Stock</text>
-           <rect class="node" data-name="Waste management" x="1116" y="10" width="90" height="146.9" style="fill:#ececec;stroke-width:0px"/>
+           <rect class="open-node node" data-name="Waste management" x="1116" y="10" width="90" height="146.9" style="fill:#ececec;stroke-width:0px"/>
            <text class="node-label" x="1160.6455" y="78.832031" text-anchor="end" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1"><tspan x="1160.6455" y="78.832031" style="text-align:center;text-anchor:middle" sodipodi:role="line">Waste</tspan><tspan x="1160.6455" y="93.832031" style="text-align:center;text-anchor:middle" sodipodi:role="line">management</tspan></text>
           </svg>
         </div>
@@ -334,6 +333,47 @@
         <div class="nodesankey" data-name="Waste management" hidden>Waste management</div>
       </div>
     </div>
+
+    <div class="btn btn-light toggle-table my-4">
+      <i class="fa fa-caret-down me-2"></i> <span class="label">Data table</span>
+    </div>
+    <div id="table-wrapper" class="d-none mb-4">
+      <table class="table" data-name="global">
+        <thead>
+          <tr>
+            <th>Resource</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <table class="table" data-name="Use" hidden>
+        <thead>
+          <tr>
+            <th>Resource</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <table class="table" data-name="Buildings" hidden>
+        <thead>
+          <tr>
+            <th>Resource</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
@@ -348,9 +388,9 @@
         "data-bs-placement": "left",
         "data-bs-title": flow.label,
         "data-bs-content": flow.from + " → " + flow.to + ": " + flow.value + "kt",
-        "data-material": flow.category,
         "fill": flow.color,
       })
+      $(".table[data-name='global'] tbody").append("<tr data-index='" + index + "'><td>" + flow.label + "</td><td>" + flow.from + "</td><td>" + flow.to + "</td><td>" + flow.value + "kt</td></tr>")
     })
 
     $(use_flows).each(function(index, flow) {
@@ -360,9 +400,9 @@
         "data-bs-placement": "left",
         "data-bs-title": flow.label,
         "data-bs-content": flow.from + " → " + flow.to + ": " + flow.value + "kt",
-        "data-material": flow.category,
         "fill": flow.color,
       })
+      $(".table[data-name='Use'] tbody").append("<tr data-index='" + index + "'><td>" + flow.label + "</td><td>" + flow.from + "</td><td>" + flow.to + "</td><td>" + flow.value + "kt</td></tr>")
     })
 
     $(buildings_flows).each(function(index, flow) {
@@ -372,19 +412,22 @@
         "data-bs-placement": "left",
         "data-bs-title": flow.label,
         "data-bs-content": flow.from + " → " + flow.to + ": " + flow.value + "kt",
-        "data-material": flow.category,
         "fill": flow.color,
       })
+      $(".table[data-name='Buildings'] tbody").append("<tr data-index='" + index + "'><td>" + flow.label + "</td><td>" + flow.from + "</td><td>" + flow.to + "</td><td>" + flow.value + "kt</td></tr>")
     })
+
+
 
     // enable popups
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
     // some variables to keep track of things
+    let scope = "global";
     let minimized = false;
-    let selectedNode = false;
-    let selectedMaterial = "all";
+    let selectedNode = "global";
+    let selectedMaterial = false;
 
     function getNodeVar(svgName) {
       if (svgName == "global") {
@@ -395,47 +438,6 @@
         return "buildings_flows"
       }
     }
-
-    function highlightGlobal(node) {
-      unhighlightGlobal()
-
-      let svg = $("svg[data-name='" + svgName + "']");
-      let node = svg.find(".node[data-name='" + nodeName + "']");
-
-      node.addClass("active")
-      svg.find(".flow").addClass("opaque");
-
-      let dataVar = getNodeVar(svgName);
-
-      if (selectedMaterial == "all") {
-        $(window[dataVar]).each(function(i, flow) {
-          if (flow.from == nodeName || flow.to == nodeName) {
-            svg.find(".flow[data-index='" + i + "']").removeClass("opaque");
-          }
-        });
-      } else {
-        $(window[dataVar]).each(function(i, flow) {
-          if (flow.material && (flow.from == nodeName || flow.to == nodeName)) {
-            svg.find(".flow[data-index='" + i + "']").removeClass("opaque");
-          }
-        });
-      }
-    }
-
-    function unhighlightGlobal() {
-      $("svg[data-name='global'] .flow").removeClass("opaque")
-      $("svg[data-name='global'] .node").removeClass("active")
-    }
-
-    $("svg[data-name='global'] .node").hover(
-      function() {
-        highlightGlobal(nodeName, selectedMaterial)
-      }, function() {
-        if (!minimized) {
-          unhighlightGlobal()
-        }
-      }
-    );
 
     function highlightNode(svgName, nodeName) {
       unhighlightNode(svgName)
@@ -455,22 +457,6 @@
       });
     }
 
-    function highlightMaterial(material) {
-      if (material != "all") {
-        $(".flow:not(.opaque)[name!='" + material + "']").addClass("opaque")
-      }
-    }
-
-    $(".select-material").click(function() {
-      selectedMaterial = $(this).data("material");
-      highlightSelected();
-    })
-
-    function highlightSelected() {
-      highlightNode(svgName, nodeName)
-      highlightMaterial(material)
-    }
-
     function unhighlightNode(svgName) {
       $("svg[data-name='" + svgName + "'] .flow").removeClass("opaque")
       $("svg[data-name='" + svgName + "'] .node").removeClass("active")
@@ -486,22 +472,49 @@
 
       if (!subNode) {
         highlightNode("global", nodeName)
+      } else {
+        unhighlightNode(selectedNode)
       }
+
+      openTable(nodeName);
 
       selectedNode = nodeName;
 
-      scrollTo(".nodesankey[data-name='" + nodeName + "']")
+      scrollTo(".sankey-wrapper")
     }
 
     function closeNodeSankey() {
       $(".sankey-wrapper").attr("hidden", "hidden");
       $("#col-svg").toggleClass("col-6 col-12 minimized");
 
+      openTable("global");
+
+      scrollTo("#col-svg")
+
       unhighlightNode("global")
       unhighlightNode(selectedNode)
-      selectedNode = "global"
+      selectedNode = false
       minimized = false
     }
+
+    function openTable(node) {
+      $("#table-wrapper table").attr("hidden", "hidden")
+      $("#table-wrapper table[data-name='" + node + "']").removeAttr("hidden")
+    }
+
+    $(".node").hover(
+      function() {
+        let svgName = $(this).parent("svg").data("name");
+        let nodeName = $(this).data("name");
+        highlightNode(svgName, nodeName)
+      }, function() {
+        if (minimized) {
+          unhighlightNode(selectedNode)
+        } else {
+          unhighlightNode("global")
+        }
+      }
+    );
 
     $(".open-node").click(function() {
       let thisNode = $(this)
@@ -520,12 +533,33 @@
       closeNodeSankey()
     })
 
+    function highlightMaterial(material) {
+
+    }
+
+    $(".select-material").click(function() {
+      $(".flow:not(.opaque)").addClass("opaque")
+      $(".node").removeClass("active")
+
+      $("#inputs-ouputs").attr("hidden", "hidden");
+      $("#category").removeAttr("hidden");
+
+      let category = $(this).data("material")
+      highlightMaterial(category)
+    })
+
     // generic function to smoothly scroll to a jquery object
     function scrollTo(object) {
       $("html, body").animate({
-        scrollTop: $(object).offset().top - 72
-      }, 500);
+        scrollTop: $(object).offset().top - 200
+      }, 300);
     }
+
+    $(".toggle-table").click(function() {
+      $("#table-wrapper").toggleClass("d-none");
+      $(".toggle-table i").toggleClass("fa-caret-down fa-caret-up")
+    })
   </script>
 </body>
 </html>
+
