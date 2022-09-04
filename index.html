@@ -12,6 +12,13 @@
       height: auto;
     }
 
+    #popup {
+      position: absolute;
+      display: none;
+      z-index: 100000;
+      pointer-events: none;
+    }
+
     #col-svg {
       transition: width .3s;
     }
@@ -112,6 +119,8 @@
       </button>
     </div>
   </nav>
+
+  <div id="popup" class="p-1 border rounded bg-white">aosidjfoadsifj</div>
   <div class="container pt-4">
 <!--
     <h2>Highlight by material</h2>
@@ -377,15 +386,12 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
   <script src="data.js"></script>
 
   <script>
     $(global_flows).each(function(index, flow) {
       $("svg[data-name='global'] .flow[data-index='" + index + "']").attr({
-        "data-bs-toggle": "popover",
-        "data-bs-trigger": "hover focus",
-        "data-bs-placement": "left",
         "data-bs-title": flow.label,
         "data-bs-content": flow.from + " → " + flow.to + ": " + flow.value + "kt",
         "fill": flow.color,
@@ -395,7 +401,6 @@
 
     $(use_flows).each(function(index, flow) {
       $("svg[data-name='Use'] .flow[data-index='" + index + "']").attr({
-        "data-bs-toggle": "popover",
         "data-bs-trigger": "hover focus",
         "data-bs-placement": "left",
         "data-bs-title": flow.label,
@@ -407,9 +412,6 @@
 
     $(buildings_flows).each(function(index, flow) {
       $("svg[data-name='Buildings'] .flow[data-index='" + index + "']").attr({
-        "data-bs-toggle": "popover",
-        "data-bs-trigger": "hover focus",
-        "data-bs-placement": "left",
         "data-bs-title": flow.label,
         "data-bs-content": flow.from + " → " + flow.to + ": " + flow.value + "kt",
         "fill": flow.color,
@@ -559,6 +561,31 @@
       $("#table-wrapper").toggleClass("d-none");
       $(".toggle-table i").toggleClass("fa-caret-down fa-caret-up")
     })
+
+    const flowPopup = $("#popup");
+
+    // follow cursor around
+    $(".flow").mouseenter(function() {
+      flowPopup.show();
+      let flowIndex = $(this).data("index")
+      updatePopup(flowIndex)
+    });
+
+    $(".flow").mousemove(function(e) {
+      flowPopup.css({
+        left: e.pageX,
+        top:  e.pageY,
+      });
+    });
+
+    $(".flow").mouseleave(function() {
+      flowPopup.hide();
+    });
+
+    // update popup
+    function updatePopup(flowIndex) {
+      console.log(flowIndex)
+    }
   </script>
 </body>
 </html>
