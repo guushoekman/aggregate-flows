@@ -17,6 +17,7 @@
       display: none;
       z-index: 100000;
       pointer-events: none;
+      font-size: 12px;
     }
 
     #col-svg {
@@ -120,7 +121,17 @@
     </div>
   </nav>
 
-  <div id="popup" class="p-1 border rounded bg-white">aosidjfoadsifj</div>
+  <div id="popup" class="p-1 border rounded bg-white">
+    <div>
+      <span id="popup-from"></span>
+      <span><i class="fal fa-arrow-right mx-1"></i></span>
+      <span id="popup-to"></span>
+    </div>
+    <div>
+      <span id="popup-value"></span>kt of
+      <span id="popup-material"></span>
+    </div>
+  </div>
   <div class="container pt-4">
 <!--
     <h2>Highlight by material</h2>
@@ -584,7 +595,13 @@
 
     // update popup
     function updatePopup(flowIndex) {
-      console.log(flowIndex)
+      let dataVar = getNodeVar(selectedNode);
+      let flowData = $(window[dataVar])[flowIndex]
+
+      $("#popup-from").html(flowData.from)
+      $("#popup-to").html(flowData.to)
+      $("#popup-value").html(flowData.value)
+      $("#popup-material").html(flowData.material)
     }
   </script>
 </body>

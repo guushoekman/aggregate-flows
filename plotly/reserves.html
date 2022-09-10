@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aggregate Flows</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="container pt-4">
+    <h4>Sankey</h4>
+    <div id="sankey"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src='https://cdn.plot.ly/plotly-2.14.0.min.js'></script>
+
+  <script>
+    var data = [{
+      type: "sankey",
+      arrangement: "perpendicular",
+      // arrangement: "snap",
+      valuesuffix: "kt",
+      valueformat: ",",
+      node: {
+        label: ["Terrestrial","Marine","Extraction Sand","Extraction Gravel","Extraction Crushed Rock","Reserves","Excavation Sand","Extraction","Stock"],
+        color: ["#5d1212","#08059a","#d7e60a","#aca9a3","#53514f","#cbbebe","#d7e60a","#cbbebe","#cbbebe"],
+        pad: 8,
+        thickness: 0,
+        line: {
+          width: 0,
+        },
+      },
+      link: {
+        source: [0,0,0,1,1,2,3,4,5,5,5,0,1],
+        target: [6,3,4,2,3,7,7,7,0,1,8,8,8],
+        value: [17695,26524,92560,4800,7212,22495,33736,92560,136779,12012,2338,0,2338],
+        color: ["#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#d7e60a","#aca9a3","#53514f","#666666","#666666","#666666","#666666","#666666"],
+        arrowlen: 10,
+      }
+    }]
+
+    var layout = {
+        title: 'Reserves',
+        height: 800,
+    };
+
+    var config = {
+      toImageButtonOptions: {
+        format: 'svg', // one of png, svg, jpeg, webp
+        filename: 'reserves',
+        height: 1000,
+        width: 1000,
+        scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+      }
+    };
+
+    Plotly.newPlot('sankey', data, layout, config)
+  </script>
+</body>
+</html>

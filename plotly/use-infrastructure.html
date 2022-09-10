@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aggregate Flows</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="container pt-4">
+    <h4>Sankey</h4>
+    <div id="sankey"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src='https://cdn.plot.ly/plotly-2.14.0.min.js'></script>
+
+  <script>
+    var data = [{
+      type: "sankey",
+      arrangement: "perpendicular",
+      // arrangement: "snap",
+      valuesuffix: "kt",
+      valueformat: ",",
+      node: {
+        label: ["Concreting Manufacturing","Asphalt Manufacturing","Concreting Sand","Concreting Gravel","Concreting Crushed Rock","Asphalt Sand","Asphalt Gravel","Asphalt Crushed Rock","Processing/Production Crushed Rock","Processing/Production C&D","Processing/Production","Mortar Manufacturing","Concreting C&D","Road Sand","Road Gravel","Road Crushed Rock","Railway Ballast","Other Infrastructure","Demolition","Deconstruction","Waste Management"],
+        color: ["#885252","#885252","#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#53514f","#53514f","#b23434","#cbbebe","#d7e60a","#b23434","#d7e60a","#aca9a3","#53514f","#885252","#885252","#b23434","#b23434","#cbbebe"],
+        pad: 8,
+        thickness: 0,
+        line: {
+          width: 0,
+        },
+      },
+      link: {
+        source: [0,0,0,0,1,1,1,2,3,4,5,6,7,8,9,10,10,2,3,4,5,6,7,11,12,13,14,15,16,17,13,14,15,16,17,18,19],
+        target: [2,3,4,12,5,6,7,13,14,15,13,14,15,16,16,8,9,17,17,17,17,17,17,17,17,18,18,18,18,18,19,19,19,19,19,20,20],
+        value: [21235,14171,27038,16245,0,0,10014,0,0,0,0,0,10014,23457,0,10014,0,15394,5378,0,0,0,0,0,0,1745,2380,6802,1471,17260,0,0,0,0,2492,29658,2492],
+        color: ["#d7e60a","#aca9a3","#53514f","#b23434","#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#53514f","#53514f","#b23434","#53514f","#b23434","#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#53514f","#d7e60a","#b23434","#d7e60a","#aca9a3","#53514f","#53514f","#666666","#d7e60a","#aca9a3","#53514f","#53514f","#666666","#666666","#666666"],
+        arrowlen: 10,
+      }
+    }]
+
+    var layout = {
+        title: 'Use - infrastructure',
+        height: 800,
+    };
+
+    var config = {
+      toImageButtonOptions: {
+        format: 'svg', // one of png, svg, jpeg, webp
+        filename: 'use - infrastructure',
+        height: 1000,
+        width: 1000,
+        scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+      }
+    };
+
+    Plotly.newPlot('sankey', data, layout, config)
+  </script>
+</body>
+</html>

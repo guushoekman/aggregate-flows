@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aggregate Flows</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="container pt-4">
+    <h4>Sankey</h4>
+    <div id="sankey"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src='https://cdn.plot.ly/plotly-2.14.0.min.js'></script>
+
+  <script>
+    var data = [{
+      type: "sankey",
+      // arrangement: "perpendicular",
+      arrangement: "freeflow",
+      valuesuffix: "kt",
+      valueformat: ",",
+      node: {
+        label: ["Concreting Sand","Concreting Gravel","Concreting Crushed Rock","Asphalt Sand","Asphalt Gravel","Asphalt Crushed Rock","Processing/Production Crushed Rock","Processing/Production C&D Waste","Concreting C&D","Mortar Manufacturing","Road","Railway Ballast","Other Infrastructure","Concreting Manufacturing","Asphalt Manufacturing","Processing/Production Sand","Processing/Production Gravel","Processing/Production Secondary Aggregates","Processing/Production Recycled Waste","Fill Sand","Fill Gravel","Fill Crushed Rock","Extraction","Waste Management","Deconstruction","Infrastructure","Buildings","Use as Fill","Aggregate Use","Non-aggregate Use","Use","Trade Crushed Rock","Building Sand","Building Gravel","Building Crushed Rock","Demolition","Stock"],
+        color: ["#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#53514f","#53514f","#b23434","#b23434","#d7e60a","#885252","#885252","#885252","#885252","#885252","#d7e60a","#aca9a3","#a5d7d4","#02aa02","#d7e60a","#aca9a3","#53514f","#cbbebe","#cbbebe","#b23434","#885252","#885252","#885252","#885252","#885252","#cbbebe","#53514f","#d7e60a","#aca9a3","#53514f","#b23434","#cbbebe"],
+        pad: 8,
+        thickness: 0,
+        line: {
+          width: 0,
+        },
+      },
+      link: {
+        source: [0,1,2,3,4,5,6,7,0,1,2,8,3,4,5,9,10,11,12,0,1,2,8,9,13,13,13,13,14,14,14,15,16,6,17,18,7,15,16,6,17,18,7,15,16,7,7,6,7,19,20,21,22,22,22,23,24,25,26,27,28,29,30,30,31,25,26,27,28,29,19,20,21,32,33,34],
+        target: [10,10,10,10,10,10,11,11,12,12,12,12,12,12,12,12,25,25,25,26,26,26,26,26,0,1,2,8,3,4,5,28,28,28,28,28,28,29,29,29,29,29,29,19,20,19,20,21,21,27,27,27,19,20,21,27,30,30,30,30,30,30,24,35,28,36,36,36,36,36,36,36,36,36,36,36],
+        value: [0,0,0,0,0,10014,23457,0,15394,5378,0,0,0,0,0,0,10014,23457,20772,5841,8793,26781,16245,270,21235,14171,27038,16245,0,0,10014,2494,4297,14046,725,0,7572,760,1667,5728,0,0,2865,1991,3349,1036,1410,4059,0,3027,4759,4059,1381,2047,9814,11204,4046,54243,57930,11845,29134,11020,4693,41868,1117,16296,12115,38539,35998,4003,5371,8058,25110,1688,2717,7896],
+        color: ["#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#53514f","#53514f","#53514f","#d7e60a","#aca9a3","#53514f","#b23434","#d7e60a","#aca9a3","#53514f","#d7e60a","#666666","#53514f","#666666","#d7e60a","#aca9a3","#53514f","#b23434","#d7e60a","#d7e60a","#aca9a3","#53514f","#b23434","#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#53514f","#a5d7d4","#a5d7d4","#a5d7d4","#d7e60a","#aca9a3","#53514f","#a5d7d4","#a5d7d4","#a5d7d4","#d7e60a","#aca9a3","#a5d7d4","#a5d7d4","#53514f","#a5d7d4","#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#53514f","#666666","#666666","#666666","#666666","#666666","#666666","#666666","#666666","#666666","#53514f","#666666","#666666","#666666","#666666","#666666","#d7e60a","#aca9a3","#53514f","#d7e60a","#aca9a3","#53514f"],
+        arrowlen: 10,
+      }
+    }]
+
+    var layout = {
+        title: 'Use',
+        height: 800,
+    };
+
+    var config = {
+      toImageButtonOptions: {
+        format: 'svg', // one of png, svg, jpeg, webp
+        filename: 'use',
+        height: 1000,
+        width: 1000,
+        scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+      }
+    };
+
+    Plotly.newPlot('sankey', data, layout, config)
+  </script>
+</body>
+</html>
