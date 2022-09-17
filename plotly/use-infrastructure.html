@@ -19,13 +19,14 @@
   <script>
     var data = [{
       type: "sankey",
-      arrangement: "perpendicular",
+      // arrangement: "perpendicular",
+      arrangement: "freeflow",
       // arrangement: "snap",
       valuesuffix: "kt",
       valueformat: ",",
       node: {
         label: ["Concreting Manufacturing","Asphalt Manufacturing","Concreting Sand","Concreting Gravel","Concreting Crushed Rock","Asphalt Sand","Asphalt Gravel","Asphalt Crushed Rock","Processing/Production Crushed Rock","Processing/Production C&D","Processing/Production","Mortar Manufacturing","Concreting C&D","Road Sand","Road Gravel","Road Crushed Rock","Railway Ballast","Other Infrastructure","Demolition","Deconstruction","Waste Management", "Stock"],
-        color: ["#b32eb3","#b32eb3","#d7e60a","#f0a316","#aca9a3","#d7e60a","#f0a316","#aca9a3","#aca9a3","#b23434","#cbbebe","#d7e60a","#b23434","#d7e60a","#f0a316","#aca9a3","#b32eb3","#b32eb3","#b23434","#b23434","#cbbebe","#cbbebe"],
+        color: ["#ca91fd","#ca91fd","#f2f78a","#dec580","#ae9e80","#f2f78a","#dec580","#ae9e80","#ae9e80","#d980b7","#a7e66f","#f2f78a","#d980b7","#f2f78a","#dec580","#ae9e80","#ca91fd","#ca91fd","#d980b7","#d980b7","#a7e66f","#a7e66f"],
         pad: 8,
         thickness: 0,
         line: {
@@ -36,7 +37,7 @@
         source: [0,0,0,0,1,1,1,2,3,4,5,6,7,8,9,2,3,4,5,6,7,11,12,13,14,15,16,17,13,14,15,16,17,18,19,17,16,13,14,15],
         target: [2,3,4,12,5,6,7,13,14,15,13,14,15,16,16,17,17,17,17,17,17,17,17,18,18,18,18,18,19,19,19,19,19,20,20,21,21,21,21,21],
         value: [15394,5378,0,0,0,0,10014,0,0,0,0,0,10014,23457,0,15394,5378,0,0,0,0,0,0,1745,2380,6802,1471,17260,0,0,0,0,2492,29658,2492,3154,146,1811,2717,8468],
-        color: ["#d7e60a","#f0a316","#aca9a3","#b23434","#d7e60a","#f0a316","#aca9a3","#d7e60a","#f0a316","#aca9a3","#d7e60a","#f0a316","#aca9a3","#aca9a3","#b23434","#d7e60a","#f0a316","#aca9a3","#d7e60a","#f0a316","#aca9a3","#d7e60a","#b23434","#d7e60a","#f0a316","#aca9a3","#aca9a3","#666666","#d7e60a","#f0a316","#aca9a3","#aca9a3","#666666","#666666","#666666","#666666","#aca9a3","#d7e60a","#f0a316","#aca9a3"],
+        color: ["#f2f78a","#dec580","#ae9e80","#d980b7","#f2f78a","#dec580","#ae9e80","#f2f78a","#dec580","#ae9e80","#f2f78a","#dec580","#ae9e80","#ae9e80","#d980b7","#f2f78a","#dec580","#ae9e80","#f2f78a","#dec580","#ae9e80","#f2f78a","#d980b7","#f2f78a","#dec580","#ae9e80","#ae9e80","#e3a6aa","#f2f78a","#dec580","#ae9e80","#ae9e80","#e3a6aa","#e3a6aa","#e3a6aa","#e3a6aa","#ae9e80","#f2f78a","#dec580","#ae9e80"],
         arrowlen: 10,
       }
     }]

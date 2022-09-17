@@ -217,6 +217,107 @@ var global_flows = [
   }
 ]
 
+var extraction_flows = [
+  {
+    "from": "Terrestrial",
+    "to": "Extraction",
+    "value": 92560,
+    "material": "Crushed Rock",
+    "label": "Extraction Crushed Rock"
+  },
+  {
+    "from": "Terrestrial",
+    "to": "Extraction",
+    "value": 26524,
+    "material": "Gravel",
+    "label": "Extraction Gravel"
+  },
+  {
+    "from": "Terrestrial",
+    "to": "Extraction",
+    "value": 17695,
+    "material": "Sand",
+    "label": "Extraction Sand"
+  },
+  {
+    "from": "Marine",
+    "to": "Extraction",
+    "value": 7212,
+    "material": "Gravel",
+    "label": "Extraction Gravel"
+  },
+  {
+    "from": "Marine",
+    "to": "Extraction",
+    "value": 4800,
+    "material": "Sand",
+    "label": "Extraction Sand"
+  },
+  {
+    "from": "Extraction",
+    "to": "Processing/Production",
+    "value": 84122,
+    "material": "Crushed Rock",
+    "label": "Processing/Production Crushed Rock"
+  },
+  {
+    "from": "Extraction",
+    "to": "Processing/Production",
+    "value": 24106,
+    "material": "Gravel",
+    "label": "Processing/Production Gravel"
+  },
+  {
+    "from": "Extraction",
+    "to": "Processing/Production",
+    "value": 16327,
+    "material": "Sand",
+    "label": "Processing/Production Sand"
+  },
+  {
+    "from": "Extraction",
+    "to": "Use as Fill",
+    "value": 9814,
+    "material": "Crushed Rock",
+    "label": "Fill Crushed Rock"
+  },
+  {
+    "from": "Extraction",
+    "to": "Use as Fill",
+    "value": 2047,
+    "material": "Gravel",
+    "label": "Fill Gravel"
+  },
+  {
+    "from": "Extraction",
+    "to": "Use as Fill",
+    "value": 1381,
+    "material": "Sand",
+    "label": "Fill Sand"
+  },
+  {
+    "from": "Extraction",
+    "to": "Waste Processing",
+    "value": 6637,
+    "material": "Crushed Rock",
+    "label": "Overburden and Interburden Crushed Rock"
+  },
+  {
+    "from": "Extraction",
+    "to": "Waste Processing",
+    "value": 2047,
+    "material": "Gravel",
+    "label": "Overburden and Interburden Gravel"
+  },
+  {
+    "from": "Extraction",
+    "to": "Waste Processing",
+    "value": 1159,
+    "material": "Sand",
+    "label": "Overburden and Interburden Sand"
+  }
+]
+
 var use_flows = [
  {
    "from": "Manufacturing",

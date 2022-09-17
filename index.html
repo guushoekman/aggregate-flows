@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -46,6 +46,10 @@
       opacity: .1;
     }
 
+    .flow.hover {
+      opacity: .5;
+    }
+
     .popover-header,
     .popover-body {
       padding: 6px 12px;
@@ -57,6 +61,8 @@
 
     text {
       pointer-events: none;
+      font-family: 'Liberation Sans', sans-serif;
+      font-size: 12px;
     }
 
     table.table {
@@ -216,22 +222,22 @@
 
             <!-- nodes -->
             <rect class="node open-node" data-name="Reserves" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
-            <text x="6.8749571" y="65.075249"><tspan x="6.8749571" y="65.075249" style="fill:#000000;font-family:FreeSans;font-size:6.35px;" sodipodi:role="line">Reserves</tspan></text>
+            <text x="6.8749571" y="65.075249"><tspan x="6.8749571" y="65.075249" style="fill:#000000;font-family:FreeSans;font-size:6.35px;">Reserves</tspan></text>
 
             <rect class="node open-node" data-name="Extraction" x="93.133" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
-            <text x="99.389206" y="65.075249"><tspan x="99.389206" y="65.075249" style="fill:#000000;font-family:FreeSans;font-size:6.35px;" sodipodi:role="line">Extraction</tspan></text>
+            <text x="99.389206" y="65.075249"><tspan x="99.389206" y="65.075249" style="fill:#000000;font-family:FreeSans;font-size:6.35px;">Extraction</tspan></text>
 
             <rect class="node open-node" data-name="Processing / production" x="186.27" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
-            <text x="206.89563" y="60.359631"><tspan x="206.89563" y="60.359631" style="fill:#000000;font-family:FreeSans;font-size:6.35px;text-align:center;text-anchor:middle" sodipodi:role="line">Processing / </tspan><tspan x="206.89563" y="68.55262" style="fill:#000000;font-family:FreeSans;font-size:6.35px;text-align:center;text-anchor:middle" sodipodi:role="line">production</tspan></text>
+            <text x="206.89563" y="60.359631"><tspan x="206.89563" y="60.359631" style="fill:#000000;font-family:FreeSans;font-size:6.35px;text-align:center;text-anchor:middle">Processing / </tspan><tspan x="206.89563" y="68.55262" style="fill:#000000;font-family:FreeSans;font-size:6.35px;text-align:center;text-anchor:middle">production</tspan></text>
 
             <rect class="node open-node" data-name="Manufacturing" x="279.4" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
-            <text x="299.45193" y="64.284325"><tspan x="299.45193" y="64.284325" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle" sodipodi:role="line">Manufacturing</tspan></text>
+            <text x="299.45193" y="64.284325"><tspan x="299.45193" y="64.284325" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle">Manufacturing</tspan></text>
 
             <rect class="node open-node" data-name="Use" x="372.53" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
-            <text x="392.58527" y="64.284325"><tspan x="392.58527" y="64.284325" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle" sodipodi:role="line">Use</tspan></text>
+            <text x="392.58527" y="64.284325"><tspan x="392.58527" y="64.284325" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle">Use</tspan></text>
 
             <rect class="node open-node" data-name="Waste management" x="465.67" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
-            <text x="485.66217" y="60.634529"><tspan x="485.66217" y="60.634529" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle" sodipodi:role="line">Waste</tspan><tspan x="485.66217" y="67.917183" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle" sodipodi:role="line">management</tspan></text>
+            <text x="485.66217" y="60.634529"><tspan x="485.66217" y="60.634529" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle">Waste</tspan><tspan x="485.66217" y="67.917183" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle">management</tspan></text>
           </svg>
         </div>
       </div>
@@ -242,7 +248,59 @@
 
       <div id="nodesankey-wrapper">
         <div class="nodesankey" data-name="Reserves" hidden>Reserves</div>
-        <div class="nodesankey" data-name="Extraction" hidden>Extraction</div>
+        <div class="nodesankey" data-name="Extraction" hidden>
+          <h4 class="text-center">Extraction</h4>
+
+          <svg data-name="Extraction" viewBox="0 0 1169 422.92" xmlns="http://www.w3.org/2000/svg">
+            <path class="flow" data-index="0" d="m530.8 34.041c-112.5 0-112.5 11.186-225 11.186s-142.5-4.584-255-4.584v223.19c105.22 0 139.12 3.9636 235 4.4824v0.10156h20c112.5 0 112.5-11.186 225-11.186l10-111.59z" style="fill:#ae9e80"/>
+            <path class="flow" data-index="1" d="m530.8 257.23c-112.5 0-112.5 19.184-225 19.184h-20c-112.5 0-122.5-12.584-235-12.584v63.957c112.26 0 123.17 10.652 235 10.697 0.011 1e-5 0.0203 0 0.0312 0 0.22632 9e-5 0.41738 4e-3 0.64453 4e-3v-4e-3h19.324c111.85-0.0391 118.31-19.187 229.77-19.297l5.2324-21.283z" style="fill:#dec580"/>
+            <path class="flow" data-index="2" d="m50.801 327.79v42.666c112.49 0 122.53 37.981 235 37.988v2e-3h40c105.13 0 116.51-24.243 209.35-27.42l5.6504-15.326-10-27.121c-112.5 0-112.5 27.186-225 27.186v-2e-3h-20c-112.5 0-122.5-37.973-235-37.973z" style="fill:#f2f78a"/>
+            <path class="flow" data-index="3" d="m535.57 319.19c-111.46 0.11014-117.92 19.258-229.77 19.297h-20v0.0117c-111.85 0.16392-122.73 39.957-235 39.957v17.391c112.5 0 122.5-38.084 235-38.084h20v2e-3c112.5 0 112.5-19.186 225-19.186z" style="fill:#dec580"/>
+            <path class="flow" data-index="4" d="m535.15 381.02c-111.87 0.10719-117.99 25.893-230.26 27.492l-19.055-0.0742-0.0332 11.561 20.148 0.29492c112.49 1.65 112.22-27.133 224.72-27.133zm-249.35 38.979v-5.7871l0.0332-5.7734c-112.5 0-122.53-12.598-235.03-12.598v11.574c112.5 0 122.5 12.584 235 12.584z" style="fill:#f2f78a"/>
+            <path class="flow" data-index="5" d="m825.8 2e-3c-112.5 0-122.5 34.039-235 34.039v202.84c112.5 0 122.5-34.039 235-34.039h20c112.5 0 112.5 3.6445 225 3.6445l10-101.42-10-101.42c-112.5 0-112.5-3.6465-225-3.6465z" style="fill:#ae9e80"/>
+            <path class="flow" data-index="6" d="m1070.8 206.49c-112.5 0-112.5 4.3555-225 4.3555h-20c-112.5 0-122.5 26.039-235 26.039v58.127c112.5 0 122.5-26.041 235-26.041h20c112.5 0 112.5-4.3535 225-4.3535l10-29.064z" style="fill:#dec580"/>
+            <path class="flow" data-index="7" d="m1070.8 264.61c-112.5 0-112.5 12.354-225 12.354h-20c-112.5 0-122.5 18.041-235 18.041v39.367c112.5 0 122.5-18.039 235-18.039h20c112.5 0 112.5-12.355 225-12.355l10-19.684z" style="fill:#f2f78a"/>
+            <path class="flow" data-index="8" d="m825.8 324.34c-112.5 0-122.5 10.039-235 10.039v23.664c112.5 0 122.5-10.039 235-10.039h20c112.5 0 112.5 2.9062 225 2.9062l10-11.834-10-11.832c-112.5 0-112.5-2.9043-225-2.9043z" style="fill:#ae9e80"/>
+            <path class="flow" data-index="9" d="m1070.8 350.91c-112.5 0-112.5 5.0938-225 5.0938h-20c-112.5 0-122.5 2.0391-235 2.0391v4.9375c112.5 0 122.5-2.041 235-2.041h20c112.5 0 112.5-5.0938 225-5.0938l10-2.4688z" style="fill:#dec580"/>
+            <path class="flow" data-index="10" d="m1070.8 355.84c-112.5 0-112.5 13.094-225 13.094h-20c-112.5 0-122.5-5.959-235-5.959v3.3301c112.5 0 122.5 5.959 235 5.959h20c112.5 0 112.5-13.094 225-13.094l10-1.666z" style="fill:#f2f78a"/>
+            <path class="flow" data-index="11" d="m590.8 366.31v16.002c112.5 0 122.5 13.961 235 13.961h20c112.5 0 112.5 3.5469 225 3.5469l10-8.002-10-8c-112.5 0-112.5-3.5488-225-3.5488h-20c-112.5 0-122.5-13.959-235-13.959z" style="fill:#ae9e80"/>
+            <path class="flow" data-index="12" d="m590.8 382.31v4.9375c112.5 0 122.5 21.959 235 21.959h20c112.5 0 112.5-4.4512 225-4.4512l10-2.4688-10-2.4688c-112.5 0-112.5 4.4531-225 4.4531h-20c-112.5 0-122.5-21.961-235-21.961z" style="fill:#dec580"/>
+            <path class="flow" data-index="13" d="m590.8 387.25v2.793c112.5 0 122.5 29.961 235 29.961h20c112.5 0 112.5-12.453 225-12.453l10-1.3965-10-1.3965c-112.5 0-112.5 12.451-225 12.451h-20c-112.5 0-122.5-29.959-235-29.959z" style="fill:#f2f78a"/>
+
+            <rect class="node" data-name="Terrestrial" x=".80176" y="40.37" width="50" height="329.81" style="fill:#c48d98"/>
+            <text class="node-label" x="-0.26953125" y="209.74858">Terrestrial</text>
+
+            <rect class="node" data-name="Marine" x=".80176" y="378.45" width="50" height="28.964" style="fill:#c5e9df"/>
+            <text class="node-label" x="7.2363272" y="397.40765">Marine</text>
+
+            <text class="node-label" x="281.90302" y="395.22574">Sand</text>
+            <text class="node-label" x="278.23004" y="320.74017">Gravel</text>
+            <text class="node-label" x="257.47217" y="155.70261">Crushed Rock</text>
+
+            <rect class="node" data-name="Extraction" x="540.8" y="33.766" width="50" height="358.78" style="fill:#a7e66f"/>
+            <text class="node-label" x="539.02094" y="217.62968">Extraction</text>
+
+            <text class="node-label" x="823.82397" y="300.85342">Sand</text>
+            <text class="node-label" x="819.28552" y="245.22638">Gravel</text>
+            <text class="node-label" x="797.33405" y="105.62245">Crushed Rock</text>
+            <text class="node-label" x="823.81482" y="374.80301">Sand</text>
+            <text class="node-label" x="819.28552" y="362.66995">Gravel</text>
+            <text class="node-label" x="797.33405" y="340.37012">Crushed Rock</text>
+            <text class="node-label" x="823.69849" y="421.01978">Sand</text>
+            <text class="node-label" x="819.78296" y="408.74667">Gravel</text>
+            <text class="node-label" x="797.54596" y="391.91196">Crushed Rock</text>
+
+            <rect class="node" data-name="Processing/Production" x="1080.8" y="3.648" width="50" height="300.34" style="fill:#a7e66f"/>
+            <text class="node-label" x="1138.2937" y="149.62854" text-anchor="end"><tspan x="1138.2937" y="149.62854">Processing /</tspan><tspan x="1138.2937" y="164.62854">production</tspan></text>
+
+            <rect class="node" data-name="Use as Fill" x="1080.8" y="326.97" width="50" height="31.93" style="fill:#ca91fd"/>
+            <text class="node-label" x="1133.7146" y="347.40802" text-anchor="end">Use as Fill</text>
+
+            <rect class="node" data-name="Waste Processing" x="1080.8" y="383.81" width="50" height="23.734" style="fill:#d980b7"/>
+            <text class="node-label" x="1154.2605" y="399.88309" text-anchor="end">Waste Processing</text>
+          </svg>
+
+        </div>
         <div class="nodesankey" data-name="Processing / production" hidden>Processing / production</div>
         <div class="nodesankey" data-name="Manufacturing" hidden>Manufacturing</div>
 
@@ -291,7 +349,7 @@
            <text class="node-label" x="18.219727" y="245.04427" style="fill:#444444;font-family:'Open Sans', sans-serif;font-size:12px;white-space:pre" data-notex="1">Extraction</text>
 
            <rect class="node open-node" data-name="Waste management" x="935" y="53.005" width="89.152" height="150" style="fill:#ececec"/>
-           <text class="node-label" x="979.22168" y="123.38802" style="fill:#444444;font-family:'Open Sans', sans-serif;font-size:12px;white-space:pre" data-notex="1"><tspan x="979.22168" y="123.38802" style="text-align:center;text-anchor:middle" sodipodi:role="line">Waste</tspan><tspan x="979.22168" y="138.38802" style="text-align:center;text-anchor:middle" sodipodi:role="line">management</tspan></text>
+           <text class="node-label" x="979.22168" y="123.38802" style="fill:#444444;font-family:'Open Sans', sans-serif;font-size:12px;white-space:pre" data-notex="1"><tspan x="979.22168" y="123.38802" style="text-align:center;text-anchor:middle">Waste</tspan><tspan x="979.22168" y="138.38802" style="text-align:center;text-anchor:middle">management</tspan></text>
 
            <rect class="node" data-name="Stock" x="935.85" y="246.01" width="89.152" height="75" style="fill:#ececec"/>
            <text class="node-label" x="995.14838" y="287.79428" text-anchor="end" style="fill:#444444;font-family:'Open Sans', sans-serif;font-size:12px;white-space:pre" data-notex="1">Stock</text>
@@ -305,39 +363,39 @@
           <div class="back-sankey border-end border-bottom open-node" data-name="Use"><i class="fal fa-arrow-left"></i> Back to use</div>
           <h4 class="text-center mb-4">Buildings</h4>
           <svg data-name="Buildings" viewBox="0 0 1206 270" xmlns="http://www.w3.org/2000/svg">
-           <path class="flow" data-index="0" d="m90 12.525c234 0 234-12.525 468-12.525v46.227c-234 0-234 12.525-468 12.525z" style="fill:#ffd700;stroke-width:0px"/>
-           <path class="flow" data-index="1" d="m90 96.257c234 0 234-2.5099 468-2.5099v45.564c-234 0-234 2.5099-468 2.5099z" style="fill:#ffd700;stroke-width:0px"/>
-           <path class="flow" data-index="2" d="m90 179.33c234 0 234 7.5053 468 7.5053v45.648c-234 0-234-7.5053-468-7.5053z" style="fill:#ffd700;stroke-width:0px"/>
-           <path class="flow" data-index="3" d="m90 58.752c234 0 234-12.525 468-12.525v18.41c-234 0-234 12.525-468 12.525z" style="fill:#f00;stroke-width:0px"/>
-           <path class="flow" data-index="4" d="m90 141.82c234 0 234-2.5099 468-2.5099v18.41c-234 0-234 2.5099-468 2.5099z" style="fill:#f00;stroke-width:0px"/>
-           <path class="flow" data-index="5" d="m90 224.97c234 0 234 7.5053 468 7.5053v18.41c-234 0-234-7.5053-468-7.5053z" style="fill:#f00;stroke-width:0px"/>
-           <path class="flow" data-index="6" d="m90 77.162c234 0 234-12.525 468-12.525v19.095c-234 0-234 12.525-468 12.525z" style="fill:#a52a2a;stroke-width:0px"/>
-           <path class="flow" data-index="7" d="m90 160.23c234 0 234-2.5099 468-2.5099v19.095c-234 0-234 2.5099-468 2.5099z" style="fill:#a52a2a;stroke-width:0px"/>
-           <path class="flow" data-index="8" d="m90 243.38c234 0 234 7.5053 468 7.5053v19.095c-234 0-234-7.5053-468-7.5053z" style="fill:#a52a2a;stroke-width:0px"/>
-           <path class="flow" data-index="9" d="m648 49.38c234 0 234 117.52 468 117.52v34.367c-234 0-234-117.52-468-117.52z" style="fill:#d3d3d3;stroke-width:0px"/>
-           <path class="flow" data-index="10" d="m648 142.46c234 0 234 58.801 468 58.801v34.367c-234 0-234-58.801-468-58.801z" style="fill:#d3d3d3;stroke-width:0px"/>
-           <path class="flow" data-index="11" d="m648 235.63h468v34.367h-468z" style="fill:#d3d3d3;stroke-width:0px"/>
-           <path class="flow" data-index="12" d="m648 5e-7c234 0 234 10 468 10v34.779c-234 0-234-10-468-10z" style="fill:#ffd700;stroke-width:0px"/>
-           <path class="flow" data-index="13" d="m648 93.747c234 0 234-34.367 468-34.367v34.116c-234 0-234 34.367-468 34.367z" style="fill:#ffd700;stroke-width:0px"/>
-           <path class="flow" data-index="14" d="m648 186.83c234 0 234-78.734 468-78.734v34.2c-234 0-234 78.734-468 78.734z" style="fill:#ffd700;stroke-width:0px"/>
-           <path class="flow" data-index="15" d="m648 34.779c234 0 234 10 468 10v6.9542c-234 0-234-10-468-10z" style="fill:#f00;stroke-width:0px"/>
-           <path class="flow" data-index="16" d="m648 127.86c234 0 234-34.367 468-34.367v6.9542c-234 0-234 34.367-468 34.367z" style="fill:#f00;stroke-width:0px"/>
-           <path class="flow" data-index="17" d="m648 221.03c234 0 234-78.734 468-78.734v6.9542c-234 0-234 78.734-468 78.734z" style="fill:#f00;stroke-width:0px"/>
-           <path class="flow" data-index="18" d="m648 41.733c234 0 234 10 468 10v7.6473c-234 0-234-10-468-10z" style="fill:#a52a2a;stroke-width:0px"/>
-           <path class="flow" data-index="19" d="m648 134.82c234 0 234-34.367 468-34.367v7.6473c-234 0-234 34.367-468 34.367z" style="fill:#a52a2a;stroke-width:0px"/>
-           <path class="flow" data-index="20" d="m648 227.99c234 0 234-78.734 468-78.734v7.6473c-234 0-234 78.734-468 78.734z" style="fill:#a52a2a;stroke-width:0px"/>
-           <rect class="open-node node" data-name="Manufacturing" x="5e-7" y="12.525" width="90" height="249.95" style="fill:#ececec;stroke-width:0px"/>
+           <path class="flow" data-index="0" d="m90 12.525c234 0 234-12.525 468-12.525v46.227c-234 0-234 12.525-468 12.525z" style="fill:#ffd700"/>
+           <path class="flow" data-index="1" d="m90 96.257c234 0 234-2.5099 468-2.5099v45.564c-234 0-234 2.5099-468 2.5099z" style="fill:#ffd700"/>
+           <path class="flow" data-index="2" d="m90 179.33c234 0 234 7.5053 468 7.5053v45.648c-234 0-234-7.5053-468-7.5053z" style="fill:#ffd700"/>
+           <path class="flow" data-index="3" d="m90 58.752c234 0 234-12.525 468-12.525v18.41c-234 0-234 12.525-468 12.525z" style="fill:#f00"/>
+           <path class="flow" data-index="4" d="m90 141.82c234 0 234-2.5099 468-2.5099v18.41c-234 0-234 2.5099-468 2.5099z" style="fill:#f00"/>
+           <path class="flow" data-index="5" d="m90 224.97c234 0 234 7.5053 468 7.5053v18.41c-234 0-234-7.5053-468-7.5053z" style="fill:#f00"/>
+           <path class="flow" data-index="6" d="m90 77.162c234 0 234-12.525 468-12.525v19.095c-234 0-234 12.525-468 12.525z" style="fill:#a52a2a"/>
+           <path class="flow" data-index="7" d="m90 160.23c234 0 234-2.5099 468-2.5099v19.095c-234 0-234 2.5099-468 2.5099z" style="fill:#a52a2a"/>
+           <path class="flow" data-index="8" d="m90 243.38c234 0 234 7.5053 468 7.5053v19.095c-234 0-234-7.5053-468-7.5053z" style="fill:#a52a2a"/>
+           <path class="flow" data-index="9" d="m648 49.38c234 0 234 117.52 468 117.52v34.367c-234 0-234-117.52-468-117.52z" style="fill:#d3d3d3"/>
+           <path class="flow" data-index="10" d="m648 142.46c234 0 234 58.801 468 58.801v34.367c-234 0-234-58.801-468-58.801z" style="fill:#d3d3d3"/>
+           <path class="flow" data-index="11" d="m648 235.63h468v34.367h-468z" style="fill:#d3d3d3"/>
+           <path class="flow" data-index="12" d="m648 5e-7c234 0 234 10 468 10v34.779c-234 0-234-10-468-10z" style="fill:#ffd700"/>
+           <path class="flow" data-index="13" d="m648 93.747c234 0 234-34.367 468-34.367v34.116c-234 0-234 34.367-468 34.367z" style="fill:#ffd700"/>
+           <path class="flow" data-index="14" d="m648 186.83c234 0 234-78.734 468-78.734v34.2c-234 0-234 78.734-468 78.734z" style="fill:#ffd700"/>
+           <path class="flow" data-index="15" d="m648 34.779c234 0 234 10 468 10v6.9542c-234 0-234-10-468-10z" style="fill:#f00"/>
+           <path class="flow" data-index="16" d="m648 127.86c234 0 234-34.367 468-34.367v6.9542c-234 0-234 34.367-468 34.367z" style="fill:#f00"/>
+           <path class="flow" data-index="17" d="m648 221.03c234 0 234-78.734 468-78.734v6.9542c-234 0-234 78.734-468 78.734z" style="fill:#f00"/>
+           <path class="flow" data-index="18" d="m648 41.733c234 0 234 10 468 10v7.6473c-234 0-234-10-468-10z" style="fill:#a52a2a"/>
+           <path class="flow" data-index="19" d="m648 134.82c234 0 234-34.367 468-34.367v7.6473c-234 0-234 34.367-468 34.367z" style="fill:#a52a2a"/>
+           <path class="flow" data-index="20" d="m648 227.99c234 0 234-78.734 468-78.734v7.6473c-234 0-234 78.734-468 78.734z" style="fill:#a52a2a"/>
+           <rect class="open-node node" data-name="Manufacturing" x="5e-7" y="12.525" width="90" height="249.95" style="fill:#ececec"/>
            <text class="node-label" x="6.8730474" y="140.60483" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1">Manufacturing</text>
-           <rect class="node" data-name="Commercial buildings" x="558" y="5e-7" width="90" height="83.747" style="fill:#ececec;stroke-width:0px"/>
-           <text class="node-label" x="603.09668" y="37.476135" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1"><tspan x="603.09668" y="37.476135" style="text-align:center;text-anchor:middle" sodipodi:role="line">Commercial</tspan><tspan x="603.09668" y="52.476135" style="text-align:center;text-anchor:middle" sodipodi:role="line">buildings</tspan></text>
-           <rect class="node" data-name="Social buildings" x="558" y="93.747" width="90" height="83.085" style="fill:#ececec;stroke-width:0px"/>
-           <text class="node-label" x="602.83008" y="130.89178" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;text-align:center;text-anchor:middle;white-space:pre" data-notex="1"><tspan x="602.83008" y="130.89178" sodipodi:role="line">Social</tspan><tspan x="602.83008" y="145.89178" sodipodi:role="line">buildings</tspan></text>
-           <rect class="node" data-name="Residential buildings" x="558" y="186.83" width="90" height="83.168" style="fill:#ececec;stroke-width:0px"/>
-           <text class="node-label" x="602.90918" y="224.01869" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;text-align:center;text-anchor:middle;white-space:pre" data-notex="1"><tspan x="602.90918" y="224.01869" sodipodi:role="line">Residential</tspan><tspan x="602.90918" y="239.01869" sodipodi:role="line">buildings</tspan></text>
-           <rect class="node" data-name="Stock" x="1116" y="166.9" width="90" height="103.1" style="fill:#ececec;stroke-width:0px"/>
+           <rect class="node" data-name="Commercial buildings" x="558" y="5e-7" width="90" height="83.747" style="fill:#ececec"/>
+           <text class="node-label" x="603.09668" y="37.476135" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1"><tspan x="603.09668" y="37.476135" style="text-align:center;text-anchor:middle">Commercial</tspan><tspan x="603.09668" y="52.476135" style="text-align:center;text-anchor:middle">buildings</tspan></text>
+           <rect class="node" data-name="Social buildings" x="558" y="93.747" width="90" height="83.085" style="fill:#ececec"/>
+           <text class="node-label" x="602.83008" y="130.89178" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;text-align:center;text-anchor:middle;white-space:pre" data-notex="1"><tspan x="602.83008" y="130.89178">Social</tspan><tspan x="602.83008" y="145.89178">buildings</tspan></text>
+           <rect class="node" data-name="Residential buildings" x="558" y="186.83" width="90" height="83.168" style="fill:#ececec"/>
+           <text class="node-label" x="602.90918" y="224.01869" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;text-align:center;text-anchor:middle;white-space:pre" data-notex="1"><tspan x="602.90918" y="224.01869">Residential</tspan><tspan x="602.90918" y="239.01869">buildings</tspan></text>
+           <rect class="node" data-name="Stock" x="1116" y="166.9" width="90" height="103.1" style="fill:#ececec"/>
            <text class="node-label" x="1175.7246" y="222.73785" text-anchor="end" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1">Stock</text>
-           <rect class="open-node node" data-name="Waste management" x="1116" y="10" width="90" height="146.9" style="fill:#ececec;stroke-width:0px"/>
-           <text class="node-label" x="1160.6455" y="78.832031" text-anchor="end" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1"><tspan x="1160.6455" y="78.832031" style="text-align:center;text-anchor:middle" sodipodi:role="line">Waste</tspan><tspan x="1160.6455" y="93.832031" style="text-align:center;text-anchor:middle" sodipodi:role="line">management</tspan></text>
+           <rect class="open-node node" data-name="Waste management" x="1116" y="10" width="90" height="146.9" style="fill:#ececec"/>
+           <text class="node-label" x="1160.6455" y="78.832031" text-anchor="end" style="fill:#444444;font-family:'Open Sans', verdana, arial, sans-serif;font-size:12px;white-space:pre" data-notex="1"><tspan x="1160.6455" y="78.832031" style="text-align:center;text-anchor:middle">Waste</tspan><tspan x="1160.6455" y="93.832031" style="text-align:center;text-anchor:middle">management</tspan></text>
           </svg>
         </div>
 
@@ -401,41 +459,6 @@
   <script src="data.js"></script>
 
   <script>
-    $(global_flows).each(function(index, flow) {
-      $("svg[data-name='global'] .flow[data-index='" + index + "']").attr({
-        "data-bs-title": flow.label,
-        "data-bs-content": flow.from + " → " + flow.to + ": " + flow.value + "kt",
-        "fill": flow.color,
-      })
-      $(".table[data-name='global'] tbody").append("<tr data-index='" + index + "'><td>" + flow.label + "</td><td>" + flow.from + "</td><td>" + flow.to + "</td><td>" + flow.value + "kt</td></tr>")
-    })
-
-    $(use_flows).each(function(index, flow) {
-      $("svg[data-name='Use'] .flow[data-index='" + index + "']").attr({
-        "data-bs-trigger": "hover focus",
-        "data-bs-placement": "left",
-        "data-bs-title": flow.label,
-        "data-bs-content": flow.from + " → " + flow.to + ": " + flow.value + "kt",
-        "fill": flow.color,
-      })
-      $(".table[data-name='Use'] tbody").append("<tr data-index='" + index + "'><td>" + flow.label + "</td><td>" + flow.from + "</td><td>" + flow.to + "</td><td>" + flow.value + "kt</td></tr>")
-    })
-
-    $(buildings_flows).each(function(index, flow) {
-      $("svg[data-name='Buildings'] .flow[data-index='" + index + "']").attr({
-        "data-bs-title": flow.label,
-        "data-bs-content": flow.from + " → " + flow.to + ": " + flow.value + "kt",
-        "fill": flow.color,
-      })
-      $(".table[data-name='Buildings'] tbody").append("<tr data-index='" + index + "'><td>" + flow.label + "</td><td>" + flow.from + "</td><td>" + flow.to + "</td><td>" + flow.value + "kt</td></tr>")
-    })
-
-
-
-    // enable popups
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-
     // some variables to keep track of things
     let scope = "global";
     let minimized = false;
@@ -449,6 +472,8 @@
         return "use_flows"
       } else if (svgName == "Buildings") {
         return "buildings_flows"
+      } else if (svgName == "Extraction") {
+        return "extraction_flows"
       }
     }
 
@@ -577,6 +602,7 @@
 
     // follow cursor around
     $(".flow").mouseenter(function() {
+      $(this).addClass("hover")
       flowPopup.show();
       let flowIndex = $(this).data("index")
       updatePopup(flowIndex)
@@ -590,6 +616,7 @@
     });
 
     $(".flow").mouseleave(function() {
+      $(this).removeClass("hover")
       flowPopup.hide();
     });
 
