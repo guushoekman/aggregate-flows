@@ -318,6 +318,359 @@ var extraction_flows = [
   }
 ]
 
+var processing_flows = [
+   {
+     "index": 0,
+     "from": "Extraction",
+     "to": "Overburden and Interburden",
+     "value": 6637,
+     "material": "Crushed rock"
+   },
+   {
+     "index": 1,
+     "from": "Extraction",
+     "to": "Use as Fill",
+     "value": 9814,
+     "material": "Crushed rock"
+   },
+   {
+     "index": 2,
+     "from": "Extraction",
+     "to": "Processing/Production",
+     "value": 84122,
+     "material": "Crushed rock"
+   },
+   {
+     "index": 3,
+     "from": "Extraction",
+     "to": "Overburden and Interburden",
+     "value": 1659,
+     "material": "Gravel"
+   },
+   {
+     "index": 4,
+     "from": "Extraction",
+     "to": "Processing/Production",
+     "value": 24106,
+     "material": "Gravel"
+   },
+   {
+     "index": 5,
+     "from": "Extraction",
+     "to": "Use as Fill",
+     "value": 2047,
+     "material": "Gravel"
+   },
+   {
+     "index": 6,
+     "from": "Extraction",
+     "to": "Overburden and Interburden",
+     "value": 1159,
+     "material": "Sand"
+   },
+   {
+     "index": 7,
+     "from": "Extraction",
+     "to": "Processing/Production",
+     "value": 16327,
+     "material": "Sand"
+   },
+   {
+     "index": 8,
+     "from": "Extraction",
+     "to": "Use as Fill",
+     "value": 1380,
+     "material": "Sand"
+   },
+   {
+     "index": 9,
+     "from": "Demolition",
+     "to": "Processing/Production",
+     "value": 33690,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 10,
+     "from": "Secondary Aggregates",
+     "to": "Processing/Production",
+     "value": 5175,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 11,
+     "from": "Marine Dredged Outside English Waters",
+     "to": "Processing/Production",
+     "value": 597,
+     "material": "Sand"
+   },
+   {
+     "index": 12,
+     "from": "Scalpings and Fines",
+     "to": "Processing/Production",
+     "value": 6900,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 13,
+     "from": "Processing/Production",
+     "to": "Concreting Manufacturing",
+     "value": 8783,
+     "material": "Crushed rock"
+   },
+   {
+     "index": 14,
+     "from": "Processing/Production",
+     "to": "Aggregate Use",
+     "value": 14046,
+     "material": "Crushed rock"
+   },
+   {
+     "index": 15,
+     "from": "Processing/Production",
+     "to": "Non-aggregate Use",
+     "value": 5728,
+     "material": "Crushed rock"
+   },
+   {
+     "index": 16,
+     "from": "Processing/Production",
+     "to": "Asphalt Manufacturing",
+     "value": 3019,
+     "material": "Crushed rock"
+   },
+   {
+     "index": 17,
+     "from": "Processing/Production",
+     "to": "Use as Fill",
+     "value": 4059,
+     "material": "Crushed rock"
+   },
+   {
+     "index": 18,
+     "from": "Processing/Production",
+     "to": "Scalpings and Fines",
+     "value": 2977,
+     "material": "Crushed rock"
+   },
+   {
+     "index": 19,
+     "from": "Processing/Production",
+     "to": "Concreting Manufacturing",
+     "value": 8252,
+     "material": "Gravel"
+   },
+   {
+     "index": 20,
+     "from": "Processing/Production",
+     "to": "Aggregate Use",
+     "value": 4297,
+     "material": "Gravel"
+   },
+   {
+     "index": 21,
+     "from": "Processing/Production",
+     "to": "Non-aggregate Use",
+     "value": 1667,
+     "material": "Gravel"
+   },
+   {
+     "index": 22,
+     "from": "Processing/Production",
+     "to": "Asphalt Manufacturing",
+     "value": 238,
+     "material": "Gravel"
+   },
+   {
+     "index": 23,
+     "from": "Processing/Production",
+     "to": "Use as Fill",
+     "value": 3349,
+     "material": "Gravel"
+   },
+   {
+     "index": 24,
+     "from": "Processing/Production",
+     "to": "Land Won",
+     "value": 1993,
+     "material": "Gravel"
+   },
+   {
+     "index": 25,
+     "from": "Processing/Production",
+     "to": "Scalpings and Fines",
+     "value": 981,
+     "material": "Gravel"
+   },
+   {
+     "index": 26,
+     "from": "Processing/Production",
+     "to": "Concreting Manufacturing",
+     "value": 13711,
+     "material": "Sand"
+   },
+   {
+     "index": 27,
+     "from": "Processing/Production",
+     "to": "Aggregate Use",
+     "value": 2494,
+     "material": "Sand"
+   },
+   {
+     "index": 28,
+     "from": "Processing/Production",
+     "to": "Non-aggregate Use",
+     "value": 760,
+     "material": "Sand"
+   },
+   {
+     "index": 29,
+     "from": "Processing/Production",
+     "to": "Asphalt Manufacturing",
+     "value": 373,
+     "material": "Sand"
+   },
+   {
+     "index": 30,
+     "from": "Processing/Production",
+     "to": "Mortar Manufacturing",
+     "value": 3822,
+     "material": "Sand"
+   },
+   {
+     "index": 31,
+     "from": "Processing/Production",
+     "to": "Use as Fill",
+     "value": 1991,
+     "material": "Sand"
+   },
+   {
+     "index": 32,
+     "from": "Processing/Production",
+     "to": "Land Won",
+     "value": 1377,
+     "material": "Sand"
+   },
+   {
+     "index": 33,
+     "from": "Processing/Production",
+     "to": "Marine Dredged",
+     "value": 1377,
+     "material": "Sand"
+   },
+   {
+     "index": 34,
+     "from": "Processing/Production",
+     "to": "Scalpings and Fines",
+     "value": 399,
+     "material": "Sand"
+   },
+   {
+     "index": 35,
+     "from": "Processing/Production",
+     "to": "C&D Waste",
+     "value": 28770,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 36,
+     "from": "Processing/Production",
+     "to": "Processing/Production Secondary Aggregates",
+     "value": 1293,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 37,
+     "from": "C&D Waste",
+     "to": "Concreting Manufacturing",
+     "value": 11825,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 38,
+     "from": "C&D Waste",
+     "to": "Aggregate Use",
+     "value": 7572,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 39,
+     "from": "C&D Waste",
+     "to": "Non-aggregate Use",
+     "value": 2865,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 40,
+     "from": "C&D Waste",
+     "to": "Asphalt Manufacturing",
+     "value": 1097,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 41,
+     "from": "C&D Waste",
+     "to": "Mortar Manufacturing",
+     "value": 1569,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 42,
+     "from": "C&D Waste",
+     "to": "Use as Fill",
+     "value": 1410,
+     "material": "Gravel"
+   },
+   {
+     "index": 43,
+     "from": "C&D Waste",
+     "to": "Use as Fill",
+     "value": 1036,
+     "material": "Sand"
+   },
+   {
+     "index": 44,
+     "from": "C&D Waste",
+     "to": "Scalpings and Fines",
+     "value": 1396,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 45,
+     "from": "Processing/Production Secondary Aggregates",
+     "to": "Aggregate Use",
+     "value": 725,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 46,
+     "from": "Processing/Production Secondary Aggregates",
+     "to": "Mortar Manufacturing",
+     "value": 239,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 47,
+     "from": "Processing/Production Secondary Aggregates",
+     "to": "Scalpings and Fines",
+     "value": 329,
+     "material": "Non-Primary"
+   },
+   {
+     "index": 48,
+     "from": "Land Won",
+     "to": "Trade",
+     "value": 3370,
+     "material": "All"
+   },
+   {
+     "index": 49,
+     "from": "Marine Dredged",
+     "to": "Trade",
+     "value": 1377,
+     "material": "All"
+   }
+]
+
 var use_flows = [
  {
    "from": "Manufacturing",
@@ -472,155 +825,5 @@ var use_flows = [
    "color": "gray",
    "material": "",
    "value": "58872.9601151639"
- }
-]
-
-var buildings_flows = [
- {
-   "from": "Manufacturing",
-   "to": "Commercial buildings",
-   "color": "gold",
-   "material": "sand",
-   "value": 6069
- },
- {
-   "from": "Manufacturing",
-   "to": "Social buildings",
-   "color": "gold",
-   "material": "sand",
-   "value": 5982
- },
- {
-   "from": "Manufacturing",
-   "to": "Residential buildings",
-   "color": "gold",
-   "material": "sand",
-   "value": 5993
- },
- {
-   "from": "Manufacturing",
-   "to": "Commercial buildings",
-   "color": "red",
-   "material": "gravel",
-   "value": 2417
- },
- {
-   "from": "Manufacturing",
-   "to": "Social buildings",
-   "color": "red",
-   "material": "gravel",
-   "value": 2417
- },
- {
-   "from": "Manufacturing",
-   "to": "Residential buildings",
-   "color": "red",
-   "material": "gravel",
-   "value": 2417
- },
- {
-   "from": "Manufacturing",
-   "to": "Commercial buildings",
-   "color": "brown",
-   "material": "rock",
-   "value": 2507
- },
- {
-   "from": "Manufacturing",
-   "to": "Social buildings",
-   "color": "brown",
-   "material": "rock",
-   "value": 2507
- },
- {
-   "from": "Manufacturing",
-   "to": "Residential buildings",
-   "color": "brown",
-   "material": "rock",
-   "value": 2507
- },
- {
-   "from": "Commercial buildings",
-   "to": "Stock",
-   "color": "lightgray",
-   "material": "stock",
-   "value": 4512
- },
- {
-   "from": "Social buildings",
-   "to": "Stock",
-   "color": "lightgray",
-   "material": "stock",
-   "value": 4512
- },
- {
-   "from": "Residential buildings",
-   "to": "Stock",
-   "color": "lightgray",
-   "material": "stock",
-   "value": 4512
- },
- {
-   "from": "Commercial buildings",
-   "to": "Waste management",
-   "color": "gold",
-   "material": "sand",
-   "value": 4566
- },
- {
-   "from": "Social buildings",
-   "to": "Waste management",
-   "color": "gold",
-   "material": "sand",
-   "value": 4479
- },
- {
-   "from": "Residential buildings",
-   "to": "Waste management",
-   "color": "gold",
-   "material": "sand",
-   "value": 4490
- },
- {
-   "from": "Commercial buildings",
-   "to": "Waste management",
-   "color": "red",
-   "material": "gravel",
-   "value": 913
- },
- {
-   "from": "Social buildings",
-   "to": "Waste management",
-   "color": "red",
-   "material": "gravel",
-   "value": 913
- },
- {
-   "from": "Residential buildings",
-   "to": "Waste management",
-   "color": "red",
-   "material": "gravel",
-   "value": 913
- },
- {
-   "from": "Commercial buildings",
-   "to": "Waste management",
-   "color": "brown",
-   "material": "rock",
-   "value": 1004
- },
- {
-   "from": "Social buildings",
-   "to": "Waste management",
-   "color": "brown",
-   "material": "rock",
-   "value": 1004
- },
- {
-   "from": "Residential buildings",
-   "to": "Waste management",
-   "color": "brown",
-   "material": "rock",
-   "value": 1004
  }
 ]
