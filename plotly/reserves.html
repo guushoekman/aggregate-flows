@@ -19,15 +19,15 @@
   <script>
     var data = [{
       type: "sankey",
-      arrangement: "perpendicular",
+      arrangement: "freeflow",
       // arrangement: "snap",
       valuesuffix: "kt",
       valueformat: ",",
       node: {
         label: ["Terrestrial","Marine","Extraction Sand","Extraction Gravel","Extraction Crushed Rock","Reserves","Excavation Sand","Extraction","Stock"],
         color: ["#c48d98","#c5e9df","#f2f78a","#dec580","#ae9e80","#a7e66f","#f2f78a","#a7e66f","#a7e66f"],
-        pad: 3,
-        thickness: 0,
+        pad: 4,
+        thickness: 50,
         line: {
           width: 0,
         },
@@ -43,15 +43,15 @@
 
     var layout = {
         title: 'Reserves',
-        height: 800,
+        height: 700,
     };
 
     var config = {
       toImageButtonOptions: {
         format: 'svg', // one of png, svg, jpeg, webp
         filename: 'reserves',
-        height: 1000,
-        width: 1000,
+        height: 600,
+        width: 1200,
         scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
       }
     };

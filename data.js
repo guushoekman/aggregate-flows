@@ -26,7 +26,7 @@ var global_flows = [
   {
    "label": "Raw sand and gravel",
    "from": "Extraction",
-   "to": "Processing / production",
+   "to": "Processing/Production",
    "value": 33419,
    "material": "Sand and gravel",
    "color": "#377eb8"
@@ -34,7 +34,7 @@ var global_flows = [
   {
    "label": "Raw crushed rock",
    "from": "Extraction",
-   "to": "Processing / production",
+   "to": "Processing/Production",
    "value": 81488,
    "material": "rock",
    "color": "#e41a1c"
@@ -57,7 +57,7 @@ var global_flows = [
   },
   {
    "label": "Concreting crushed rock",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Manufacturing",
    "value": 11886,
    "material": "rock",
@@ -65,7 +65,7 @@ var global_flows = [
   },
   {
    "label": "Concreting gravel",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Manufacturing",
    "value": 11563,
    "material": "Sand and gravel",
@@ -73,7 +73,7 @@ var global_flows = [
   },
   {
    "label": "Concreting sand",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Manufacturing",
    "value": 19106,
    "material": "Sand and gravel",
@@ -81,7 +81,7 @@ var global_flows = [
   },
   {
    "label": "Asphalt sand",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Manufacturing",
    "value": 929,
    "material": "Sand and gravel",
@@ -89,7 +89,7 @@ var global_flows = [
   },
   {
    "label": "Asphalt gravel",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Manufacturing",
    "value": 458,
    "material": "Sand and gravel",
@@ -97,7 +97,7 @@ var global_flows = [
   },
   {
    "label": "Asphalt crushed rock",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Manufacturing",
    "value": 4025,
    "material": "rock",
@@ -105,7 +105,7 @@ var global_flows = [
   },
   {
    "label": "Mortal sand",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Manufacturing",
    "value": 5634,
    "material": "Sand and gravel",
@@ -113,7 +113,7 @@ var global_flows = [
   },
   {
    "label": "Exports of processed sand, gravel and crushed rock",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Export",
    "value": 4949,
    "material": false,
@@ -121,7 +121,7 @@ var global_flows = [
   },
   {
    "label": "Scalping and fines",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Waste management",
    "value": 11886,
    "material": false,
@@ -129,7 +129,7 @@ var global_flows = [
   },
   {
    "label": "Non-aggregate use",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Use",
    "value": 9909,
    "material": false,
@@ -137,7 +137,7 @@ var global_flows = [
   },
   {
    "label": "Other aggregates",
-   "from": "Processing / production",
+   "from": "Processing/Production",
    "to": "Use",
    "value": 29127,
    "material": false,
@@ -146,15 +146,15 @@ var global_flows = [
   {
    "label": "Recycled C&D flows",
    "from": "Waste management",
-   "to": "Processing / production",
+   "to": "Processing/Production",
    "value": 40790,
    "material": false,
    "color": "#96305e"
   },
   {
-   "label": "Recycled processing / production waste",
+   "label": "Recycled Processing/Production waste",
    "from": "Waste management",
-   "to": "Processing / production",
+   "to": "Processing/Production",
    "value": 6535,
    "material": false,
    "color": "#458926"
