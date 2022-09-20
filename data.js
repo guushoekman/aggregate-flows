@@ -671,6 +671,72 @@ var processing_flows = [
    }
 ]
 
+var reserves_flows = [
+  {
+   "index": 0,
+   "from": "Reserves",
+   "to": "Terrestrial",
+   "value": 136779,
+   "material": "All"
+  },
+  {
+   "index": 1,
+   "from": "Reserves",
+   "to": "Marine",
+   "value": 12012,
+   "material": "All"
+  },
+  {
+   "index": 2,
+   "from": "Reserves",
+   "to": "Stock",
+   "value": 2338,
+   "material": "All"
+  },
+  {
+   "index": 3,
+   "from": "Terrestrial",
+   "to": "Extraction",
+   "value": 92560,
+   "material": "Crushed Rock"
+  },
+  {
+   "index": 4,
+   "from": "Terrestrial",
+   "to": "Extraction",
+   "value": 26524,
+   "material": "Gravel"
+  },
+  {
+   "index": 5,
+   "from": "Terrestrial",
+   "to": "Extraction",
+   "value": 17695,
+   "material": "Sand"
+  },
+  {
+   "index": 6,
+   "from": "Marine",
+   "to": "Extraction",
+   "value": 7212,
+   "material": "Gravel"
+  },
+  {
+   "index": 7,
+   "from": "Marine",
+   "to": "Extraction",
+   "value": 4800,
+   "material": "Sand"
+  },
+  {
+   "index": 8,
+   "from": "Marine",
+   "to": "Stock",
+   "value": 2338,
+   "material": "All"
+  }
+]
+
 var use_flows = [
  {
    "from": "Manufacturing",
