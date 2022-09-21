@@ -893,3 +893,366 @@ var use_flows = [
    "value": "58872.9601151639"
  }
 ]
+
+var infrastructure_flows = [
+ {
+   "index": 0,
+   "from": "Processing/Production",
+   "to": "Railway Ballast",
+   "value": 23457,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 1,
+   "from": "Concreting Manufacturing",
+   "to": "Other Infrastructure",
+   "value": 5378,
+   "material": "Gravel"
+ },
+ {
+   "index": 2,
+   "from": "Concreting Manufacturing",
+   "to": "Other Infrastructure",
+   "value": 15394,
+   "material": "Sand"
+ },
+ {
+   "index": 3,
+   "from": "Asphalt Manufacturing",
+   "to": "Road Crushed Rock",
+   "value": 10014,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 4,
+   "from": "Railway Ballast",
+   "to": "Demolition",
+   "value": 1471,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 5,
+   "from": "Railway Ballast",
+   "to": "Stock",
+   "value": 146,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 6,
+   "from": "Other Infrastructure",
+   "to": "Demolition",
+   "value": 17260,
+   "material": "All"
+ },
+ {
+   "index": 7,
+   "from": "Other Infrastructure",
+   "to": "Deconstruction",
+   "value": 2492,
+   "material": "All"
+ },
+ {
+   "index": 8,
+   "from": "Other Infrastructure",
+   "to": "Stock",
+   "value": 3154,
+   "material": "All"
+ },
+ {
+   "index": 9,
+   "from": "Road Crushed Rock",
+   "to": "Demolition",
+   "value": 6802,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 10,
+   "from": "Road Crushed Rock",
+   "to": "Stock",
+   "value": 8468,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 11,
+   "from": "Road Gravel",
+   "to": "Demolition",
+   "value": 2380,
+   "material": "Gravel"
+ },
+ {
+   "index": 12,
+   "from": "Road Gravel",
+   "to": "Stock",
+   "value": 2717,
+   "material": "Gravel"
+ },
+ {
+   "index": 13,
+   "from": "Road Sand",
+   "to": "Demolition",
+   "value": 1745,
+   "material": "Sand"
+ },
+ {
+   "index": 14,
+   "from": "Road Sand",
+   "to": "Stock",
+   "value": 1811,
+   "material": "Sand"
+ },
+ {
+   "index": 15,
+   "from": "Demolition",
+   "to": "Waste Management",
+   "value": 29658,
+   "material": "All"
+ },
+ {
+   "index": 16,
+   "from": "Deconstruction",
+   "to": "Waste Management",
+   "value": 2492,
+   "material": "All"
+ }
+]
+
+var manufacturing_flows = [
+ {
+   "index": 0,
+   "from": "Processing/Production",
+   "to": "Railway Ballast",
+   "value": 23457,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 1,
+   "from": "Processing/Production",
+   "to": "Asphalt Manufacturing",
+   "value": 3019,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 2,
+   "from": "Processing/Production",
+   "to": "Concreting Manufacturing",
+   "value": 8783,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 3,
+   "from": "Processing/Production",
+   "to": "Asphalt Manufacturing",
+   "value": 238,
+   "material": "Gravel"
+ },
+ {
+   "index": 4,
+   "from": "Processing/Production",
+   "to": "Concreting Manufacturing",
+   "value": 8252,
+   "material": "Gravel"
+ },
+ {
+   "index": 5,
+   "from": "Processing/Production",
+   "to": "Asphalt Manufacturing",
+   "value": 373,
+   "material": "Sand"
+ },
+ {
+   "index": 6,
+   "from": "Processing/Production",
+   "to": "Concreting Manufacturing",
+   "value": 13711,
+   "material": "Sand"
+ },
+ {
+   "index": 7,
+   "from": "Processing/Production",
+   "to": "Mortar Manufacturing",
+   "value": 3822,
+   "material": "Sand"
+ },
+ {
+   "index": 8,
+   "from": "Processing/Production",
+   "to": "Processing/Production C&D Waste",
+   "value": 14491,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 9,
+   "from": "Processing/Production",
+   "to": "Processing/Production Secondary Aggregates",
+   "value": 239,
+   "material": "Secondary Aggregates"
+ },
+ {
+   "index": 10,
+   "from": "Processing/Production C&D Waste",
+   "to": "Asphalt Manufacturing",
+   "value": 1097,
+   "material": "Non-Primary"
+ },
+ {
+   "index": 11,
+   "from": "Processing/Production C&D Waste",
+   "to": "Concreting Manufacturing",
+   "value": 11825,
+   "material": "Non-Primary"
+ },
+ {
+   "index": 12,
+   "from": "Processing/Production C&D Waste",
+   "to": "Mortar Manufacturing",
+   "value": 1569,
+   "material": "Non-Primary"
+ },
+ {
+   "index": 13,
+   "from": "Demolition",
+   "to": "Concreting Manufacturing",
+   "value": 7071,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 14,
+   "from": "Trade",
+   "to": "Land Won",
+   "value": 7983,
+   "material": "All"
+ },
+ {
+   "index": 15,
+   "from": "Land Won",
+   "to": "Asphalt Manufacturing",
+   "value": 984,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 16,
+   "from": "Land Won",
+   "to": "Concreting Manufacturing",
+   "value": 6999,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 17,
+   "from": "Land Won",
+   "to": "Concreting Manufacturing",
+   "value": 473,
+   "material": "Gravel"
+ },
+ {
+   "index": 18,
+   "from": "Asphalt Manufacturing",
+   "to": "Road",
+   "value": 10014,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 19,
+   "from": "Concreting Manufacturing",
+   "to": "Buildings",
+   "value": 26781,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 20,
+   "from": "Concreting Manufacturing",
+   "to": "Reprocessing",
+   "value": 257,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 21,
+   "from": "Concreting Manufacturing",
+   "to": "Buildings",
+   "value": 16245,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 22,
+   "from": "Concreting Manufacturing",
+   "to": "Other Infrastructure",
+   "value": 5378,
+   "material": "Gravel"
+ },
+ {
+   "index": 23,
+   "from": "Concreting Manufacturing",
+   "to": "Buildings",
+   "value": 8793,
+   "material": "Gravel"
+ },
+ {
+   "index": 24,
+   "from": "Concreting Manufacturing",
+   "to": "Other Infrastructure",
+   "value": 15394,
+   "material": "Sand"
+ },
+ {
+   "index": 25,
+   "from": "Concreting Manufacturing",
+   "to": "Buildings",
+   "value": 6111,
+   "material": "Sand"
+ },
+ {
+   "index": 26,
+   "from": "Mortar Manufacturing",
+   "to": "Buildings",
+   "value": 270,
+   "material": "Sand"
+ },
+ {
+   "index": 27,
+   "from": "Mortar Manufacturing",
+   "to": "Reprocessing",
+   "value": 346,
+   "material": "Sand"
+ },
+ {
+   "index": 28,
+   "from": "Mortar Manufacturing",
+   "to": "Landfill",
+   "value": 229,
+   "material": "Sand"
+ },
+ {
+   "index": 29,
+   "from": "Landfill",
+   "to": "Waste Management",
+   "value": 229,
+   "material": "All"
+ },
+ {
+   "index": 30,
+   "from": "Reprocessing",
+   "to": "Waste Management",
+   "value": 603,
+   "material": "All"
+ },
+ {
+   "index": 31,
+   "from": "Railway Ballast",
+   "to": "Infrastructure",
+   "value": 23457,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 32,
+   "from": "Road",
+   "to": "Infrastructure",
+   "value": 10014,
+   "material": "All"
+ },
+ {
+   "index": 33,
+   "from": "Other Infrastructure",
+   "to": "Infrastructure",
+   "value": 20772,
+   "material": "All"
+ }
+]
