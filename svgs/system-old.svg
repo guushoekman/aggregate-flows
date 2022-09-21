@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   data-name="global"
+   class="global-view"
+   width="1916"
+   height="500"
+   viewBox="0 0 484.63304 132.03"
+   version="1.1"
+   id="svg1110"
+   sodipodi:docname="system-old.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1114" />
+  <sodipodi:namedview
+     id="namedview1112"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.89656637"
+     inkscape:cx="1370.2276"
+     inkscape:cy="402.64727"
+     inkscape:window-width="1920"
+     inkscape:window-height="1051"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1110"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <text
+     x="191.82109"
+     y="4.2285271"
+     font-size="6px"
+     id="text1010"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.75308px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'">Export</text>
+  <text
+     x="290.88"
+     y="5"
+     font-size="6"
+     id="text1012"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.75308px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'">Import</text>
+  <text
+     x="377.82373"
+     y="4.47188"
+     font-size="6"
+     id="text1014"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.75308px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'">Import</text>
+  <!-- reserves to extraction -->
+  <path
+     style="fill:#ae9e80;stroke-width:0.969006"
+     class="flow"
+     d="m 29.097002,42.598 h 46.314505 l 6.602495,11.428231 -6.601504,11.428236 -46.315496,-3e-6 z"
+     id="path38949"
+     sodipodi:nodetypes="cccccc" />
+  <path
+     style="fill:#f9aab1;stroke-width:0"
+     class="flow"
+     d="m 29.097002,66.147822 h 46.315496 l 6.601504,5.821001 -6.601504,5.820998 -46.315496,2e-6 z"
+     id="path39695"
+     sodipodi:nodetypes="cccccc" />
+  <path
+     style="fill:#f9aab1;stroke-width:0"
+     class="flow"
+     d="m 29.097002,78.581001 46.315496,0.001 6.601504,2.11565 -6.602495,2.117351 -46.314505,-7.01e-4 z"
+     id="path39697"
+     sodipodi:nodetypes="cccccc" />
+  <!-- extraction to processing -->
+  <path
+     id="rect1022"
+     style="fill:#f9aab1"
+     class="flow"
+     d="m 122.23001,69.806038 46.31549,0 6.60151,4.3656 -6.60151,4.365601 -46.31549,-10e-7 z" />
+  <path
+     style="fill:#ae9e80"
+     class="flow"
+     d="m 122.23,46.790668 46.3155,0 6.6015,10.7155 -6.6015,10.715496 -46.3155,4e-6 z"
+     id="path41432" />
+  <!-- extraction to waste -->
+  <path
+     class="flow"
+     data-index="5"
+     d="m 97.890004,82.814 v 49.213 H 483.4168 l 10e-6,-42.611496 -1.47757,-6.601504 -1.47754,6.601504 -1e-5,39.700496 H 100.84451 V 82.814 Z"
+     id="path1026"
+     style="fill:#d980b7;fill-opacity:1;stroke:none;stroke-width:1.00767;stroke-opacity:1"
+     sodipodi:nodetypes="cccccccccc" />
+  <!-- extraction to use -->
+  <path
+     class="flow"
+     data-index="6"
+     d="m 103.44,82.815 v 43.127 h 290.83721 l 10e-6,-36.525496 -1.46619,-6.601504 -1.46618,6.601504 10e-6,33.615496 H 106.37154 V 82.815 Z"
+     id="path1028"
+     style="fill:#ca91fd;fill-opacity:1;stroke:none;stroke-width:1.00376"
+     sodipodi:nodetypes="cccccccccc" />
+  <!-- processing to manufacturing -->
+  <path
+     id="rect1032"
+     style="fill:#ca91fd;stroke-width:1.48398"
+     class="flow"
+     d="m 215.36,55.478867 46.31551,0 6.60149,3.495993 -6.60149,3.495992 -46.31551,10e-7 z"
+     sodipodi:nodetypes="cccccc" />
+  <path
+     id="rect1036"
+     style="fill:#ca91fd;stroke-width:1.36775"
+     class="flow"
+     d="m 215.36,65.408745 46.31551,0 6.60149,0.742451 -6.60149,0.74245 -46.31551,2e-6 z"
+     sodipodi:nodetypes="cccccc" />
+  <path
+     id="rect1038"
+     style="fill:#f2f78a;stroke-width:1.45042"
+     class="flow"
+     d="m 215.36,69.140381 46.31551,0 6.60149,0.834913 -6.60149,0.834917 -46.31551,-3e-6 z"
+     sodipodi:nodetypes="cccccc" />
+  <!-- processing to export -->
+  <path
+     id="rect1044"
+     style="fill:#e3a6aa"
+     class="flow"
+     d="M 188.62578,6.6015 189.41953,0 l 0.79374,6.6015 1e-5,35.9965 h -1.5875 z"
+     sodipodi:nodetypes="cccccc" />
+  <!-- processing to waste -->
+  <path
+     class="flow"
+     data-index="15"
+     d="m 182.78753,82.815 v 37.835 h 294.98365 l 0,-31.233496 -1.61194,-6.601504 -1.61194,6.601504 -1e-5,28.058496 H 186.01143 v -34.66 z"
+     id="path1046"
+     style="fill:#d980b7;fill-opacity:1;stroke:none;stroke-width:1.00767"
+     sodipodi:nodetypes="cccccccccc" />
+  <!-- processing to use -->
+  <path
+     class="flow"
+     data-index="16"
+     d="m 187.87838,82.815 v 32.99891 h 196.76731 l 0,-26.397406 -1.34406,-6.601504 -1.34405,6.601504 -1e-5,23.625216 H 190.56486 V 82.815 Z"
+     id="path1048"
+     style="fill:#ca91fd;fill-opacity:1;stroke:none;stroke-width:1.03191;stroke-opacity:1"
+     sodipodi:nodetypes="cccccccccc" />
+  <path
+     class="flow"
+     data-index="17"
+     d="m 192.0742,82.815 v 28.84 h 188.39 v -7.6729 h -0.006 l -10e-6,-14.565497 -3.83644,-6.601503 -3.83644,6.601503 -10e-6,14.565497 h -173.04 v -21.167 z"
+     id="path1050"
+     style="fill:#ca91fd;fill-opacity:1;stroke:none;stroke-opacity:1"
+     sodipodi:nodetypes="cccccccccccc" />
+  <!-- waste to processing -->
+  <path
+     class="flow"
+     data-index="18"
+     d="m 194.46,24.077 1e-5,11.919498 5.24276,6.601502 5.24277,-6.601502 -1e-5,-1.071398 h 265.97571 v 7.6729 h 10.48554 V 24.077 h -10.48554 z"
+     id="path1052"
+     style="fill:#d980b7;fill-opacity:1;stroke:none;stroke-width:0.983151"
+     sodipodi:nodetypes="ccccccccccc" />
+  <path
+     class="flow"
+     data-index="19"
+     d="m 206.40036,35.970567 -0.0109,2.920913 0.77042,3.70642 0.75918,-3.72657 3.2e-4,-1.529587 H 468.17488 V 42.5979 h 1.51901 V 35.970567 H 207.91698 Z"
+     id="path1054"
+     style="fill:#a2e39b;fill-opacity:1;stroke:none;stroke-width:0.909102"
+     sodipodi:nodetypes="ccccccccccc" />
+  <!-- manufacturing to use -->
+  <path
+     id="rect1056"
+     style="fill:#ca91fd;stroke-width:2.7583"
+     class="flow"
+     d="m 308.5,52.095966 46.31549,0 6.60151,4.025912 -6.60151,4.025911 -46.31549,2e-6 z"
+     sodipodi:nodetypes="cccccc" />
+  <path
+     id="rect1056-4"
+     style="fill:#ca91fd;stroke-width:3.55369"
+     class="flow"
+     d="m 308.5,62.854321 46.31549,0 6.60151,6.682491 -6.60151,6.682487 -46.31549,4e-6 z"
+     sodipodi:nodetypes="cccccc" />
+  <!-- manufacturing to waste -->
+  <!-- import to manufacturing -->
+  <path
+     id="rect1062"
+     style="fill:#e3a6aa"
+     class="flow"
+     d="m 286.92947,0 h 2.1167 l 0,35.996498 -1.05835,6.601502 -1.05835,-6.601502 z"
+     sodipodi:nodetypes="cccccc" />
+  <!-- import to use -->
+  <path
+     id="rect1064"
+     style="fill:#ae9e80;stroke-width:0.774916"
+     class="flow"
+     d="m 374.31,0 h 1.48766 l 10e-6,35.996498 L 375.05383,42.598 374.31,35.996498 Z"
+     sodipodi:nodetypes="cccccc" />
+  <!-- use to waste -->
+  <path
+     id="rect1066"
+     style="fill:#d980b7;stroke-width:1.1942"
+     class="flow"
+     d="m 401.63,57.424 46.3155,0 6.6015,5.2825 -6.6015,5.282498 -46.3155,2e-6 z"
+     sodipodi:nodetypes="cccccc" />
+  <!-- waste to use -->
+  <path
+     class="flow"
+     data-index="26"
+     d="m 376.29432,38.2871 -1e-5,2.462179 0.63936,1.848421 0.63936,-1.848421 -1e-5,-1.384549 h 87.46451 v 3.23297 h 1.2787 v -4.3106 h -88.74234 z"
+     id="path1068"
+     style="fill:#d980b7;fill-opacity:1;stroke:none;stroke-width:0.887343;stroke-opacity:1"
+     sodipodi:nodetypes="ccccccccccc" />
+  <!-- nodes -->
+  <rect
+     class="node open-node"
+     data-name="Reserves"
+     y="42.598"
+     width="40.216999"
+     height="40.216999"
+     fill="#ececec"
+     id="rect1070"
+     style="fill:#a7e66f;fill-opacity:1"
+     x="-11.119995" />
+  <text
+     x="-4.2450385"
+     y="65.075249"
+     id="text1074"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'"><tspan
+       x="-4.2450385"
+       y="65.075249"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';fill:#000000"
+       id="tspan1072">Reserves</tspan></text>
+  <rect
+     class="node open-node"
+     data-name="Extraction"
+     x="82.013008"
+     y="42.598"
+     width="40.216999"
+     height="40.216999"
+     fill="#ececec"
+     id="rect1076"
+     style="fill:#a7e66f;fill-opacity:1" />
+  <text
+     x="88.269211"
+     y="65.075249"
+     id="text1080"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'"><tspan
+       x="88.269211"
+       y="65.075249"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';fill:#000000"
+       id="tspan1078">Extraction</tspan></text>
+  <rect
+     class="node open-node"
+     data-name="Processing/Production"
+     x="175.15001"
+     y="42.598"
+     width="40.216999"
+     height="40.216999"
+     fill="#ececec"
+     id="rect1082"
+     style="fill:#a7e66f;fill-opacity:1" />
+  <text
+     x="195.77563"
+     y="60.359631"
+     id="text1088"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'"><tspan
+       x="195.77563"
+       y="60.359631"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:center;text-anchor:middle;fill:#000000"
+       id="tspan1084">Processing /</tspan><tspan
+       x="195.77563"
+       y="68.55262"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:center;text-anchor:middle;fill:#000000"
+       id="tspan1086">production</tspan></text>
+  <rect
+     class="node open-node"
+     data-name="Manufacturing"
+     x="268.28"
+     y="42.598"
+     width="40.216999"
+     height="40.216999"
+     fill="#ececec"
+     id="rect1090"
+     style="fill:#a7e66f;fill-opacity:1" />
+  <text
+     x="288.33194"
+     y="64.284325"
+     id="text1094"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'"><tspan
+       x="288.33194"
+       y="64.284325"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.6444px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:center;text-anchor:middle;fill:#000000"
+       id="tspan1092">Manufacturing</tspan></text>
+  <rect
+     class="node open-node"
+     data-name="Use"
+     x="361.41"
+     y="42.598"
+     width="40.216999"
+     height="40.216999"
+     fill="#ececec"
+     id="rect1096"
+     style="fill:#a7e66f;fill-opacity:1" />
+  <text
+     x="381.46527"
+     y="64.284325"
+     id="text1100"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'"><tspan
+       x="381.46527"
+       y="64.284325"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.6444px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:center;text-anchor:middle;fill:#000000"
+       id="tspan1098">Use</tspan></text>
+  <rect
+     class="node open-node"
+     data-name="Waste Management"
+     x="454.55002"
+     y="42.598"
+     width="40.216999"
+     height="40.216999"
+     fill="#ececec"
+     id="rect1102"
+     style="fill:#a7e66f;fill-opacity:1" />
+  <text
+     x="474.54218"
+     y="60.634529"
+     id="text1108"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'"><tspan
+       x="474.54218"
+       y="60.634529"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.6444px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:center;text-anchor:middle;fill:#000000"
+       id="tspan1104">Waste</tspan><tspan
+       x="474.54218"
+       y="67.917183"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.6444px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:center;text-anchor:middle;fill:#000000"
+       id="tspan1106">management</tspan></text>
+  <path
+     style="fill:#a5d7d4;fill-opacity:1;stroke:none;stroke-width:0.899378"
+     class="flow"
+     d="m 159.97275,8.1409904 v 1.5879702 h 22.30688 l 0,26.2677774 0.79373,6.601503 0.79372,-6.601503 0,-26.2677774 V 8.1409904 h -1.58745 z"
+     data-index="5"
+     sodipodi:nodetypes="cccccccccc"
+     id="path47141" />
+  <text
+     xml:space="preserve"
+     style="font-size:4.75308px;line-height:1.25;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:center;text-anchor:middle;stroke-width:0.26406"
+     x="134.76361"
+     y="10.124794"
+     id="text11323"><tspan
+       sodipodi:role="line"
+       id="tspan11321"
+       style="font-size:4.75308px;stroke-width:0.26406"
+       x="134.76361"
+       y="10.124794">Secondary Aggregates</tspan></text>
+  <path
+     style="fill:#f9aab1;fill-opacity:1;stroke:none;stroke-width:0.403579"
+     class="flow"
+     d="m 159.80513,21.742143 v 0.52812 h 17.98548 l 1e-5,13.726479 0.26405,6.601499 0.26407,-6.601503 -1e-5,-14.254595 h -0.52812 z"
+     data-index="6"
+     sodipodi:nodetypes="ccccccccc"
+     id="path47145" />
+  <text
+     xml:space="preserve"
+     style="font-size:4.75308px;line-height:1.25;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:center;text-anchor:middle;stroke-width:0.26406"
+     x="116.67602"
+     y="23.31975"
+     id="text33774"><tspan
+       sodipodi:role="line"
+       id="tspan33772"
+       style="font-size:4.75308px;stroke-width:0.26406"
+       x="116.67602"
+       y="23.31975">Marine Dredged Outside English Waters</tspan></text>
+  <path
+     id="rect36817"
+     style="fill:#d980b7;fill-opacity:0.99537;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 290.84017,82.814785 v 12.227731 0.945874 h 0.93262 173.8438 0.93261 l -10e-6,-6.572107 -0.46629,-6.601498 -0.46629,6.601498 -2e-5,5.626233 H 291.77279 V 82.814785 Z"
+     sodipodi:nodetypes="ccccccccccccc" />
+  <path
+     id="rect37609"
+     style="fill:#d980b7;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 284.60937,89.416283 10e-6,8.842402 v 3.495705 5.1e-4 h 187.2564 v -3.496215 -15.4439 h -3.54953 v 15.4439 H 288.15891 l 0,-8.842402 -1.77476,-6.601498 z"
+     sodipodi:nodetypes="ccccccccccccc" />
+  <rect
+     style="fill:#d40000;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect38696-5-1-7-4-3-6"
+     width="6.6015"
+     height="6.6015"
+     x="416.52661"
+     y="78.657753" />
+  <rect
+     style="fill:#d40000;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect38696-5-1-7-4-3"
+     width="6.6015"
+     height="6.6015"
+     x="426.35199"
+     y="78.657753" />
+</svg>

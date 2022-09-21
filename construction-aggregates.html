@@ -1,0 +1,2587 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Construction aggregates</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-VhBcF/php0Z/P5ZxlxaEx1GwqTQVIBu4G4giRWxTKOCjTxsPFETUDdVL5B6vYvOt" crossorigin="anonymous">
+  <style>
+    svg {
+      width: 100%;
+      height: auto;
+    }
+
+    #popup {
+      position: absolute;
+      display: none;
+      z-index: 100000;
+      pointer-events: none;
+      font-size: 12px;
+    }
+
+    #col-svg {
+      transition: width .3s;
+    }
+
+    #col-svg.minimized .svg-wrapper {
+      cursor: pointer;
+    }
+
+    #col-svg.minimized svg {
+      pointer-events: none;
+    }
+
+    .node,
+    .flow {
+      cursor: help;
+    }
+
+    .node.open-node {
+      cursor: pointer;
+    }
+
+    .node,
+    .flow {
+      transition: opacity .2s;
+    }
+
+    .node.opaque,
+    .flow.opaque {
+      opacity: .1;
+    }
+
+    .flow.hover {
+      opacity: .5;
+    }
+
+    .popover-header,
+    .popover-body {
+      padding: 6px 12px;
+    }
+
+    .node.active {
+      stroke: #000;
+    }
+
+    @font-face {
+      font-family: 'Liberation Sans';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Liberation Sans'),
+           url(bodoni.woff) format('woff');
+    }
+
+    text {
+      pointer-events: none;
+      font-family: 'Liberation Sans', sans-serif;
+      font-size: 12px;
+    }
+
+    .nodesankey[data-name="Manufacturing"] text,
+    .nodesankey[data-name="Use"] text {
+      font-size: 16px;
+    }
+
+    text.link-text {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    table.table {
+      margin-bottom: 0;
+    }
+
+    .cover {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    #col-svg.minimized .cover {
+      pointer-events: unset;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+    }
+
+    .back-sankey {
+      position: absolute;
+      top: 0;
+      left: 0;
+      line-height: 1.5rem;
+      background-color: #efefef;
+      cursor: pointer;
+      padding: .25rem .5rem;
+      font-size: 12px;
+    }
+
+    .back-sankey i {
+      margin-right: .25rem;
+    }
+
+    .x-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 1.5rem;
+      width: 1.5rem;
+      line-height: 1.5rem;
+      background-color: #efefef;
+      cursor: pointer;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+      <a class="navbar-brand">Construction aggregates</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded=false aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="border rounded bg-light p-3 text-center h-100">
+          <i class="fal fa-bullseye-pointer fa-fw mr-2"></i> Nodes are the boxes from where flows enter and exit. Hover over them to highlight their inputs and ouputs.
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="border rounded bg-light p-3 text-center h-100">
+          <i class="fal fa-hand-pointer fa-fw mr-2"></i> Click on an <u>underlined node title</u> to see its own diagram.
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="border rounded bg-light p-3 text-center h-100">
+          <i class="fal fa-arrow-right fa-fw mr-2"></i> Flows are the arrows that go from node to node. Hover over them to see their details.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup" class="p-1 border rounded bg-white">
+    <div>
+      <span id="popup-from"></span>
+      <span><i class="fal fa-arrow-right mx-1"></i></span>
+      <span id="popup-to"></span>
+    </div>
+    <div>
+      <span id="popup-value"></span>kt of
+      <span id="popup-material"></span>
+    </div>
+  </div>
+  <div class="container pt-4">
+    <div class="row">
+      <div id="col-svg" class="col-12">
+        <div class="svg-wrapper position-relative p-3">
+          <div class="close-sankey cover"></div>
+          <svg data-name="global" class="global-view" width="1920" height="500" viewBox="-0.5 0 485 132" xmlns="http://www.w3.org/2000/svg">
+
+            <path class="flow" data-index="0"  d="m29.097 42.598h46.315l6.6025 11.428-6.6015 11.428-46.315-3e-6z" style="fill:#ae9e80;stroke-width:.96901"/>
+            <path class="flow" data-index="1"  d="m29.097 66.148h46.315l6.6015 5.821-6.6015 5.821-46.315 2e-6z" style="fill:#f9aab1;stroke-width:0"/>
+            <path class="flow" data-index="2"  d="m29.097 78.581 46.315 1e-3 6.6015 2.1156-6.6025 2.1174-46.315-7.01e-4z" style="fill:#f9aab1;stroke-width:0"/>
+            <path class="flow" data-index="3"  d="m122.23 46.791h46.316l6.6015 10.716-6.6015 10.715-46.316 4e-6z" style="fill:#ae9e80"/>
+            <path class="flow" data-index="4"  d="m122.23 69.806h46.315l6.6015 4.3656-6.6015 4.3656-46.315-1e-6z" style="fill:#f9aab1"/>
+            <path class="flow" data-index="5"  d="m103.44 82.815v43.127h290.84l1e-5 -36.525-1.4662-6.6015-1.4662 6.6015 1e-5 33.615h-284.97v-40.217z" style="fill:#ca91fd"/>
+            <path class="flow" data-index="6"  d="m97.89 82.814v49.213h385.53l1e-5 -42.611-1.4776-6.6015-1.4775 6.6015-1e-5 39.7h-379.62v-46.302z" style="fill:#d980b7"/>
+            <path class="flow" data-index="7"  d="m159.81 21.742v0.52812h17.985l1e-5 13.726 0.26405 6.6015 0.26407-6.6015-1e-5 -14.255h-0.52812z" style="fill:#f9aab1"/>
+            <path class="flow" data-index="8"  d="m159.97 8.141v1.588h22.307v26.268l0.79373 6.6015 0.79372-6.6015v-26.268-1.588h-1.5874z" style="fill:#a5d7d4"/>
+            <path class="flow" data-index="9"  d="m188.63 6.6015 0.79375-6.6015 0.79374 6.6015 1e-5 35.996h-1.5875z" style="fill:#e3a6aa"/>
+            <path class="flow" data-index="10" d="m194.46 24.077 1e-5 11.919 5.2428 6.6015 5.2428-6.6015-1e-5 -1.0714h265.98v7.6729h10.486v-18.521h-10.486z" style="fill:#d980b7"/>
+            <path class="flow" data-index="11" d="m206.4 35.971-0.0109 2.9209 0.77042 3.7064 0.75918-3.7266 3.2e-4 -1.5296h260.26v5.2562h1.519v-6.6273h-261.78z" style="fill:#a2e39b"/>
+            <path class="flow" data-index="12" d="m215.36 55.479h46.316l6.6015 3.496-6.6015 3.496-46.316 1e-6z" style="fill:#ca91fd;stroke-width:1.484"/>
+            <path class="flow" data-index="13" d="m215.36 65.409h46.316l6.6015 0.74245-6.6015 0.74245-46.316 2e-6z" style="fill:#ca91fd;stroke-width:1.3678"/>
+            <path class="flow" data-index="14" d="m215.36 69.14h46.316l6.6015 0.83491-6.6015 0.83492-46.316-3e-6z" style="fill:#f2f78a;stroke-width:1.4504"/>
+            <path class="flow" data-index="15" d="m182.79 82.815v37.835h294.98v-31.233l-1.6119-6.6015-1.6119 6.6015-1e-5 28.058h-288.54v-34.66z" style="fill:#d980b7"/>
+            <path class="flow" data-index="16" d="m187.88 82.815v32.999h196.77v-26.397l-1.3441-6.6015-1.344 6.6015-1e-5 23.625h-191.39v-30.227z" style="fill:#ca91fd"/>
+            <path class="flow" data-index="17" d="m192.07 82.815v28.84h188.39v-7.6729h-6e-3l-1e-5 -14.565-3.8364-6.6015-3.8364 6.6015-1e-5 14.565h-173.04v-21.167z" style="fill:#ca91fd"/>
+            <path class="flow" data-index="18" d="m286.93 0h2.1167v35.996l-1.0584 6.6015-1.0584-6.6015z" style="fill:#e3a6aa"/>
+            <path class="flow" data-index="19" d="m308.5 52.096h46.315l6.6015 4.0259-6.6015 4.0259-46.315 2e-6z" style="fill:#ca91fd;stroke-width:2.7583"/>
+            <path class="flow" data-index="20" d="m308.5 62.854h46.315l6.6015 6.6825-6.6015 6.6825-46.315 4e-6z" style="fill:#ca91fd;stroke-width:3.5537"/>
+            <path class="flow" data-index="21" d="m290.84 82.815v13.174h175.71l-1e-5 -6.5721-0.46629-6.6015-0.46629 6.6015-2e-5 5.6262h-173.84v-12.228z" style="fill-opacity:.99537;fill:#d980b7"/>
+            <path class="flow" data-index="22" d="m284.61 89.416 1e-5 8.8424v3.4962h187.26v-18.94h-3.5495v15.444h-180.16v-8.8424l-1.7748-6.6015z" style="fill:#d980b7"/>
+            <path class="flow" data-index="23" d="m374.31 0h1.4877l1e-5 35.996-0.74384 6.6015-0.74383-6.6015z" style="fill:#ae9e80;stroke-width:.77492"/>
+            <path class="flow" data-index="24" d="m401.63 57.424h46.316l6.6015 5.2825-6.6015 5.2825-46.316 2e-6z" style="fill:#d980b7;stroke-width:1.1942"/>
+            <path class="flow" data-index="25" d="m376.29 38.287-1e-5 2.4622 0.63936 1.8484 0.63936-1.8484-1e-5 -1.3845h87.465v3.233h1.2787v-4.3106h-88.742z" style="fill:#d980b7"/>
+
+            <rect class="node open-node" data-name="Reserves" x="-11.12" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f" data-name="Reserves"/>
+            <text class="link-text" x="-4.2450385" y="65.075249"><tspan x="-4.2450385" y="65.075249" style="fill:#000000;font-size:6.35px">Reserves</tspan></text>
+
+            <rect class="node open-node" data-name="Extraction" x="82.013" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f" />
+            <text class="link-text" x="88.269211" y="65.075249"><tspan x="88.269211" y="65.075249" style="fill:#000000;font-size:6.35px">Extraction</tspan></text>
+
+            <rect class="node open-node" data-name="Processing/Production" x="175.15" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f"/>
+            <text class="link-text" x="195.77563" y="60.359631"><tspan x="195.77563" y="60.359631" style="fill:#000000;font-size:6.35px;text-align:center;text-anchor:middle">Processing /</tspan><tspan x="195.77563" y="68.55262" style="fill:#000000;font-size:6.35px;text-align:center;text-anchor:middle">production</tspan></text>
+
+            <rect class="node open-node" data-name="Manufacturing" x="268.28" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f" />
+            <text class="link-text" x="288.33194" y="64.284325"><tspan x="288.33194" y="64.284325" style="fill:#000000;font-size:5.6444px;text-align:center;text-anchor:middle">Manufacturing</tspan></text>
+
+            <rect class="node open-node" data-name="Use" x="361.41" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f"/>
+            <text class="link-text" x="381.46527" y="64.284325"><tspan x="381.46527" y="64.284325" style="fill:#000000;font-size:5.6444px;text-align:center;text-anchor:middle">Use</tspan></text>
+
+            <rect class="node open-node" data-name="Waste Management" x="454.55" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f"/>
+            <text class="link-text" x="474.54218" y="60.634529"><tspan x="474.54218" y="60.634529" style="fill:#000000;font-size:5.6444px;text-align:center;text-anchor:middle">Waste</tspan><tspan x="474.54218" y="67.917183" style="fill:#000000;font-size:5.6444px;text-align:center;text-anchor:middle">management</tspan></text>
+
+            <text x="134.76361" y="10.124794" style="font-size:4.7531px;line-height:1.25;stroke-width:.26406;text-align:center;text-anchor:middle" xml:space="preserve"><tspan x="134.76361" y="10.124794" style="font-size:4.7531px;stroke-width:.26406" sodipodi:role="line">Secondary Aggregates</tspan></text>
+
+            <text x="116.67602" y="23.31975" style="font-size:4.7531px;line-height:1.25;stroke-width:.26406;text-align:center;text-anchor:middle" xml:space="preserve"><tspan x="116.67602" y="23.31975" style="font-size:4.7531px;stroke-width:.26406" sodipodi:role="line">Marine Dredged Outside English Waters</tspan></text>
+
+
+            <text x="191.82109" y="4.2285271" font-size="6px" style="font-size:4.7531px">Export</text>
+            <text x="290.88" y="5" font-size="6" style="font-size:4.7531px">Import</text>
+            <text x="377.82373" y="4.47188" font-size="6" style="font-size:4.7531px">Import</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="sankey-wrapper position-relative border p-4 my-4" hidden>
+      <div class="close-sankey border-start border-bottom x-button"><i class="fal fa-times"></i></div>
+
+      <div id="nodesankey-wrapper">
+        <div class="nodesankey" data-name="Reserves" hidden>
+          <h4 class="text-center">Reserves</h4>
+
+          <svg data-name="Reserves" viewBox="0 0 1052 438" xmlns="http://www.w3.org/2000/svg">
+            <path class="flow" data-index="0" d="m51.335 33.668c135.7 0 135.7-25.128 271.41-25.128l10 182.71-10 182.71c-135.7 0-135.7 25.128-271.41 25.128z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="1" d="m51.335 399.09c135.7 0 135.7-14.489 271.41-14.489l10 16.046-10 16.046c-135.7 0-135.7 14.489-271.41 14.489z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="2" d="m51.335 431.18c467.11 0 467.11-6.944 934.23-6.944l10 3.1231-10 3.1231c-467.11 0-467.11 6.944-934.23 6.944z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="3" d="m664.15 5e-7c-135.7 0-145.7 8.541-281.41 8.541v247.28c135.7 0 145.7-8.541 281.41-8.541h50v-247.28zm50.002 0v247.28c135.7 0 135.7 3.1484 271.41 3.1484l10-123.64-10-123.64c-135.7 0-135.7-3.1484-271.41-3.1484z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="4" d="m985.56 249.43c-135.7 0-135.7 2.4902-271.41 2.4902v70.939h12.031s164.79-1.6727 263.59-2.2676l5.791-26.098zm-321.41 2.4902c-135.7 0-145.7 2.9023-281.41 2.9023v70.861c135.7 0 145.54-2.8242 281.24-2.8242h0.16992-4e-3 50v-70.939z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="5" d="m382.74 326.68v47.273c135.7 0 145.81 22.59 281.51 22.59v2e-3h49.895l2e-3 -47.494h-50.002c-135.7 0-145.7-22.371-281.41-22.371zm331.41 22.371v47.494h0.10551c135.07 0 141.64-8.4328 275.5-8.5117l5.8007-17.43-10.002-30.049c-135.7 0-135.7 8.4961-271.41 8.4961z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="6" d="m989.77 321.59c-98.792 0.5949-263.59 2.2676-263.59 2.2676h-12.025v19.188c135.7 0 135.7-2.4883 271.41-2.4883zm-325.79 2.2676c-135.7 0-145.54 60.736-281.24 60.736v19.268c135.7 0 145.7-60.816 281.41-60.816l-9e-5 -19.188zm0.16992 0v19.188h50.006l-6e-3 -19.188h-4e-3z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="7" d="m989.65 388.04c-133.87 0.0789-140.43 8.5117-275.5 8.5117v12.602c135.59-5e-3 135.64-8.4961 271.3-8.4961zm-325.4 8.5098c-135.7 0-145.81 7.3164-281.51 7.3164v12.824c135.7 0 145.7-7.5351 281.41-7.5352h49.895v-12.604h-49.787zm49.789 2e-3v12.602h0.10351v-12.602z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="8" d="m382.74 416.69c301.41 0 301.75 1.6096 603.15 1.6096l9.6126 2.9938-9.9508 2.9416c-301.41 0-301.41-1.2988-602.82-1.2988z" style="fill:#e3a6aa;stroke-width:0px"/>
+
+            <rect class="node" data-name="Reserves" x="1.3344" y="33.668" width="50" height="403.75" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label" x="2.5" y="238.6">Reserves</text>
+
+            <rect class="node" data-name="Terrestrial" x="332.74" y="8.5401" width="50" height="365.42" style="fill:#c48d98;stroke-width:0px"/>
+            <text class="node-label" x="332" y="194.5">Terrestrial</text>
+
+            <rect class="node" data-name="Marine" x="332.74" y="384.6" width="50" height="38.337" style="fill:#c5e9df;stroke-width:0px"/>
+            <text class="node-label" x="339" y="407">Marine</text>
+
+            <rect class="node open-node" data-name="Extraction" x="995.56" y="3.1471" width="50" height="397.51" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label link-text" x="994" y="205">Extraction</text>
+
+            <rect class="node" data-name="Stock" x="995.56" y="417.99" width="50" height="12.492" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label" x="1005" y="427">Stock</text>
+
+            <text class="node-label" x="735" y="381">Sand</text>
+            <text class="node-label" x="734" y="300">Gravel</text>
+            <text class="node-label" x="660" y="131">Crushed Rock</text>
+          </svg>
+
+        </div>
+        <div class="nodesankey" data-name="Extraction" hidden>
+          <h4 class="text-center">Extraction</h4>
+
+          <svg data-name="Extraction" viewBox="0 0 1169 422.92" xmlns="http://www.w3.org/2000/svg">
+            <path class="flow" data-index="0" d="m530.8 34.041c-112.5 0-112.5 11.186-225 11.186s-142.5-4.584-255-4.584v223.19c105.22 0 139.12 3.9636 235 4.4824v0.10156h20c112.5 0 112.5-11.186 225-11.186l10-111.59z" style="fill:#ae9e80"/>
+            <path class="flow" data-index="1" d="m530.8 257.23c-112.5 0-112.5 19.184-225 19.184h-20c-112.5 0-122.5-12.584-235-12.584v63.957c112.26 0 123.17 10.652 235 10.697 0.011 1e-5 0.0203 0 0.0312 0 0.22632 9e-5 0.41738 4e-3 0.64453 4e-3v-4e-3h19.324c111.85-0.0391 118.31-19.187 229.77-19.297l5.2324-21.283z" style="fill:#dec580"/>
+            <path class="flow" data-index="2" d="m50.801 327.79v42.666c112.49 0 122.53 37.981 235 37.988v2e-3h40c105.13 0 116.51-24.243 209.35-27.42l5.6504-15.326-10-27.121c-112.5 0-112.5 27.186-225 27.186v-2e-3h-20c-112.5 0-122.5-37.973-235-37.973z" style="fill:#f2f78a"/>
+            <path class="flow" data-index="3" d="m535.57 319.19c-111.46 0.11014-117.92 19.258-229.77 19.297h-20v0.0117c-111.85 0.16392-122.73 39.957-235 39.957v17.391c112.5 0 122.5-38.084 235-38.084h20v2e-3c112.5 0 112.5-19.186 225-19.186z" style="fill:#dec580"/>
+            <path class="flow" data-index="4" d="m535.15 381.02c-111.87 0.10719-117.99 25.893-230.26 27.492l-19.055-0.0742-0.0332 11.561 20.148 0.29492c112.49 1.65 112.22-27.133 224.72-27.133zm-249.35 38.979v-5.7871l0.0332-5.7734c-112.5 0-122.53-12.598-235.03-12.598v11.574c112.5 0 122.5 12.584 235 12.584z" style="fill:#f2f78a"/>
+            <path class="flow" data-index="5" d="m825.8 2e-3c-112.5 0-122.5 34.039-235 34.039v202.84c112.5 0 122.5-34.039 235-34.039h20c112.5 0 112.5 3.6445 225 3.6445l10-101.42-10-101.42c-112.5 0-112.5-3.6465-225-3.6465z" style="fill:#ae9e80"/>
+            <path class="flow" data-index="6" d="m1070.8 206.49c-112.5 0-112.5 4.3555-225 4.3555h-20c-112.5 0-122.5 26.039-235 26.039v58.127c112.5 0 122.5-26.041 235-26.041h20c112.5 0 112.5-4.3535 225-4.3535l10-29.064z" style="fill:#dec580"/>
+            <path class="flow" data-index="7" d="m1070.8 264.61c-112.5 0-112.5 12.354-225 12.354h-20c-112.5 0-122.5 18.041-235 18.041v39.367c112.5 0 122.5-18.039 235-18.039h20c112.5 0 112.5-12.355 225-12.355l10-19.684z" style="fill:#f2f78a"/>
+            <path class="flow" data-index="8" d="m825.8 324.34c-112.5 0-122.5 10.039-235 10.039v23.664c112.5 0 122.5-10.039 235-10.039h20c112.5 0 112.5 2.9062 225 2.9062l10-11.834-10-11.832c-112.5 0-112.5-2.9043-225-2.9043z" style="fill:#ae9e80"/>
+            <path class="flow" data-index="9" d="m1070.8 350.91c-112.5 0-112.5 5.0938-225 5.0938h-20c-112.5 0-122.5 2.0391-235 2.0391v4.9375c112.5 0 122.5-2.041 235-2.041h20c112.5 0 112.5-5.0938 225-5.0938l10-2.4688z" style="fill:#dec580"/>
+            <path class="flow" data-index="10" d="m1070.8 355.84c-112.5 0-112.5 13.094-225 13.094h-20c-112.5 0-122.5-5.959-235-5.959v3.3301c112.5 0 122.5 5.959 235 5.959h20c112.5 0 112.5-13.094 225-13.094l10-1.666z" style="fill:#f2f78a"/>
+            <path class="flow" data-index="11" d="m590.8 366.31v16.002c112.5 0 122.5 13.961 235 13.961h20c112.5 0 112.5 3.5469 225 3.5469l10-8.002-10-8c-112.5 0-112.5-3.5488-225-3.5488h-20c-112.5 0-122.5-13.959-235-13.959z" style="fill:#ae9e80"/>
+            <path class="flow" data-index="12" d="m590.8 382.31v4.9375c112.5 0 122.5 21.959 235 21.959h20c112.5 0 112.5-4.4512 225-4.4512l10-2.4688-10-2.4688c-112.5 0-112.5 4.4531-225 4.4531h-20c-112.5 0-122.5-21.961-235-21.961z" style="fill:#dec580"/>
+            <path class="flow" data-index="13" d="m590.8 387.25v2.793c112.5 0 122.5 29.961 235 29.961h20c112.5 0 112.5-12.453 225-12.453l10-1.3965-10-1.3965c-112.5 0-112.5 12.451-225 12.451h-20c-112.5 0-122.5-29.959-235-29.959z" style="fill:#f2f78a"/>
+
+            <rect class="node open-node" data-name="Terrestrial" data-link="Reserves" x=".80176" y="40.37" width="50" height="329.81" style="fill:#c48d98"/>
+            <text class="node-label link-text" x="-0.26953125" y="209.74858">Terrestrial</text>
+
+            <rect class="node open-node" data-name="Marine" data-link="Reserves" x=".80176" y="378.45" width="50" height="28.964" style="fill:#c5e9df"/>
+            <text class="node-label link-text" x="7.2363272" y="397.40765">Marine</text>
+
+            <text class="node-label" x="281.90302" y="395.22574">Sand</text>
+            <text class="node-label" x="278.23004" y="320.74017">Gravel</text>
+            <text class="node-label" x="257.47217" y="155.70261">Crushed Rock</text>
+
+            <rect class="node" data-name="Extraction" x="540.8" y="33.766" width="50" height="358.78" style="fill:#a7e66f"/>
+            <text class="node-label" x="539.02094" y="217.62968">Extraction</text>
+
+            <text class="node-label" x="823.82397" y="300.85342">Sand</text>
+            <text class="node-label" x="819.28552" y="245.22638">Gravel</text>
+            <text class="node-label" x="797.33405" y="105.62245">Crushed Rock</text>
+            <text class="node-label" x="823.81482" y="374.80301">Sand</text>
+            <text class="node-label" x="819.28552" y="362.66995">Gravel</text>
+            <text class="node-label" x="797.33405" y="340.37012">Crushed Rock</text>
+            <text class="node-label" x="823.69849" y="421.01978">Sand</text>
+            <text class="node-label" x="819.78296" y="408.74667">Gravel</text>
+            <text class="node-label" x="797.54596" y="391.91196">Crushed Rock</text>
+
+            <rect class="node open-node" data-name="Processing/Production" x="1080.8" y="3.648" width="50" height="300.34" style="fill:#a7e66f"/>
+            <text class="node-label link-text" x="1138.2937" y="149.62854" text-anchor="end"><tspan x="1138.2937" y="149.62854">Processing /</tspan><tspan x="1138.2937" y="164.62854">production</tspan></text>
+
+            <rect class="node open-node" data-name="Use as Fill" data-link="Use" x="1080.8" y="326.97" width="50" height="31.93" style="fill:#ca91fd"/>
+            <text class="node-label link-text" x="1133.7146" y="347.40802" text-anchor="end">Use as Fill</text>
+
+            <rect class="node open-node" data-name="Waste Processing" data-link="Waste Management" x="1080.8" y="383.81" width="50" height="23.734" style="fill:#d980b7"/>
+            <text class="node-label link-text" x="1154.2605" y="399.88309" text-anchor="end">Waste Processing</text>
+          </svg>
+
+        </div>
+
+        <div class="nodesankey" data-name="Processing/Production" hidden>
+          <h4 class="text-center">Processing/Production</h4>
+          <svg data-name="Processing/Production" viewBox="0 0 1056.2 389.01" xmlns="http://www.w3.org/2000/svg">
+            <path data-index="0" class="flow" d="m981.48 8.266c-352.85 0-352.85 4.6543-705.7 4.6543h-48c-65.708 0-76.707 9.3008-142.42 9.3008v5.9707c65.713 0 76.712-9.3008 142.42-9.3008h50v-0.0039c350.6-0.01979 351.6-4.6504 703.7-4.6504l10-2.9863z" style="fill:#ae9e80"/>
+            <path data-index="1" class="flow" d="m227.78 18.891c-65.708 0-76.707 9.3008-142.42 9.3008v10.049c63.315-1.1669 78.696-10.529 148.83-10.529h41.584c257.14 0 268.14 241 525.28 241h50.059v-8.834c64.637-0.34161 65.025-31.281 130.38-31.281l10-1.8262-0.012-2e-3 -9.9512-0.14649c-65.717 0-65.717 31.297-131.43 31.297v1.5293h-48.986v-8e-3c-256.46 0-268.16-239.26-523.33-240.52v-0.0293h-2z" style="fill:#ae9e80"/>
+            <path data-index="2" class="flow" d="m233.19 27.717c-70.134 0-84.515 9.3566-147.83 10.523l-0.0058 74.452c65.708 0 75.713-9.3021 141.43-9.3021h49.193c65.518 0.0855 65.59 42.314 131.24 42.314l10-37.832-10-37.834c-65.373 0-65.741-41.861-130.43-42.299v-0.02344z" style="fill:#ae9e80" sodipodi:nodetypes="sccsccccccs"/>
+            <path data-index="3" class="flow" d="m981.48 14.241c-352.85 0-352.85 100.32-705.7 100.32v-2e-3h-50v-2e-3c-65.708 0-76.707-1.8692-142.42-1.8691v1.4922c65.713 0 76.712 1.8691 142.42 1.8691v2e-3h50v2e-3c352.85 0 352.85-100.32 705.7-100.32l10-0.74609z" style="fill:#dec580"/>
+            <path data-index="4" class="flow" d="m83.359 114.18v21.688c65.713 0 76.712 1.8691 142.42 1.8691v2e-3h50v-6e-3c65.717 0 65.717 29.658 131.43 29.658l10-10.842-10-10.842c-65.717 0-65.717-29.658-131.43-29.658v2e-3h-50v-2e-3c-65.708 0-76.707-1.8691-142.42-1.8691z" style="fill:#dec580"/>
+            <path data-index="5" class="flow" d="m83.359 135.86v1.834c65.708 0 76.707 1.8691 142.42 1.8691h50c257.14 0 268.14 141.27 525.27 141.27v0.0117h50v-1.7656h-49.678c-257.14 0-268.45-141.35-525.59-141.35v4e-3h-50v-2e-3c-65.708 0-76.707-1.8691-142.42-1.8691zm905.48 95.434-7.3516 0.17382c-65.713 0-65.713 46.125-131.43 46.125v1.4004c65.717 0 65.717-46.125 131.43-46.125z" style="fill:#dec580"/>
+            <path data-index="6" class="flow" d="m981.48 15.73c-352.85 0-352.85 130.34-705.7 130.34v-2e-3h-49.998l-2e-3 -8e-3c-65.708 0-76.707-8.3652-142.42-8.3652v1.043c65.713 1e-5 76.712 8.3652 142.42 8.3652l2e-3 8e-3h49.998v2e-3c352.85 0 352.85-130.34 705.7-130.34l10-0.52148z" style="fill:#f2f78a"/>
+            <path data-index="7" class="flow" d="m83.359 138.74v14.162c65.713 0 76.712 8.3652 142.42 8.3652l2e-3 6e-3h49.998v0.5254c65.717 0 65.717 20.279 131.43 20.279l10-7.3418-10-7.3438c-65.717 0-65.717-20.279-131.43-20.279v-2e-3h-49.998l-2e-3 -6e-3c-65.708 0-76.707-8.3652-142.42-8.3652zm192.42 6.8047v0.52344h2e-3v-0.52344z" style="fill:#f2f78a"/>
+            <path data-index="8" class="flow" d="m83.359 152.9v1.7734c65.708 0 76.707 8.3633 142.42 8.3633v6e-3h50c257.14 0 268.14 126.9 525.28 126.9h50v-0.96875h-50v2e-3c-256.86-0.09569-268.24-127.18-525.28-127.18v-0.5293h-49.998l-2e-3 -6e-3c-65.708 0-76.707-8.3652-142.42-8.3652zm904.82 80.881-6.6934 0.91211c-65.713 0-65.713 53.1-131.43 53.1v0.89844c65.717 0 65.717-53.098 131.43-53.098l10-1.3613z" style="fill:#f2f78a"/>
+            <path data-index="9" class="flow" d="m84.359 201.46c161.43 0 161.43-19.383 322.85-19.383l10 15.152-10 15.152c-161.43 0-161.43 19.383-322.85 19.383z" style="fill:#a5d7d4"/>
+            <path data-index="10" class="flow" d="m84.359 274.63c161.43 0 161.43-62.252 322.85-62.252l10 2.3274-10 2.3274c-161.43 0-161.43 62.252-322.85 62.252z" style="fill:#a5d7d4"/>
+            <path data-index="11" class="flow" d="m84.359 308.19c161.43 0 161.43-91.152 322.85-91.152l10 0.2685-10 0.26849c-161.43 0-161.43 91.152-322.85 91.152z" style="fill:#f2f78a"/>
+            <path data-index="12" class="flow" d="m84.359 334.97c161.43 0 161.43-117.4 322.85-117.4l10 3.1032-10 3.1032c-161.43 0-161.43 117.4-322.85 117.4z" style="fill:#a5d7d4"/>
+            <path data-index="13" class="flow" d="m981.48 65.597c-161.42 0-161.42 0.60352-322.85 0.60352h-50c-65.708 0-74.707 3.8398-140.42 3.8398l-6e-3 7.9219c65.713 0 74.718-3.8613 140.43-3.8613h50c161.42 0 161.42-0.60352 322.85-0.60352l10-3.9492z" style="fill:#ae9e80"/>
+            <path data-index="14" class="flow" d="m608.63 74.1c-65.708 0-76.707 3.8379-142.42 3.8379v12.633c65.713 0 76.712-3.8379 142.42-3.8379h50v2e-3c161.42 0 161.42 61.018 322.85 61.018l10-6.3164-10-6.3184c-161.42 0-161.42-61.018-322.85-61.018z" style="fill:#ae9e80"/>
+            <path data-index="15" class="flow" d="m608.63 86.735c-64.971 0-76.644 3.7381-140.42 3.8223v5.1562c63.776-0.0842 75.449-3.8223 140.42-3.8223h50v2e-3c161.42 0 161.42 101.83 322.85 101.83l10-2.5762-10-2.5762c-161.42 0-161.42-101.83-322.85-101.83v-0.0059z" style="fill:#ae9e80" sodipodi:nodetypes="sccscccccccs"/>
+            <path data-index="16" class="flow" d="m608.63 66.192v0.0098h50v-0.0098zm0 20.543c-64.971 0-76.644 3.7381-140.42 3.8223v2e-3c63.776-0.0842 75.449-3.8223 140.42-3.8223h50v-2e-3zm50 5.1562v2e-3h-50c-64.971 0-76.644 3.7381-140.42 3.8223v2.7188c63.776-0.0842 75.449-3.8223 140.42-3.8223h50v-0.0059c161.42 0 161.42 175.12 322.85 175.12l10-1.3594-10-1.3574c-161.42 0-161.42-175.12-322.85-175.12z" style="fill:#ae9e80"/>
+            <path data-index="17" class="flow" d="m658.62 66.209v20.525h-50c-6.8755 0-12.855 0.0615-18.658 0.13672 5.7994-0.0748 11.793-0.13477 18.658-0.13477h50v3.6446h6e-3v-20.525h4e-3v-3.6465zm0 24.174v4.2285h-50c-64.967 0-76.644 3.7377-140.41 3.8223v6.3477h6e-3v-2.7012c63.767-0.0846 75.443-3.8223 140.41-3.8223h50v-7.875zm-189.61 0.16602c-0.28816 5.4e-4 -0.54226 0.0029-0.80274 0.0059v0.0039c0.29327-1e-3 0.5098-0.0088 0.80274-0.0098zm189.62 4.0605 6e-3 3.6484c65.712 0 76.766 161.19 142.48 161.19h48.943v0.44335c0.0134 0 0.0256 1e-5 0.0391 0v-0.44335h0.96289v-1.543c64.726-0.31218 65.081-31.283 130.47-31.283l9.9629 0.14649-10-1.8242c-65.673 0-65.723 31.253-131.3 31.295h-49.127v2e-3c-65.717 0-76.717-161.63-142.43-161.63z" style="fill:#ae9e80"/>
+            <path data-index="18" class="flow" d="m608.62 98.258c-64.967 0-76.644 3.7377-140.41 3.8223v2.6914c65.702-2.5e-4 76.703-3.8379 142.41-3.8379v-2e-3c17.667-0.0433 35.606 0.01 53.01 0.01 7.0654 1e-5 12.793 5.7276 12.793 12.793v255.41c-2e-5 7.0654-5.7276 12.793-12.793 12.793h-644.28c-7.0654-3e-5 -12.793-5.7276-12.793-12.793v-17.963c1.7e-5 -7.0654 5.7276-12.793 12.793-12.793h5l10-1.3398-10-1.3379h-5c-8.5442 1.6e-4 -15.471 6.9265-15.471 15.471v17.963c1.66e-4 8.5442 6.9265 15.471 15.471 15.471h644.28c8.5442-1.6e-4 15.471-6.9265 15.471-15.471v-255.41c-1.7e-4 -8.5442-6.9265-15.471-15.471-15.471-18.179 0.049-36.681-0.0059-55.014-0.0059z" style="fill:#ae9e80" sodipodi:nodetypes="ccccccccccssscccccccccccc"/>
+            <path data-index="19" class="flow" d="m981.48 73.504c-161.42 0-161.42 44.477-322.85 44.477h-47.998l-2e-3 -6e-3c-65.708 0-76.707-13.203-142.42-13.203v7.4199c65.713 0 76.712 13.203 142.42 13.203l2e-3 6e-3h47.998v2e-3c161.42 0 161.42-44.477 322.85-44.477l10-3.7109z" style="fill:#dec580"/>
+            <path data-index="20" class="flow" d="m468.21 112.2v3.8652c65.711 2.8e-4 76.711 13.203 142.42 13.203l2e-3 6e-3h47.998v-6e-3c161.42 1.9e-4 161.42 22.357 322.85 22.357l10-1.9336-10-1.9316c-161.42 0-161.42-22.357-322.85-22.357v6e-3h-47.996l-2e-3 -6e-3c-65.707 0-76.707-13.203-142.42-13.203z" style="fill:#dec580"/>
+            <path data-index="21" class="flow" d="m468.22 116.06v1.5c65.704 1e-3 76.706 13.203 142.41 13.203l2e-3 6e-3h47.998v-0.0117c161.42 5.4e-4 161.42 64.461 322.85 64.461l10-0.75-10-0.75c-161.42 0-161.42-64.461-322.85-64.461v0.0117h-49.998v-0.0195c-63.91-0.26935-75.395-13.188-140.41-13.19z" style="fill:#dec580"/>
+            <path data-index="22" class="flow" d="m468.22 117.56v0.2207c65.704 1e-3 76.706 13.203 142.41 13.203l2e-3 6e-3h47.998v-0.0176c161.42 1e-3 161.42 138.96 322.85 138.96l10-0.10742-10-0.10547c-161.42 0-161.42-138.96-322.85-138.96v0.0117h-49.998v-0.0195c-63.91-0.2693-75.395-13.188-140.41-13.19z" style="fill:#dec580"/>
+            <path data-index="23" class="flow" d="m468.22 117.78v3.0117c65.708 8.3e-4 76.708 13.203 142.41 13.203l2e-3 6e-3h47.998v-0.0117c65.687 6e-3 76.768 143.5 142.42 143.61v6e-3l50.008-4e-3v-1.5078c64.689-0.47762 65.057-46.104 130.43-46.104l6.5762 8e-3 -6.5762-1.4082c-65.717 0-65.717 46.125-131.43 46.125v6e-3h-49c-65.717 0-76.717-143.74-142.43-143.74v0.0117h-49.998v-0.0195c-63.91-0.26988-75.395-13.189-140.41-13.19z" style="fill:#dec580"/>
+            <path data-index="24" class="flow" d="m468.22 120.8v1.793c65.713 0 76.712 13.203 142.42 13.203l2e-3 6e-3h47.998c65.705 0.0228 76.819 188.76 142.53 188.76l-0.10938-1.5868c-65.717 0-76.711-188.97-142.42-188.97l-50.004 1.7e-4v-0.0195c-63.91-0.26938-75.395-13.188-140.41-13.19z" style="fill:#dec580" sodipodi:nodetypes="cccccccccccccc"/>
+            <path data-index="25" class="flow" d="m468.22 122.59v0.88281c65.024 0 76.507 12.92 140.42 13.189v0.0195h50l4.998-0.0137c6.5782-0.0182 11.912 5.3319 11.912 11.91v220.57c0 6.5783-5.3338 11.91-11.912 11.91h-644.28c-6.5783 0-11.912-5.3319-11.912-11.91v-17.963c5.523e-4 -6.5779 5.3342-11.91 11.912-11.91h5l10-0.4414-10-0.44141h-5c-7.0654 0-12.793 5.7276-12.793 12.793v17.963c0 7.0654 5.7276 12.793 12.793 12.793h644.28c7.0654 0 12.793-5.7276 12.793-12.793v-220.57c0-7.0654-5.7276-12.793-12.793-12.793l-5.0078 0.0137h-50v-0.0195c-63.91-0.26924-75.395-13.188-140.41-13.19z" style="fill:#dec580"/>
+            <path data-index="26" class="flow" d="m981.48 80.926c-161.42 0-161.42 70.844-322.85 70.844h-47.998l-2e-3 -6e-3c-65.708 0-76.707-28.303-142.42-28.303v12.332c65.713 0 76.712 28.303 142.42 28.303l2e-3 8e-3h47.998c161.42 0 161.42-70.844 322.85-70.844l10-6.168z" style="fill:#f2f78a"/>
+            <path data-index="27" class="flow" d="m468.21 135.79v2.2422c65.713 0 76.712 28.303 142.42 28.303l2e-3 6e-3h47.998c161.42 0 161.42-12.479 322.85-12.479l10-1.1211-10-1.123c-161.42 0-161.42 12.479-322.85 12.479v4e-3h-50v-0.0332c-63.913-0.57708-75.396-28.277-140.42-28.277z" style="fill:#f2f78a"/>
+            <path data-index="28" class="flow" d="m468.21 138.03v0.68554c65.713 0 76.712 28.303 142.42 28.303l2e-3 6e-3h47.998v-4e-3c161.42 0 161.42 28.883 322.85 28.883l10-0.34179-10-0.3418c-161.42 0-161.42-28.883-322.85-28.883v4e-3h-50v-0.0332c-63.913-0.57708-75.396-28.277-140.42-28.277z" style="fill:#f2f78a"/>
+            <path data-index="29" class="flow" d="m468.21 138.72v0.34375c65.713 0 76.712 28.303 142.42 28.303l2e-3 6e-3h47.998v-4e-3c161.42 0 161.42 102.91 322.85 102.91l10-0.16797-10-0.16797c-161.42 0-161.42-102.91-322.85-102.91v-2e-3h-50v-0.0332c-63.913-0.57708-75.396-28.277-140.42-28.277z" style="fill:#f2f78a"/>
+            <path data-index="30" class="flow" d="m468.22 139.06v3.4336c65.704 3e-3 76.706 28.303 142.41 28.303l2e-3 6e-3h47.998v-4e-3c161.42 0 161.42 195.22 322.85 195.22l10-1.7188-10-1.7188c-161.42 0-161.42-195.22-322.85-195.22v0.01h-50v-0.0332c-63.91-0.57705-75.395-28.274-140.41-28.277z" style="fill:#f2f78a"/>
+            <path data-index="31" class="flow" d="m468.21 142.49v1.791c65.713 0 76.712 28.303 142.42 28.303l2e-3 6e-3h47.998c65.674 0 76.807 115.16 142.43 115.28v0.01h50v-1.0254c64.704-0.54145 65.051-53.086 130.43-53.086l6.6992 0.91211 3.3008-0.44922-10-1.3613c-65.717 0-65.717 53.098-131.43 53.098v2e-3h-49c-65.717 0-76.717-115.17-142.43-115.17h-50v-0.0332c-63.913-0.5775-75.396-28.278-140.42-28.278z" style="fill:#f2f78a"/>
+            <path data-index="32" class="flow" d="m468.21 144.28v1.2422c65.713 0 76.712 28.303 142.42 28.303l2e-3 6e-3h47.998v-2e-3c65.717 0 76.717 152.17 142.43 152.17l0.10938-1.4445c-65.717 0-76.826-151.97-142.54-151.97h-50v-0.0332c-63.913-0.57708-75.396-28.277-140.42-28.277z" style="fill:#f2f78a" sodipodi:nodetypes="cccccccccsccsc"/>
+            <path data-index="33" class="flow" d="m468.21 145.52v1.2422c65.713 0 76.712 28.303 142.42 28.303l2e-3 6e-3h47.998v-2e-3c65.717 0 76.717 162.28 142.43 162.28l0.2827-0.58578-0.2827-0.65281c-65.717 0-76.717-162.28-142.43-162.28h-50v-0.0332c-63.913-0.57708-75.396-28.277-140.42-28.277z" style="fill:#f2f78a" sodipodi:nodetypes="cccccccccsccsc"/>
+            <path data-index="34" class="flow" d="m468.22 146.76-0.01 0.35742c65.024 0 76.507 27.7 140.42 28.277v0.0332h50l5.0098 4e-3c6.38 3e-3 11.553 5.1727 11.553 11.553v182.16c0 6.38-5.1728 11.553-11.553 11.553h-644.28c-6.38 0-11.553-5.1728-11.553-11.553v-17.963c0-6.38 5.1727-11.551 11.553-11.551h5l10-0.17969-10-0.17968h-5c-6.5779 0-11.912 5.3323-11.912 11.91v17.963c0 6.5783 5.3338 11.912 11.912 11.912h644.28c6.5783 0 11.912-5.3338 11.912-11.912v-182.16c0-6.5783-5.3338-11.91-11.912-11.91l-5.0098-2e-3h-49.99v-0.0332c-63.913-0.57704-75.396-28.277-140.42-28.277z" style="fill:#f2f78a"/>
+            <path data-index="35" class="flow" d="m468.21 147.12c65.713 0 74.709 45.28 140.42 45.28l1.3615 13.708-1.3615 12.17c-65.713 0-74.708-45.279-140.42-45.279z" style="fill:#a5d7d4"/>
+            <path data-index="36" class="flow" d="m467.21 173c65.713 0 76.703 189.56 142.42 189.56v1.163c-65.713 0-76.703-189.56-142.42-189.56z" style="fill:#a5d7d4"/>
+            <path data-index="37" class="flow" d="m658.63 192.4c161.43 0 161.43-99.143 322.85-99.143l10 5.3182-10 5.3182c-161.43 0-161.43 99.143-322.85 99.143z" style="fill:#a5d7d4"/>
+            <path data-index="38" class="flow" d="m658.63 203.03c161.43 0 161.43-49.17 322.85-49.17l10 3.4055-10 3.4054c-161.43 0-161.43 49.17-322.85 49.17z" style="fill:#a5d7d4"/>
+            <path data-index="39" class="flow" d="m658.63 209.84c161.43 0 161.43-13.938 322.85-13.938l10 1.2885-10 1.2885c-161.43 0-161.43 13.938-322.85 13.938z" style="fill:#a5d7d4"/>
+            <path data-index="40" class="flow" d="m658.63 212.42c161.43 0 161.43 57.848 322.85 57.848l10 0.49337-10 0.49337c-161.43 0-161.43-57.848-322.85-57.848z" style="fill:#a5d7d4"/>
+            <path data-index="41" class="flow" d="m658.63 213.41c161.43 0 161.43 152.61 322.85 152.61l10 0.70565-10 0.70564c-161.43 0-161.43-152.61-322.85-152.61z" style="fill:#a5d7d4"/>
+            <path data-index="42" class="flow" d="m658.63 214.82 2e-3 1.2676c65.71 0 76.716 62.985 142.42 62.99v6e-3h49.998v-1.4785h-49.932v-6e-3c-65.714 0-76.777-62.779-142.49-62.779zm322.86 15.17c-65.717 0-65.717 46.125-131.43 46.125v1.4805c65.717 0 65.717-46.125 131.43-46.125l7.3516-0.17382 2.6484-0.56641-3.4238-0.73242z" style="fill:#dec580"/>
+            <path data-index="43" class="flow" d="m658.63 216.09-0.01 0.9336c65.625 0 76.97 71.747 142.44 71.947v4e-3h50v-0.30078c4.2763-0.0362 8.2883-0.28522 12.039-0.7461-3.7508 0.46034-7.7632 0.70802-12.039 0.74415v-0.79102h-49.91c-65.708 0-76.807-71.791-142.52-71.791zm322.86 17.68c-65.717 0-65.717 53.1-131.43 53.1v0.92383c65.717 0 65.717-53.1 131.43-53.1l3.3906-0.46289z" style="fill:#f2f78a"/>
+            <path data-index="44" class="flow" d="m24.359 339.63h-5a11.552 11.552 0 0 0-11.552 11.552v17.963a11.552 11.552 0 0 0 11.552 11.552h644.28a11.552 11.552 0 0 0 11.552-11.552v-140.57a11.552 11.552 0 0 0-11.552-11.552h-5v1.2557h5a10.296 10.296 0 0 1 10.296 10.296v140.57a10.296 10.296 0 0 1-10.296 10.296h-644.28a10.296 10.296 0 0 1-10.296-10.296v-17.963a10.296 10.296 0 0 1 10.296-10.296h5l10-0.62784z" style="fill:#a5d7d4"/>
+            <path data-index="45" class="flow" d="m658.63 362.56c161.43 0 161.43-201.88 322.85-201.88l10 0.32607-10 0.32606c-161.43 0-161.43 201.88-322.85 201.88z" style="fill:#a5d7d4"/>
+            <path data-index="46" class="flow" d="m658.63 363.21c161.43 0 161.43 4.2165 322.85 4.2165l10 0.10749-10 0.10749c-161.43 0-161.43-4.2165-322.85-4.2165z" style="fill:#a5d7d4"/>
+            <path data-index="47" class="flow" d="m24.359 340.88h-5a10.296 10.296 0 0 0-10.296 10.296v27.541a10.296 10.296 0 0 0 10.296 10.296h644.28a10.296 10.296 0 0 0 10.296-10.296v-5a10.296 10.296 0 0 0-10.296-10.296h-5v0.29593h5a10 10 0 0 1 10 10v5a10 10 0 0 1-10 10h-644.28a10 10 0 0 1-10-10v-27.541a10 10 0 0 1 10-10h5l10-0.14796z" style="fill:#a5d7d4"/>
+            <path data-index="48" class="flow" d="m850.06 322.97c65.713 0 65.713 5.4661 131.43 5.4661l10 1.5156-10 1.5156c-65.713 0-65.713-5.4661-131.43-5.4661z" style="fill:#e3a6aa"/>
+            <path data-index="49" class="flow" d="m850.06 336.11c65.713 0 65.713-4.64 131.43-4.64l10 0.61929-10 0.6193c-65.713 0-65.713 4.64-131.43 4.64z" style="fill:#e3a6aa"/>
+
+            <rect class="node" data-name="Secondary Aggregates" x="35.359" y="274.63" width="50" height="4.6548" style="fill:#a5d7d4"/>
+            <text class="node-label" x="4.5913086" y="280.06335">Secondary Aggregates</text>
+
+            <rect class="node" data-name="Marine Dredged Outside English Waters" x="35.359" y="308.19" width="50" height=".53699" style="fill:#c5e9df"/>
+            <text class="node-label" x="52.88427" y="305.83542" style="line-height:0.9;word-spacing:0px"><tspan data-index="tspan34318" x="52.88427" y="305.83542" dx="0" style="text-align:center;text-anchor:middle" sodipodi:role="line">Marine Dredged</tspan><tspan data-index="tspan89992" x="52.88427" y="316.63541" style="text-align:center;text-anchor:middle" sodipodi:role="line">Outside English Waters</tspan></text>
+
+            <rect class="node" data-name="Scalpings and Fines" x="35.359" y="334.97" width="50" height="6.2065" style="fill:#d980b7"/>
+            <text class="node-label" x="6.2680664" y="341.17816">Scalpings and Fines</text>
+
+            <rect class="node" data-name="Demolition" x="35.359" y="201.46" width="50" height="30.304" style="fill:#d980b7"/>
+            <text class="node-label" x="35" y="221">Demolition</text>
+
+            <rect class="node open-node" data-name="Extraction" x="35.359" y="22.221" width="50" height="132.99" style="fill:#a7e66f"/>
+            <text class="node-label link-text" x="34" y="93.5">Extraction</text>
+
+            <rect class="node" data-name="Processing/Production" x="418.21" y="70.04" width="50" height="153.74" style="fill:#a7e66f"/>
+            <text class="node-label" x="442.83981" y="143.6123"><tspan data-index="tspan41438" x="442.83981" y="143.6123" style="text-align:center;text-anchor:middle" sodipodi:role="line">Processing /</tspan><tspan data-index="tspan41440" x="442.83981" y="154.8623" style="text-align:center;text-anchor:middle" sodipodi:role="line">production</tspan></text>
+
+            <rect class="node" data-name="Processing/Production Secondary Aggregates" x="609.63" y="362.56" width="50" height="1.163" style="fill:#a5d7d4"/>
+            <text class="node-label" x="558.03546" y="356.08078">Secondary Aggregates</text>
+
+            <path class="node" data-name="C&D Waste" d="m608.63 192.4h50v25.878h-50z" style="fill:#d980b7"/>
+            <text class="node-label" x="610.43738" y="208.65866">C&D Waste</text>
+
+            <rect class="node" data-name="Land Won" x="801.06" y="322.97" width="50" height="3.0313" style="fill:#c48d98"/>
+            <text class="node-label" x="804.15411" y="326.94952">Land Won</text>
+
+            <rect class="node" data-name="Marine Dredged" x="801.06" y="336.11" width="50" height="1.2386" style="fill:#c5e9df"/>
+            <text class="node-label" x="796.67047" y="338.88782">Marine Dredged</text>
+
+            <rect class="node open-node" data-name="Concreting Manufacturing" data-link="Manufacturing" x="992.47" y="65.6" width="50" height="38.292" style="fill:#ca91fd"/>
+            <text class="node-label link-text" x="1017.4601" y="82.573311" text-anchor="end" style="line-height:1.3"><tspan data-index="tspan46700" x="1017.4601" y="82.573311" style="text-align:center;text-anchor:middle" sodipodi:role="line">Concreting</tspan><tspan data-index="tspan46702" x="1017.4601" y="91.573311" style="text-align:center;text-anchor:middle" sodipodi:role="line">manufacturing</tspan></text>
+
+            <rect class="node open-node" data-name="Asphalt Manufacturing" data-link="Manufacturing" x="992.47" y="267.01" width="50" height="4.2519" style="fill:#ca91fd"/>
+            <text class="node-label link-text" x="1017.4601" y="266.96326" text-anchor="end" style="line-height:1.3"><tspan data-index="tspan49350" x="1017.4601" y="266.96326" style="text-align:center;text-anchor:middle" sodipodi:role="line">Asphalt</tspan><tspan data-index="tspan49352" x="1017.4601" y="275.96326" style="text-align:center;text-anchor:middle" sodipodi:role="line">manufacturing</tspan></text>
+
+            <rect class="node open-node" data-name="Mortar Manufacturing" data-link="Manufacturing" x="992.47" y="362.58" width="50" height="5.0641" style="fill:#f2f78a"/>
+            <text class="node-label link-text" x="1017.4601" y="363.22455" text-anchor="end" style="line-height:1.3"><tspan data-index="tspan52084" x="1017.4601" y="363.22455" style="text-align:center;text-anchor:middle" sodipodi:role="line">Mortar</tspan><tspan data-index="tspan52086" x="1017.4601" y="371.32455" style="text-align:center;text-anchor:middle" sodipodi:role="line">manufacturing</tspan></text>
+
+            <rect class="node open-node" data-name="Aggregate Use" data-link="Use" x="992.47" y="135.12" width="50" height="26.206" style="fill:#ca91fd"/>
+            <text class="node-label link-text" x="1047.6792" y="150.38551" text-anchor="end">Aggregate Use</text>
+
+            <rect class="node open-node" data-name="Non-aggregate Use" data-link="Use" x="992.47" y="188.57" width="50" height="9.9123" style="fill:#ca91fd"/>
+            <text class="node-label link-text" x="1056.5737" y="195.68867" text-anchor="end">Non-aggregate Use</text>
+
+            <rect class="node open-node" data-name="Use as Fill" data-link="Use" x="992.47" y="224.94" width="50" height="10.654" style="fill:#ca91fd"/>
+            <text class="node-label link-text" x="1038.4265" y="233.48421" text-anchor="end">Use as Fill</text>
+
+            <rect class="node" data-name="Trade" x="992.47" y="328.44" width="50" height="4.2699" style="fill:#a7e66f"/>
+            <text class="node-label" x="1029.1562" y="333.79214" text-anchor="end">Trade</text>
+
+            <rect class="node" data-name="Overburden and Interburden" x="992.47" y="8.2704" width="50" height="8.5046" style="fill:#d980b7"/>
+            <text class="node-label" x="1018.6625" y="6.5214844" text-anchor="end" style="line-height:0.7"><tspan data-index="tspan44032" x="1018.6625" y="6.5214844" dy="0" style="text-align:center;text-anchor:middle" sodipodi:role="line">Overburden</tspan><tspan data-index="tspan44034" x="1018.6625" y="14.921484" style="text-align:center;text-anchor:middle" sodipodi:role="line">and</tspan><tspan data-index="tspan44038" x="1018.6625" y="23.321484" style="text-align:center;text-anchor:middle" sodipodi:role="line">Interburden</tspan></text>
+
+            <text x="208.57057" y="157.92307">Sand</text>
+            <text x="204.06354" y="131.05695">Gravel</text>
+            <text x="190.16293" y="66.066597">Crushed Rock</text>
+            <text x="593.87408" y="165.42035">Sand</text>
+            <text x="588.99615" y="130.98013">Gravel</text>
+            <text x="571.55591" y="85.839005">Crushed Rock</text>
+            <text x="810.37714" y="291.02887">Sand</text>
+            <text x="808.09631" y="280.8288">Gravel</text>
+            <text x="796.75171" y="264.38617">Crushed Rock</text>
+          </svg>
+        </div>
+
+        <div class="nodesankey" data-name="Manufacturing" hidden>
+          <h4 class="text-center">Manufacturing</h4>
+
+          <svg data-name="Manufacturing" viewBox="0 0 1683 805" xmlns="http://www.w3.org/2000/svg">
+            <path class="flow" data-index="0"  d="m1354.1 5.0298e-7 -813.68 4.8418c-115.96 0-115.96 15.754-231.93 15.754h-50c-86.144 0-96.145 157.54-182.29 157.54v44c86.144 0 96.145-157.54 182.29-157.54v102.13h50c115.96 0 115.96-15.754 231.93-15.754l813.68-4.8418z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="1"  d="m258.47 64.596c-85.722 0.5582-95.845 157.53-181.84 157.53l-0.64649-8.9219v29.525c86.144 0 96.791-157.15 182.94-157.15zm450.85 101.73c-200.43 0-200.43 0.40234-400.85 0.40234h-50v18.807h50c200.43 0 200.43-0.40039 400.85-0.40039l10-9.4043z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="2"  d="m258.92 85.582c-86.144 0-96.791 157.15-182.94 157.15l0.19336 8.9316c85.991 0 97.214-156.59 182.94-157.15zm-0.45312 99.953v54.717h50c199.49 0 199.49 65.574 398.99 65.574l10-27.359-10-27.357c-199.49 0-199.49-65.574-398.99-65.574z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="3"  d="m709.32 185.13c-201.36 0-201.36 80.945-402.71 80.945h-50c-85.213 0-95.213-14.418-180.43-14.418v1.4824c85.213 0 95.213 14.418 180.43 14.418h50c201.36 0 201.36-80.945 402.71-80.945l10-0.74219z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="4"  d="m76.177 253.14v51.408c85.213 0 95.213 14.416 180.43 14.416h50v2e-3c200.43 0 200.43 38.264 400.85 38.264l10-25.705-10-25.703c-200.43 0-200.43-38.264-400.85-38.264v-2e-3h-50c-85.213 0-95.213-14.416-180.43-14.416z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="5"  d="m709.32 186.62c-201.82 0-201.82 144.91-403.65 144.91h-50c-84.747 1e-5 -94.747-26.975-179.49-26.975l2e-3 2.3223c84.747 0 94.747 26.975 179.49 26.975h49.998v2e-3c201.82 0 201.82-144.91 403.65-144.91l10-1.1621z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="6"  d="m76.177 306.88v85.418c84.747 0 94.747 26.975 179.49 26.975h50c200.89 0 200.89 23.381 401.78 23.381l10-42.709-10-42.707c-200.89 0-200.89-23.383-401.78-23.383h-50c-84.747 0-94.747-26.975-179.49-26.975z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="7"  d="m76.177 392.3v23.809c84.747 0 94.747 26.975 179.49 26.975h50c88.008 0 88.008 339.79 176.02 339.79l10-11.904-10-11.906c-88.008 0-88.008-339.79-176.02-339.79v2e-3h-50c-84.747 0-94.747-26.975-179.49-26.975z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="8"  d="m76.178 416.11c84.747 0 84.747 38.147 169.49 38.147l10 45.138-10 45.138c-84.747 0-84.747-38.147-169.49-38.147z" style="fill:#d980b7;stroke-width:0px"/>
+            <path class="flow" data-index="9"  d="m76.177 506.38v1.4902c88.008 0 98.009 225.59 186.02 225.59h50c84.747 0 84.745 60.68 169.49 60.68l10-0.74414-10-0.74414c-84.747 0-84.745-60.68-169.49-60.68h-50c-88.008 0-98.009-225.59-186.02-225.59z" style="fill:#a5d7d4;stroke-width:0px"/>
+            <path class="flow" data-index="10" d="m305.67 454.25c201.82 0 201.82-265.31 403.65-265.31l10 3.417-10 3.4171c-201.82 0-201.82 265.31-403.65 265.31z" style="fill:#a5d7d4;stroke-width:0px"/>
+            <path class="flow" data-index="11" d="m305.67 461.09c200.89 0 200.89-18.435 401.78-18.435l10 36.834-10 36.834c-200.89 0-200.89 18.435-401.78 18.435z" style="fill:#a5d7d4;stroke-width:0px"/>
+            <path class="flow" data-index="12" d="m305.67 534.75c88.008 0 88.008 248.12 176.02 248.12l10 4.8873-10 4.8873c-88.008 0-88.008-248.12-176.02-248.12z" style="fill:#a5d7d4;stroke-width:0px"/>
+            <path class="flow" data-index="13" d="m75.246 573.98c316.1 0 316.1-57.665 632.21-57.665l10 22.026-10 22.026c-316.1 0-316.1 57.666-632.21 57.666z" style="fill:#d980b7;stroke-width:0px"/>
+            <path class="flow" data-index="14" d="m76.178 646.03c85.679 0 85.679 0.42455 171.36 0.42455l10 24.866-10 24.866c-85.679 0-85.679-0.42455-171.36-0.42455z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="15" d="m709.32 195.78c-85.213 0-85.213 425.49-170.43 425.49v2e-3h-50c-85.679 0-95.679 25.191-181.36 25.191v6.1289c85.679 0 95.679-25.191 181.36-25.191h50c85.213 0 85.213-425.49 170.43-425.49l10-3.0644z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="16" d="m707.45 560.37c-84.281 0-84.282 67.027-168.56 67.027h-50c-85.679-1e-5 -95.679 25.191-181.36 25.191v43.604c85.679 0 95.679-25.191 181.36-25.191h50v-2e-3c84.281 0 84.282-67.025 168.56-67.025l10-21.803z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="17" d="m707.45 603.97c-83.815 0-83.816 101.03-167.63 101.03h-50c-86.144-1e-5 -96.145-8.8066-182.29-8.8066v2.9473c86.144 0 96.145 8.8066 182.29 8.8066h50c83.815 0 83.816-101.03 167.63-101.03l10-1.4727z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="18" d="m769.32 166.33c109.44 0 465-3.938 574.44-3.938l10 31.193-10 31.193c-109.44 0-465 3.938-574.44 3.938z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="19" d="m995.4 239.83c-108.97 0-118.97 11.283-227.95 11.283v166.84c108.97 0 118.97-11.283 227.95-11.283h50c148.8 0 159.73 160.08 308.09 160.6v101.34h49.998c7e-4 0 0 0 0 0 101.18-5e-5 101.19-3.498 202.37-3.498l10-134.02-10-134.02c-101.19 0-101.19 3.4961-202.38 3.4961v2e-3h-49.998v83.648-83.648c-149.04 0-159.04-160.73-308.09-160.73z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="20" d="m995.4 406.67c-108.97 0-118.97 11.283-227.95 11.283v1.6016c108.97 0 118.97-11.283 227.95-11.283h50c58.656 0 58.657 375.71 117.31 375.71l10-0.79883-10-0.80078c-58.656 0-58.657-375.72-117.31-375.72z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="21" d="m994.94 416.94c-108.74 0-118.74 2.6152-227.48 2.6152v101.2c108.74 0 118.74-2.6152 227.48-2.6152h50c149.28 0 149.27 150.46 298.55 150.46l10-50.602-10-50.602c-149.28 0-149.27-150.46-298.55-150.46z" style="fill:#d980b7;stroke-width:0px"/>
+            <path class="flow" data-index="22" d="m1343.5 244.7c-147.64 0-147.64 282.95-295.29 282.96-7e-4 0 0 0 0 0h-49.998c-110.37 0-120.37-6.8984-230.74-6.8984l2e-3 33.504c110.37 0 120.37 6.8984 230.74 6.8984h49.996c7e-4 0 0 0 0 0 147.64-3e-3 147.64-282.96 295.29-282.96l10-16.752z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="23" d="m767.46 554.26v54.779c110.37 0 120.37 6.8984 230.74 6.8984h49.996c147.64 2e-3 157.64 118.45 305.29 118.45h49.998c101.19 0 101.19-14.498 202.38-14.498l10-27.389-10-27.391c-101.19 0-101.19 14.498-202.38 14.498h-49.998c-147.64 0-157.65-118.45-305.29-118.45-6e-4 0 0 0 0 0h-49.998c-110.37 0-120.37-6.8984-230.74-6.8984z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="24" d="m1343.5 278.2c-147.64 0-147.64 348.33-295.29 348.33h-50c-110.37 0-120.37-17.498-230.74-17.498v95.902c110.37 2.2e-4 120.37 17.498 230.74 17.498h50c147.64 0 147.64-348.33 295.29-348.33l10-47.951z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="25" d="m767.45 704.94v36.389c110.37 0 120.37 17.5 230.74 17.5h50v-2e-3c147.64 1.9e-4 157.64 19.893 305.29 19.893v-37.23c-147.64 0-157.65-19.051-305.29-19.051v2e-3h-49.998c-110.37 0-120.37-17.5-230.74-17.5zm586.03 36.549v38.07h49.998c101.19 0 101.19-21.604 202.38-21.604l10-19.035-10-19.035c-101.19 0-101.19 21.603-202.38 21.604z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="26" d="m541.69 759.06c400.9 0 410.9 19.654 811.8 19.654l5e-4 0.84062c-400.9 0-410.9-18.812-811.8-18.812z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="27" d="m541.69 760.75c310.51 0 310.51 23.236 621.03 23.236l10 1.0778-10 1.0777c-310.51 0-310.51-23.236-621.03-23.236z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="28" d="m541.69 762.9c82.883 0 82.883 29.81 165.77 29.81l10 0.71332-10 0.71331c-82.883 0-82.883-29.81-165.77-29.81z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="29" d="m767.45 792.71c419.67 0 419.67-3 839.34-3l10 0.71332-10 0.71331c-419.67 0-419.67 3-839.34 3z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="30" d="m1222.7 782.38c192.04 0 192.04 3.5733 384.08 3.5733l10 1.8783-10 1.8783c-192.04 0-192.04-3.5734-384.08-3.5734z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="31" d="m1404.1 2.3503e-5 201.79 0.13865 10 73.066-10 73.066-201.79-0.13864z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="32" d="m1403.8 162.39c101.05 0 101.05-16.117 202.11-16.117l10 31.193-10 31.193c-101.05 0-101.05 16.117-202.11 16.117z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="33" d="m1403.5 244.7c101.19 0 101.19-36.041 202.37-36.041l10 64.703-10 64.703c-101.19 0-101.19 36.041-202.37 36.041z" style="fill:#e3a6aa;stroke-width:0px"/>
+
+            <rect class="node open-node" data-name="Processing/Production" x="26.177" y="178.14" width="50" height="329.73" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label link-text" x="8.3397961" y="348.55209">Processing/Production</text>
+
+            <rect class="node" data-name="Demolition" x="25.246" y="573.98" width="50" height="44.051" style="fill:#d980b7;stroke-width:0px"/>
+            <text class="node-label" x="30.322205" y="598.70197">Demolition</text>
+
+            <rect class="node" data-name="Trade" x="26.178" y="646.03" width="50" height="49.733" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label" x="40.336792" y="672.28979">Trade</text>
+
+            <rect class="node" data-name="Processing/Production C&D Waste" x="255.67" y="454.25" width="50" height="90.276" style="fill:#d980b7;stroke-width:0px"/>
+            <text class="node-label" x="257.3064" y="502.48792">C&D Waste</text>
+
+            <rect class="node" data-name="Land Won" x="257.54" y="646.46" width="50" height="52.679" style="fill:#c48d98;stroke-width:0px"/>
+            <text class="node-label" x="264.20013" y="676.86707">Land Won</text>
+
+            <rect class="node" data-name="Mortar Manufacturing" x="491.69" y="759.06" width="50" height="35.074" style="fill:#f2f78a;stroke-width:0px"/>
+            <text class="node-label" x="480.99847" y="778.77802">Mortar Manufacturing</text>
+
+            <rect class="node" data-name="Asphalt Manufacturing" x="719.32" y="166.33" width="50" height="62.385" style="fill:#ca91fd;stroke-width:0px"/>
+             <text class="node-label" x="699.82349" y="199.84625">Asphalt Manufacturing</text>
+
+            <rect class="node" data-name="Concreting Manufacturing" x="717.45" y="251.11" width="50" height="490.22" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="690.98755" y="498.54443">Concreting Manufacturing</text>
+
+            <rect class="node" data-name="Landfill" x="717.45" y="792.71" width="50" height="1.4266" style="fill:#d980b7;stroke-width:0px"/>
+            <text class="node-label" x="728.60974" y="804.8797">Landfill</text>
+
+            <rect class="node" data-name="Railway Ballast" x="1354.1" y="2.3516e-5" width="50" height="146.13" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="1348.2213" y="75.393288">Railway Ballast</text>
+
+            <rect class="node" data-name="Road" x="1353.8" y="162.39" width="50" height="62.385" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="1367.9161" y="196.79814">Road</text>
+
+            <rect class="node" data-name="Other Infrastructure" x="1353.5" y="244.7" width="50" height="129.41" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="1339.4592" y="312.61731">Other Infrastructure</text>
+
+            <rect class="node open-node" data-name="Infrastructure" x="1615.9" y=".13867" width="50" height="337.92" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label link-text" x="1614.1346" y="172.31294">Infrastructure</text>
+
+            <rect class="node" data-name="Buildings" x="1615.9" y="397.06" width="50" height="360.89" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="1622.392" y="579.83612">Buildings</text>
+
+            <rect class="node open-node" data-name="Waste Management" x="1616.8" y="785.96" width="50" height="5.1832" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label link-text" x="1524" y="802">Waste Management</text>
+
+            <rect class="node" data-name="Reprocessing" x="1172.7" y="782.38" width="50" height="3.7566" style="fill:#a2e39b;stroke-width:0px"/>
+            <text class="node-label" x="1164.8994" y="786.98187">Reprocessing</text>
+
+            <text class="node-label" x="491.02997" y="648.93964">Crushed Rock</text>
+            <text class="node-label" x="1075.4659" y="193.15987">Crushed Rock</text>
+            <text class="node-label" x="268.02264" y="390.13367">Sand</text>
+            <text class="node-label" x="241.01375" y="743.24976">Secondary Aggregates</text>
+            <text class="node-label" x="269.46295" y="298.32828">Gravel</text>
+            <text class="node-label" x="504.64355" y="710.8075">Gravel</text>
+            <text class="node-label" x="921.26697" y="690.13409">Sand</text>
+            <text class="node-label" x="924.10138" y="564.85651">Gravel</text>
+            <text class="node-label" x="967.2326" y="338.77237">Crushed Rock</text>
+            <text class="node-label" x="964.36011" y="467.18213">C&D Waste</text>
+
+            <!-- zoom icon -->
+            <!-- <path d="m 1638.2337,178.07129 a 11.873225,11.873225 0 0 0 -10.9849,11.84111 11.873225,11.873225 0 0 0 19.1833,9.34732 11.942637,11.942637 0 0 1 -0.289,0.22833 c 0.055,0.0731 0.1133,0.13937 0.179,0.20692 l 7.0319,7.03545 a 1.8277049,1.8277049 0 0 0 2.5865,-2.58299 l -7.0353,-7.03547 a 1.8394365,1.8394365 0 0 0 -0.2106,-0.18194 11.942637,11.942637 0 0 1 -0.7955,0.96327 11.873225,11.873225 0 0 0 3.0967,-7.98089 11.873225,11.873225 0 0 0 -12.7615,-11.84111 z m 0.8883,1.79454 a 10.046575,10.046575 0 0 1 0,20.09315 10.046575,10.046575 0 0 1 0,-20.09315 z m 0,3.6533 a 0.91332497,0.91332497 0 0 0 -0.9133,0.91332 v 4.56663 h -4.5666 a 0.913325,0.913325 0 0 0 0,1.82665 h 4.5666 v 4.56662 a 0.91332497,0.91332497 0 0 0 1.8266,0 v -4.56662 h 4.5667 a 0.913325,0.913325 0 0 0 0,-1.82665 h -4.5667 v -4.56663 a 0.91332497,0.91332497 0 0 0 -0.9133,-0.91332 z m 8.6231,14.54185 a 11.942637,11.942637 0 0 1 -1.1417,1.06316 11.873225,11.873225 0 0 0 1.1417,-1.06316 z" style="pointer-events: none;"/> -->
+          </svg>
+        </div>
+
+        <div class="nodesankey" data-name="Use" hidden>
+          <h4 class="text-center">Use</h4>
+
+          <svg data-name="Use" viewBox="0 0 1730 835" xmlns="http://www.w3.org/2000/svg">
+            <path class="flow" data-index="0"  d="m91.611 14.649c474.4 0 474.4 4.1201 948.81 4.1201l10.083 0.52581-10.083 0.52581c-474.4 0-474.4-4.1201-948.81-4.1201z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="1"  d="m1040.5 19.821c-321.68 0-321.68 6.7852-643.35 6.7852-123.17 0-183.17 6.6875-306.35 6.6875v105.31c123.17 0 183.17-7.6875 306.35-7.6875 321.68 0 321.68-6.7871 643.35-6.7871l10-52.154z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="2"  d="m1040.5 124.13c-322.4 0-322.4 13.055-644.79 13.055h-50c-122.45 0-132.45 1.4199-254.9 1.4199v34.248c122.45 0 132.45-1.4199 254.9-1.4199h50c322.4 0 322.4-13.055 644.79-13.055l10-17.123z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="3"  d="m345.71 171.43c-122.45 0-132.45 1.4199-254.9 1.4199v20.947c122.45-1e-5 132.45-1.4199 254.9-1.4199h50v-2e-3c210.51 0 210.51 99.506 421.03 99.506l10-10.475-10-10.473c-210.51 0-210.51-99.504-421.03-99.504z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="4"  d="m1040.5 158.38c-321.68 0-321.68 39.041-643.35 39.041h-50c-123.17 0-133.17-3.6211-256.35-3.6211v22.75c123.17 0 133.17 3.6211 256.35 3.6211h50c321.68 0 321.68-39.041 643.35-39.041l10-11.375z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="5"  d="m90.804 216.55v59.957c123.17 0 133.17 3.6211 256.35 3.6211h50v2e-3c209.79 0 209.79 71.713 419.58 71.713l10-29.979-10-29.979c-209.79 0-209.79-71.715-419.58-71.715h-50c-123.17 1e-5 -133.17-3.6211-256.35-3.6211z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="6"  d="m1040.5 181.13c-320.95 0-320.95 106.17-641.91 106.17h-50c-123.89 0-133.89-10.795-257.79-10.795v63.271c123.89 0 133.89 10.797 257.79 10.797h50c320.95 0 320.95-106.17 641.91-106.17l10-31.637z" style="fill:#d980b7;stroke-width:0px"/>
+            <path class="flow" data-index="7"  d="m818.18 357.93c-209.79 0-209.79 6.6777-419.58 6.6777h-50c-124.62 0-134.62-5.8965-259.23-5.8965v39.004c124.62 0 134.62 5.8965 259.23 5.8965h50c209.79 0 209.79-6.6777 419.58-6.6777l10-19.502z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="8"  d="m175.8 412.14c321.1 0 321.1-10.974 642.2-10.974l10 45.681-10 45.681c-321.1 0-321.1 10.974-642.2 10.974l-85 1e-5 1.3e-4 -91.363z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="9"  d="m90.805 503.51c125.34 0 125.34 8.975 250.68 8.975l10 27.354-10 27.354c-125.34 0-125.34-8.975-250.68-8.975z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="10" d="m90.805 558.21c124.62 0 124.62 102.04 249.23 102.04l10 11.155-10 11.155c-124.62 0-124.62-102.04-249.23-102.04z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="11" d="m90.804 580.52v15.809c123.89 0 134.33 148.48 258.22 148.48l-0.43164-15.682h-2e-3c-123.89 0-133.89-148.61-257.79-148.61zm258.22 164.29h50c320.74-4e-5 332.53-8.9529 650.09-9.0449l-5.7304-15.484c-322.4 0-322.4 8.8476-644.8 8.8477h-50z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="12" d="m92.248 607.12c124.62 0 124.62-39.929 249.23-39.929l10 8.3682-10 8.3682c-124.62 0-124.62 39.929-249.23 39.929z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="13" d="m92.248 623.85c123.89 0 123.89 58.714 247.79 58.714l10 3.2464-10 3.2464c-123.89 0-123.89-58.714-247.79-58.714z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="14" d="m92.248 630.35v13.045c124.62 0 134.78 157.75 259.39 157.75h50c320.95 0 330.79-13.574 651.75-13.574l-10-13.254c-320.95 0-320.95 13.721-641.91 13.721h-50l0.1582 12.949-0.1582-12.949c-124.62 0-134.62-157.69-259.23-157.69z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="15" d="m90.805 650.93c125.34 0 125.34-67.004 250.68-67.004l10 4.8569-10 4.8569c-125.34 0-125.34 67.004-250.68 67.004z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="16" d="m90.805 660.64c124.62 0 124.62 28.418 249.23 28.418l10 1.4801-10 1.4801c-124.62 0-124.62-28.418-249.23-28.418z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="17" d="m90.804 663.6v7.7559c124.52 0 134.9 153.36 259.23 153.61v6e-3h50v-3.5527c320.61 0 331.61-16.465 650.18-16.574l-6.8222-4.0215c-321.68 0-321.68 16.596-643.35 16.596h-50c-124.62 0-134.62-153.82-259.23-153.82zm962.46 143.04 0.01 0.13867 0.1153-0.0684z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="18" d="m90.805 679.48c125.34 0 125.34-85.84 250.68-85.84l10 14.746-10 14.746c-125.34 0-125.34 85.84-250.68 85.84z" style="fill:#a5d7d4;stroke-width:0px"/>
+            <path class="flow" data-index="19" d="m90.805 708.97c124.62 0 124.62-16.951 249.23-16.951l10 5.5794-10 5.5794c-124.62 0-124.62 16.951-249.23 16.951z" style="fill:#a5d7d4;stroke-width:0px"/>
+            <path class="flow" data-index="20" d="m90.804 720.13v5.4922c125.34 0 135.42 81.145 260.75 81.145l0.082-5.5801-0.082 5.5801h50c319.52 0 331.21-13.979 647.99-14.104l3.8437-5.0938c-320.95 0-330.79 13.574-651.75 13.574h-50c-125.34-8.7e-4 -135.5-81.014-260.84-81.014z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="21" d="m90.804 725.62v4.0352c124.62 0 134.6 99.691 259.21 99.691l0.0195-2.1562v2.1562h50v-4.1387c321.68 0 321.68-16.598 643.35-16.598l6.7675 0.01 3.1153-1.8359v-2e-3l-0.01-0.13672-3.0566-1.8027c-318.56 0.10909-329.56 16.574-650.17 16.574v3.5527h-49.703c-124.62 0-134.91-99.35-259.53-99.35z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="22" d="m92.248 743.91c124.62 0 124.62-120.78 249.23-120.78l10 1.4119-10 1.4119c-124.62 0-124.62 120.78-249.23 120.78z" style="fill:#a5d7d4;stroke-width:0px"/>
+            <path class="flow" data-index="23" d="m90.805 760.39c125.34 0 125.34-134.43 250.68-134.43l10 2.1753-10 2.1753c-125.34 0-125.34 134.43-250.68 134.43z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="24" d="m1049.1 735.77c-317.57 0.092-329.35 9.0449-650.09 9.0449h-50l-0.43164 38.354h50c322.4-4e-5 322.4-8.8496 644.8-8.8496l10-27.016zm-700.09 9.0449c-123.89 0-134.33 32.248-258.22 32.248v38.225c123.89 0 133.89-32.121 257.79-32.121z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="25" d="m1049.5 792.66c-316.77 0.12488-328.46 14.104-647.99 14.104h-50l-0.0781 7.7793h50c320.95 0 320.95-13.723 641.91-13.723zm-698.06 21.883 0.0781-7.7793c-125.34 0-135.42 8.5176-260.75 8.5176v7.9727c125.34 0 135.34-8.7109 260.68-8.7109z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="26" d="m1043.4 808.61c-321.68 0-321.68 16.598-643.35 16.598v4c321.68 0 321.68-16.598 643.35-16.598l6.7695-3.9902zm-952.59 14.645v5.3789c124.62 0 134.62 5.9531 259.23 5.9531h50v-5.2402h-50v2.5508l-0.0195-2.5508c-124.62 0-134.6-6.0918-259.21-6.0918z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="27" d="m876.73 270.94c82.028 0 82.028 10.414 164.06 10.414l10 40.452-10 40.452c-82.028 0-82.028-10.414-164.06-10.414z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="28" d="m878.18 357.94c81.306 0 81.306 4.3197 162.61 4.3197l10 19.502-10 19.502c-81.306 0-81.306-4.3197-162.61-4.3197z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="29" d="m878.18 402.94 162.61-1.6803 10 45.681-10 45.681-162.61 1.6803z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="30" d="m1100.5 18.77c191.17 0 191.17 9.1502 382.34 9.1502l10 4.2863-10 4.2863c-191.17 0-191.17-9.1503-382.34-9.1503z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="31" d="m1100.5 27.342c282.26 0 282.26 119.15 564.53 119.15l10 23.78-10 23.78c-282.26 0-282.26-119.15-564.53-119.15z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="32" d="m1100.5 74.903c284.43 0 284.43 313.97 568.86 313.97l10 23.593-10 23.593c-284.43 0-284.43-313.97-568.86-313.97z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="33" d="m1542.8 27.92c58.93 0 58.93-0.37403 117.86-0.37403l10 7.8794-10 7.8794c-58.93 0-58.93 0.37403-117.86 0.37403z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="34" d="m1100.8 281.35c191.02 0 191.02-244.86 382.05-244.86l10 4.853-10 4.853c-191.02 0-191.02 244.86-382.05 244.86z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="35" d="m1100.8 291.06c282.12 0 282.12-97.001 564.24-97.001l10 57.757-10 57.757c-282.12 0-282.12 97.001-564.24 97.001z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="36" d="m1100.8 406.57c284.29 0 284.29 29.486 568.57 29.486l10 31.736-10 31.736c-284.29 0-284.29-29.486-568.57-29.486z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="37" d="m401.48 512.48c633.94 0 633.94-12.953 1267.9-12.953l10 70.104-10 70.104c-633.94 0-633.94 12.953-1267.9 12.953z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="38" d="m400.04 660.26c634.66 0 634.66-20.521 1269.3-20.521l10 7.7956-10 7.7956c-634.66 0-634.66 20.521-1269.3 20.521z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="39" d="m539.78 680.81c251.8 0 251.8-4.1662 503.61-4.1662l10 21.819-10 21.819c-251.8 0-251.8 4.1662-503.61 4.1662z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="40" d="m1103.4 676.64c282.99 0 282.99-21.314 565.97-21.314l10 75.053-10 75.053c-282.99 0-282.99 21.314-565.97 21.314z" style="fill:#e3a6aa;stroke-width:0px"/>
+
+            <rect class="node open-node" data-name="Mortar Manufacturing" data-link="Manufacturing" x="42.937" y="14.649" width="50" height="1.0516" style="fill:#f2f78a;stroke-width:0px"/>
+            <text class="node-label link-text" x="17.823059" y="8.6953125">Mortar Manufacturing</text>
+
+            <rect class="node open-node" data-name="Concreting Manufacturing" data-link="Manufacturing" x="40.805" y="33.293" width="50" height="306.49" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label link-text" x="-0.609375" y="183.47552">Concreting Manufacturing</text>
+
+            <rect class="node open-node" data-name="Asphalt Manufacturing" data-link="Manufacturing" x="39.361" y="358.72" width="50" height="39.004" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label link-text" x="8.1342392" y="382.01315">Asphalt Manufacturing</text>
+
+            <rect class="node open-node" data-name="Processing/Production Crushed Rock" data-link="Processing/Production" x="40.805" y="412.14" width="50" height="184.19" style="fill:#ae9e80;stroke-width:0px"/>
+            <text class="node-label link-text" x="65.7024" y="501.02722"><tspan x="65.7024" y="501.02722" sodipodi:role="line">Processing/Production</tspan><tspan x="65.7024" y="516.02722" sodipodi:role="line">Crushed Rock</tspan></text>
+
+            <rect class="node open-node" data-name="Processing/Production Gravel" data-link="Processing/Production" x="42.249" y="607.12" width="50" height="36.273" style="fill:#dec580;stroke-width:0px"/>
+            <text class="node-label link-text" x="67.1464" y="622.04285"><tspan id="tspan151515" x="67.1464" y="622.04285" sodipodi:role="line">Processing/Production</tspan><tspan id="tspan151517" x="67.1464" y="637.04285" sodipodi:role="line">Gravel</tspan></text>
+
+            <rect class="node open-node" data-name="Processing/Production C&D Waste" data-link="Processing/Production" x="40.805" y="679.48" width="50" height="50.178" style="fill:#d980b7;stroke-width:0px"/>
+            <text class="node-label link-text" x="65.7024" y="701.35724"><tspan id="tspan154481" x="65.7024" y="701.35724" sodipodi:role="line">Processing/Production</tspan><tspan id="tspan154483" x="65.7024" y="716.35724" sodipodi:role="line">C&D Waste</tspan></text>
+
+            <rect class="node open-node" data-name="Processing/Production Sand" data-link="Processing/Production" x="40.805" y="650.93" width="50" height="20.429" style="fill:#f2f78a;stroke-width:0px"/>
+            <text class="node-label link-text" x="65.7024" y="657.93262"><tspan id="tspan153349" x="65.7024" y="657.93262" sodipodi:role="line">Processing/Production</tspan><tspan id="tspan153351" x="65.7024" y="672.93262" sodipodi:role="line">Sand</tspan></text>
+
+            <rect class="node open-node" data-name="Processing/Production Secondary Aggregates" data-link="Processing/Production" x="42.249" y="743.91" width="50" height="2.8238" style="fill:#a5d7d4;stroke-width:0px"/>
+            <text class="node-label link-text" x="67.193283" y="740.92865"><tspan id="tspan155625" x="67.193283" y="740.92865" sodipodi:role="line">Processing/Production</tspan><tspan id="tspan155627" x="67.193283" y="755.92865" sodipodi:role="line">Secondary Aggregates</tspan></text>
+
+            <rect class="node open-node" data-name="Extraction" x="40.805" y="777.06" width="50" height="51.576" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label link-text" x="65.7024" y="807.13739">Extraction</text>
+
+            <rect class="node" data-name="Trade Crushed Rock" x="40.805" y="760.39" width="50" height="4.3506" style="fill:#ae9e80;stroke-width:0px"/>
+            <text class="node-label" x="14.724983" y="770.29053">Trade Crushed Rock</text>
+
+            <rect class="node" data-name="Road" x="828.18" y="357.94" width="50" height="39.004" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="840.05475" y="382.04617">Road</text>
+
+            <rect class="node" data-name="Railway Ballast" x="828.18" y="402.94" width="50" height="91.363" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="809.56305" y="452.40726">Railway Ballast</text>
+
+            <rect class="node" data-name="Other Infrastructure" x="826.73" y="270.94" width="50" height="80.905" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="800.54535" y="313.52875">Other Infrastructure</text>
+
+            <rect class="node open-node" data-name="Waste Management" x="489.78" y="680.81" width="50" height="43.638" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label link-text" x="542.78394" y="706.82745">Waste Management</text>
+
+            <rect class="node" data-name="Deconstruction" x="1492.8" y="27.92" width="50" height="18.279" style="fill:#d980b7;stroke-width:0px"/>
+            <text class="node-label" x="1481.8224" y="41.307503">Deconstruction</text>
+
+            <rect class="node open-node" data-name="Infrastructure" x="1050.8" y="281.35" width="50" height="211.27" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label link-text" x="1047.204" y="394.97766">Infrastructure</text>
+
+            <rect class="node" data-name="Buildings" x="1050.5" y="18.769" width="50" height="225.63" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="1052.9222" y="135.11182">Buildings</text>
+
+            <rect class="node" data-name="Use as Fill" x="1053.4" y="676.64" width="50" height="150.11" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="1051.389" y="755.89502">Use as Fill</text>
+
+            <rect class="node" data-name="Aggregate Use" x="351.48" y="512.48" width="50" height="140.21" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="344.48242" y="578.39789">Aggregate Use</text>
+
+            <rect class="node" data-name="Non-aggregate Use" x="350.04" y="660.26" width="50" height="42.922" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="328.82001" y="686.29669">Non-aggregate Use</text>
+
+            <rect class="node" data-name="Use" x="1670.7" y="27.546" width="50" height="15.759" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label" x="1684.8329" y="39.494946">Use</text>
+
+            <rect class="node open-node" data-name="Demolition" data-link="Waste Management" x="1675" y="146.49" width="50" height="163.08" style="fill:#d980b7;stroke-width:0px"/>
+            <text class="node-label link-text" x="1671.5828" y="232.32111">Demolition</text>
+
+            <rect class="node" data-name="Stock" x="1679.4" y="388.87" width="50" height="416.56" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label" x="1719.0857" y="601.44104" text-anchor="end">Stock</text>
+
+            <text class="node-label" x="401.59393" y="323.13855">C&D</text>
+            <text class="node-label" x="400.14996" y="242.97336">Sand</text>
+            <text class="node-label" x="398.70593" y="168.98056">Gravel</text>
+            <text class="node-label" x="400.14996" y="83.461388">Crushed Rock</text>
+            <text class="node-label" x="401.59393" y="388.314">Crushed Rock</text>
+            <text class="node-label" x="403.03693" y="830.20355">Sand</text>
+            <text class="node-label" x="404.48096" y="805.49054">Gravel</text>
+            <text class="node-label" x="401.59393" y="760.34619">Crushed Rock</text>
+          </svg>
+        </div>
+
+        <div class="nodesankey subnodesankey" data-name="Infrastructure" hidden>
+          <div class="back-sankey border-end border-bottom open-node" data-name="Use"><i class="fal fa-arrow-left"></i> Back to use</div>
+          <h4 class="text-center mb-4">Infrastructure</h4>
+
+          <svg data-name="Infrastructure" viewBox="0 0 1379.8 621.07" xmlns="http://www.w3.org/2000/svg">
+            <path class="flow" data-index="0" d="m67.213 10.065c143.98 0 143.98-2.8871 287.96-2.8871l10 109.65-10 109.65c-143.98 0-143.98 2.8871-287.96 2.8871z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="1" d="m708.2 147.05c-149.68 0-149.68 112.55-299.37 112.55h-50c-142.71 0-152.71 2.7637-295.42 2.7637v50.277c142.71 0 152.71-2.7637 295.42-2.7637h50c149.68 0 149.68-112.55 299.37-112.55l10-25.141z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="2" d="m708.2 197.32c-150.95 0-150.95 121.36-301.9 121.36h-50c-141.44 0-151.44-6.043-292.89-6.043v143.91c141.44 0 151.45 6.0449 292.89 6.0449h50c150.95 0 150.95-121.36 301.9-121.36l10-71.957z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="3" d="m708.2 381.19c-152.85 0-152.85 115.26-305.7 115.26h-50c-140.18 0-150.18-8-290.35-8v93.619c140.18 0 150.18 8 290.35 8h50c152.85 0 152.85-115.26 305.7-115.26l10-46.809z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="4" d="m415.17 7.1779c310.35 0 310.35-7.1775 620.7-7.1775l10 6.876-10 6.876c-310.35 0-310.35 7.1775-620.7 7.1775z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="5" d="m415.17 20.93c449.47 0 449.47 374.79 898.94 374.79l10 0.68246-10 0.68246c-449.47 0-449.47-374.79-898.94-374.79z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="6" d="m768.2 147.05c133.84 0 133.84-133.29 267.68-133.29l10 80.68-10 80.68c-133.84 0-133.84 133.29-267.68 133.29z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="7" d="m768.2 308.41c135.11 0 135.11-8.1398 270.21-8.1398l10 11.649-10 11.649c-135.11 0-135.11 8.1398-270.21 8.1398z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="8" d="m768.2 331.7c272.96 0 272.96 65.379 545.92 65.379l10 14.743-10 14.743c-272.96 0-272.96-65.379-545.92-65.379z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="9" d="m768.2 381.19c133.84 0 133.84-206.08 267.68-206.08l10 31.795-10 31.795c-133.84 0-133.84 206.08-267.68 206.08z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="10" d="m768.2 444.78c272.96 0 272.96-18.211 545.92-18.211l10 39.583-10 39.583c-272.96 0-272.96 18.211-545.92 18.211z" style="fill:#ae9e80;stroke-width:0px"/>
+            <path class="flow" data-index="11" d="m768.2 531.17c133.84 0 133.84-292.47 267.68-292.47l10 11.125-10 11.125c-133.84 0-133.84 292.47-267.68 292.47z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="12" d="m768.2 553.42c272.96 0 272.96-47.686 545.92-47.686l10 12.7-10 12.7c-272.96 0-272.96 47.686-545.92 47.686z" style="fill:#dec580;stroke-width:0px"/>
+            <path class="flow" data-index="13" d="m768.2 587.82c133.84 0 133.84-326.87 267.68-326.87l10 8.1568-10 8.1568c-133.84 0-133.84 326.87-267.68 326.87z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="14" d="m768.2 604.13c272.96 0 272.96-73 545.92-73l10 8.4653-10 8.4653c-272.96 0-272.96 73-545.92 73z" style="fill:#f2f78a;stroke-width:0px"/>
+            <path class="flow" data-index="15" d="m1095.9 4.3194e-4c107.22 0 107.22 0.15423 214.44 0.15423l10 138.63-10 138.63c-107.22 0-107.22-0.15423-214.44-0.15423z" style="fill:#e3a6aa;stroke-width:0px"/>
+            <path class="flow" data-index="16" d="m1098.4 300.27c105.95 0 105.95-22.846 211.9-22.846l10 11.649-10 11.649c-105.95 0-105.95 22.846-211.9 22.846z" style="fill:#e3a6aa;stroke-width:0px"/>
+
+            <rect class="node open-node" data-name="Processing/Production" x="17.213" y="10.065" width="50" height="219.29" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label link-text" x="43.093689" y="117.3038"><tspan id="tspan4154" x="43.093689" y="117.3038" style="text-align:center;text-anchor:middle">Processing / </tspan><tspan id="tspan4156" x="43.093689" y="128.5538" style="text-align:center;text-anchor:middle">Production</tspan></text>
+
+            <rect class="node" data-name="Concreting Manufacturing" x="13.41" y="262.36" width="50" height="194.19" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" data-name="Concreting Manufacturing" x="38.330482" y="356.1572"><tspan id="tspan14810" x="38.330482" y="356.1572" style="text-align:center;text-anchor:middle">Concreting</tspan><tspan id="tspan14812" x="38.330482" y="367.4072" style="text-align:center;text-anchor:middle">Manufacturing</tspan></text>
+
+            <rect class="node" data-name="Asphalt Manufacturing" x="12.143" y="488.45" width="50" height="93.619" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="37.063484" y="531.95715"><tspan id="tspan16806" x="37.063484" y="531.95715" style="text-align:center;text-anchor:middle">Asphalt</tspan><tspan id="tspan16808" x="37.063484" y="543.20715" style="text-align:center;text-anchor:middle">Manufacturing</tspan></text>
+
+            <rect class="node" data-name="Railway Ballast" x="365.17" y="7.178" width="50" height="219.29" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="389.69012" y="113.61407"><tspan id="tspan10342" x="389.69012" y="113.61407" style="text-align:center;text-anchor:middle">Railway</tspan><tspan id="tspan10344" x="389.69012" y="128.61407" style="text-align:center;text-anchor:middle">Ballast</tspan></text>
+
+            <rect class="node" data-name="Other Infrastructure" x="718.2" y="147.05" width="50" height="214.14" style="fill:#ca91fd;stroke-width:0px"/>
+            <text class="node-label" x="704.17078" y="257.33423">Other Infrastructure</text>
+
+            <rect class="node" data-name="Road Crushed Rock" x="718.2" y="381.19" width="50" height="142.76" style="fill:#ae9e80;stroke-width:0px"/>
+            <text class="node-label" x="702.3031" y="455.78363">Road Crushed Rock</text>
+
+            <rect class="node" data-name="Road Gravel" x="718.2" y="531.17" width="50" height="47.651" style="fill:#dec580;stroke-width:0px"/>
+            <text class="node-label" x="717.86853" y="558.2121">Road Gravel</text>
+
+            <rect class="node" data-name="Road Sand" x="718.2" y="587.82" width="50" height="33.244" style="fill:#f2f78a;stroke-width:0px"/>
+            <text class="node-label" x="720.60193" y="607.65991">Road Sand</text>
+
+            <rect class="node" data-name="Demolition" x="1045.9" y="5e-7" width="50" height="277.27" style="fill:#d980b7;stroke-width:0px"/>
+            <text class="node-label" x="1049.5392" y="141.84966">Demolition</text>
+
+            <rect class="node" data-name="Deconstruction" x="1048.4" y="300.27" width="50" height="23.297" style="fill:#d980b7;stroke-width:0px"/>
+            <text class="node-label" x="1043.318" y="315.13135">Deconstruction</text>
+
+            <rect class="node open-node" data-name="Waste Management" x="1320.3" y=".155" width="50" height="300.56" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label link-text" x="1344.9753" y="146.97353"><tspan id="tspan23169" x="1344.9753" y="146.97353" style="text-align:center;text-anchor:middle">Waste</tspan><tspan id="tspan23171" x="1344.9753" y="158.22353" style="text-align:center;text-anchor:middle">Management</tspan></text>
+
+            <rect class="node" data-name="Stock" x="1324.1" y="395.72" width="50" height="152.35" style="fill:#a7e66f;stroke-width:0px"/>
+            <text class="node-label" x="1360.1581" y="475.10855" text-anchor="end">Stock</text>
+
+            <text x="215.95648" y="121.48527" style="line-height:1.25;text-align:center;text-anchor:middle">Crushed Rock</text>
+            <text class="node-label" x="417.5473" y="392.21585">Sand</text>
+            <text class="node-label" x="411.83258" y="288.93484">Gravel</text>
+            <text class="node-label" x="406.01178" y="545.38965">Crushed Rock</text>
+          </svg>
+        </div>
+      <div class="nodesankey" data-name="Waste Management" hidden>
+        <h4 class="text-center mb-4">Waste Management</h4>
+        <svg data-name="Waste Management" viewBox="0 0 1267 653" xmlns="http://www.w3.org/2000/svg">
+          <path class="flow" data-index="0"  d="m409.9 2.0478c-62.481 0-62.482 11.205-124.96 11.205h-50c-63.778 0-73.778 26.393-137.56 26.393v33.484c63.778 0 73.778-26.393 137.56-26.393h50c62.481 0 62.482-11.205 124.96-11.205l10-16.742z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="1"  d="m409.9 35.532c-63.13 0-63.13 21.701-126.26 21.701h-50c-63.13 0-73.13 15.896-136.26 15.896v10.328c63.13 0 73.13-15.898 136.26-15.898h50v2e-3c63.13 0 63.13-21.701 126.26-21.701l10-5.1641z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="2"  d="m409.9 45.86c-64.427 0-64.427 33.195-128.85 33.195h-50c-61.833 0-71.833 4.4024-133.67 4.4024v5.8457c61.833 0 71.833-4.4004 133.67-4.4004h50c64.427 0 64.427-33.195 128.85-33.195l10-2.9238z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="3"  d="m409.9 51.708c-61.184 0-61.183 73.691-122.37 73.691v4.1074c61.184 0 61.183-73.693 122.37-73.693l10-2.0527zm-312.52 37.596v4.1074c65.075 0 75.075 36.096 140.15 36.096h50v-4.1074h-50c-65.075 0-75.075-36.096-140.15-36.096z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="4"  d="m409.9 55.813c-62.481 0-62.482 85.189-124.96 85.189h-50c-63.778 0-73.778-47.592-137.56-47.592v3.0918c63.778 0 73.778 47.592 137.56 47.592h50c62.481 0 62.482-85.187 124.96-85.187l10-1.5469z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="5"  d="m234.94 189.59c-63.778 0-73.778 26.342-137.56 26.342v15.02c63.778 0 73.778-26.342 137.56-26.342h50c63.13 0 63.13 2.2598 126.26 2.2598l10-7.5098-10-7.5078c-63.13 0-63.13-2.2617-126.26-2.2617z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="6"  d="m411.2 206.87c-64.427 0-64.427 6.7754-128.85 6.7754h-50c-62.481-1e-5 -72.482 17.307-134.96 17.307v4.9492c62.481 0 72.482-17.307 134.96-17.307h50c64.427 0 64.427-6.7754 128.85-6.7754l10-2.4746z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="7"  d="m411.2 211.82c-65.075 0-65.075 18.271-130.15 18.271h-50c-61.833 0-71.833 5.8105-133.67 5.8105v2.0117c61.833 0 71.833-5.8105 133.67-5.8105h50c65.075 0 65.075-18.27 130.15-18.27l10-1.0059z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="8"  d="m411.2 213.83c-63.778 0-63.778 39.766-127.56 39.766h-50c-63.13 0-73.13-15.686-136.26-15.686v1.6602c63.13 0 73.13 15.686 136.26 15.686h50c63.778 0 63.778-39.766 127.56-39.766l10-0.83008z" style="fill:#a5d7d4;stroke-width:0px"/>
+          <path class="flow" data-index="9"  d="m411.2 215.49c-64.427 0-64.427 53.613-128.85 53.613h-50c-62.481 0-72.482-29.533-134.96-29.533v7.043c62.481 0 72.482 29.533 134.96 29.533h50c64.427 0 64.427-53.613 128.85-53.613l10-3.5215z" style="fill:#d980b7;stroke-width:0px"/>
+          <path class="flow" data-index="10" d="m98.677 344.1c59.887 0 59.887-32.347 119.77-32.347l10 0.64829-10 0.64829c-59.887 0-59.887 32.347-119.77 32.347z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="11" d="m98.677 345.4c59.239 0 59.239-15.851 118.48-15.851l10 1.4505-10 1.4505c-59.238 0-59.238 15.851-118.48 15.851z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="12" d="m98.677 385.18c56.644 0 56.644-9.2326 113.29-9.2326l10 10.206-10 10.206c-56.644 0-56.644 9.2326-113.29 9.2326z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="13" d="m278.45 311.75c65.724 0 65.724-24.882 131.45-24.882l10 0.64829-10 0.6483c-65.724 0-65.724 24.882-131.45 24.882z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="14" d="m277.15 329.55c66.372 0 66.372-41.378 132.74-41.378l10 0.8728-10 0.8728c-66.372 0-66.372 41.378-132.74 41.378z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="15" d="m277.15 331.29c356.79 0 356.79-73.153 713.57-73.153l10 0.57767-10 0.57766c-356.79 0-356.79 73.153-713.57 73.153z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="16" d="m271.97 375.94c69.615 0 69.615-35.864 139.23-35.864l10 3.7107-10 3.7107c-69.615 0-69.615 35.864-139.23 35.864z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="17" d="m271.97 383.37c70.264 0 70.264-14.678 140.53-14.678l10 27.564-10 27.564c-70.264 0-70.264 14.678-140.53 14.678z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="18" d="m271.97 438.49c70.264 0 70.264-9.2902 140.53-9.2902l10 49.825-10 49.825c-70.264 0-70.264 9.2903-140.53 9.2903z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="19" d="m271.97 538.14c69.615 0 69.615-4.1464 139.23-4.1464l10 36.355-10 36.355c-69.615 0-69.615 4.1464-139.23 4.1464z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="20" d="m469.9 2.0487c343.17 0 343.17-2.0487 686.33-2.0487l10 28.263-10 28.263c-343.17 0-343.17 2.0487-686.33 2.0487z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="21" d="m469.9 58.574c343.82 0 343.82 28.447 687.63 28.447l10 11.346-10 11.346c-343.82 0-343.82-28.447-687.63-28.447z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="22" d="m469.9 81.267c124.74 0 124.74 24.02 249.48 24.02l10 28.429-10 28.429c-124.74 0-124.74-24.02-249.48-24.02z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="23" d="m471.2 191.85c124.09 0 124.09-29.707 248.18-29.707l10 15.342-10 15.342c-124.09 0-124.09 29.707-248.18 29.707z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="24" d="m471.2 222.54c343.17 0 343.17-87.607 686.33-87.607l10 0.63063-10 0.63064c-343.17 0-343.17 87.607-686.33 87.607z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="25" d="m471.2 223.8c85.356 0 85.356-1.3894 170.71-1.3894l8.8843 17.406-8.8843 17.406c-85.356 0-85.356 1.3894-170.71 1.3894z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="26" d="m469.9 286.87c124.74 0 124.74-94.045 249.48-94.045l10 1.5211-10 1.5211c-124.74 0-124.74 94.045-249.48 94.045z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="27" d="m469.9 289.92c343.82 0 343.82-153.72 687.63-153.72l10 2.5225-10 2.5225c-343.82 0-343.82 153.72-687.63 153.72z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="28" d="m471.2 340.08c172.47 0 172.47 4.5266 344.95 4.5266l10 3.7107-10 3.7107c-172.47 0-172.47-4.5266-344.95-4.5266z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="29" d="m595.78 351.97c-56.644 0-66.645 16.721-123.29 16.721v34.318c56.644 0 66.645-16.723 123.29-16.723h50c85.18 0 85.179 0.0625 170.36 0.0625l10-17.158-10-17.158c-85.18 0-85.179-0.0625-170.36-0.0625z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="30" d="m816.14 386.34c-85.828 0-85.828 3.4043-171.66 3.4043h-50c-55.996 0-65.996 13.256-121.99 13.256v12.006c55.996 0 65.996-13.254 121.99-13.254h50c85.828 0 85.828-3.4043 171.66-3.4043l10-6.0039z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="31" d="m816.14 398.35c-85.828 0-144.42 8.3965-171.66 8.3965h-50c-55.996 0-65.996 8.2617-121.99 8.2617v8.8047c55.996 0 65.996-8.2617 121.99-8.2617h50c14.88 0 40.177-7.9761 171.66-8.3984l10-4.4023z" style="fill:#f2f78a;stroke-width:0px" sodipodi:nodetypes="cssccssccc"/>
+          <path class="flow" data-index="32" d="m472.49 429.2c171.82 0 171.82-22.047 343.65-22.047l10 43.539-10 43.539c-171.82 0-171.82 22.047-343.65 22.047z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="33" d="m38.677 396.28h-5a22.572 22.572 0 0 0-22.572 22.572v200a22.572 22.572 0 0 0 22.572 22.572h443.82a22.572 22.572 0 0 0 22.572-22.572v-80a22.572 22.572 0 0 0-22.572-22.572h-5v12.572h5a10 10 0 0 1 10 10v80a10 10 0 0 1-10 10h-443.82a10 10 0 0 1-10-10v-200a10 10 0 0 1 10-10h5l10-6.2862z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="34" d="m816.14 494.23c-78.046 0-78.046 36.627-156.09 36.627v2e-3h-50c-64.427 0-74.427 3.1367-138.85 3.1367v38.791c64.427 0 74.427-3.1367 138.85-3.1367h50c78.046 0 78.046-36.629 156.09-36.629l10-19.395z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="35" d="m33.678 385.18a33.677 33.677 0 0 0-33.678 33.676v200a33.677 33.677 0 0 0 33.678 33.678h631.37a21.104 21.104 0 0 0 21.105-21.105v-40.668a21.104 21.104 0 0 0-21.105-21.104h-55c-64.427 0-74.427 3.1367-138.85 3.1367v9.7734c64.427 0 74.427-3.1367 138.85-3.1367h50v-2e-3h5a11.332 11.332 0 0 1 11.332 11.332v40.668a11.332 11.332 0 0 1-11.332 11.332h-631.37a23.904 23.904 0 0 1-23.904-23.904v-200a23.904 23.904 0 0 1 23.904-23.904h5l10-4.8848-10-4.8867z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="36" d="m816.14 533.02c-78.046 0-78.046 47.725-156.09 47.725h-50c-64.427 0-74.427 1.8125-138.85 1.8125v13.213c64.427 0 74.427-1.8125 138.85-1.8125h50c78.046 0 78.046-47.723 156.09-47.723l10-6.6074z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="37" d="m816.14 546.24c-78.695 1e-5 -78.694 54.682-157.39 54.682h-50c-63.778 0-73.778-5.1465-137.56-5.1465v9.6016c63.778 0 73.778 5.1465 137.56 5.1465h50v-2e-3c78.695-1e-5 78.694-54.682 157.39-54.682l10-4.8008z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="38" d="m33.678 394.95a23.904 23.904 0 0 0-23.904 23.904v208a23.904 23.904 0 0 0 23.904 23.904h630.07a11.332 11.332 0 0 0 11.332-11.332v-17.572a11.332 11.332 0 0 0-11.332-11.332h-5v4e-3h-50c-63.778 0-73.778-5.1484-137.56-5.1484v1.332c63.778 0 73.778 5.1484 137.56 5.1484h50v-4e-3h5a10 10 0 0 1 10 10v17.572a10 10 0 0 1-10 10h-630.07a22.572 22.572 0 0 1-22.574-22.572v-208a22.572 22.572 0 0 1 22.574-22.572h5l10-0.66602-10-0.66601z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="39" d="m876.14 344.61c57.293 0 57.293-85.311 114.59-85.311l10 33.802-10 33.802c-57.293 0-57.293 85.311-114.59 85.311z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="40" d="m876.14 412.21c140.05 0 140.05-27.496 280.09-27.496l10 84.984-10 84.984c-140.05 0-140.05 27.496-280.09 27.496z" style="fill:#d980b7;stroke-width:0px"/>
+          <path class="flow" data-index="41" d="m876.14 582.18c140.05 0 140.05-14 280.09-14l10 17.837-10 17.837c-140.05 0-140.05 14-280.09 14z" style="fill:#d980b7;stroke-width:0px"/>
+          <path class="flow" data-index="42" d="m1050.7 258.14c53.402 0 53.402-116.9 106.8-116.9l10 37.838-10 37.838c-53.402 0-53.402 116.9-106.8 116.9z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="43" d="m779.38 105.29c189.08 0 189.08 4.4277 378.15 4.4277l10 12.608-10 12.608c-189.08 0-189.08-4.4277-378.15-4.4277z" style="fill:#e3a6aa;stroke-width:0px"/>
+
+          <rect class="node open-node" data-name="Extraction" x="47.38" y="39.646" width="50" height="56.858" style="fill:#a7e66f;stroke-width:0px"/>
+          <text class="node-label link-text" x="46.520569" y="71.22123">Extraction</text>
+
+          <rect class="node open-node" data-name="Processing/Production" x="47.38" y="215.93" width="50" height="30.684" style="fill:#a7e66f;stroke-width:0px"/>
+           <text class="node-label link-text" x="10.866585" y="233.907">Processing/Production</text>
+
+          <rect class="node open-node" data-name="Manufacturing" x="48.677" y="344.1" width="50" height="4.1975" style="fill:#a7e66f;stroke-width:0px"/>
+          <text class="node-label link-text" x="28.778603" y="349.94455">Manufacturing</text>
+
+          <rect class="node" data-name="Deconstruction" x="48.677" y="385.18" width="50" height="23.677" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="35.912689" y="401.51221">Deconstruction</text>
+
+          <rect class="node" data-name="Concreting Crushed Rock" x="228.45" y="311.76" width="50" height="1.2966" style="fill:#ae9e80;stroke-width:0px"/>
+          <text class="node-label" x="193.82745" y="308.71768">Concreting Crushed Rock</text>
+
+          <rect class="node" data-name="Mortar Manufacturing" data-link="Manufacturing" x="227.15" y="329.55" width="50" height="2.9009" style="fill:#f2f78a;stroke-width:0px"/>
+          <text class="node-label" x="201.45245" y="342.43301">Mortar Manufacturing</text>
+
+          <rect class="node open-node" data-name="Use" x="221.97" y="375.94" width="50" height="234.91" style="fill:#a7e66f;stroke-width:0px"/>
+          <text class="node-label link-text" x="235.47873" y="498.46817">Use</text>
+
+          <rect class="node" data-name="Overburden and Interburden" x="419.9" y="2.0491" width="50" height="136.08" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="402.66669" y="66.876167"><tspan x="402.66669" y="66.876167" sodipodi:role="line">Overburden</tspan><tspan id="tspan190302" x="402.66669" y="81.876167" sodipodi:role="line">and Interburden</tspan></text>
+
+          <rect class="node" data-name="Demolition" x="826.14" y="344.61" width="50" height="273.25" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="822.69391" y="485.51852">Demolition</text>
+
+          <rect class="node" data-name="Scalpings and Fines" x="421.2" y="191.85" width="50" height="66.757" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="400.88895" y="227.89595">Scalpings and Fines</text>
+
+          <rect class="node" data-name="Manufacturing Waste" x="419.9" y="286.87" width="50" height="8.0873" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="402.82153" y="303.75674">Manufacturing Waste</text>
+
+          <rect class="node" data-name="Railway Ballast" x="421.2" y="340.08" width="50" height="7.4213" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label" x="417.53107" y="347.86768">Railway Ballast</text>
+
+          <rect class="node" data-name="Road" x="422.49" y="368.69" width="50" height="55.128" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label" x="433.04395" y="400.53998">Road</text>
+
+          <rect class="node" data-name="Other Infrastructure" x="422.49" y="429.2" width="50" height="99.65" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label" x="395.45605" y="485.39554">Other Infrastructure</text>
+
+          <rect class="node" data-name="Buildings" x="421.2" y="534" width="50" height="72.71" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label" x="421.57111" y="573.45453">Buildings</text>
+
+          <rect class="node" data-name="Recycled Waste" x="650.86" y="222.41" width="50" height="34.811" style="fill:#a2e39b;stroke-width:0px"/>
+          <text class="node-label" x="615.81927" y="235.41621"><tspan x="615.81927" y="235.41621" sodipodi:role="line">Processing/Production</tspan><tspan id="tspan188150" x="615.81927" y="250.41621" sodipodi:role="line">recycled Waste</tspan></text>
+
+          <rect class="node" data-name="Concreting C&D" x="1166.2" y="568.18" width="50" height="35.674" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="1146.7992" y="589.88922">Concreting C&D</text>
+
+          <rect class="node" data-name="Landfill" x="1000.7" y="258.14" width="50" height="75.676" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="1006.6227" y="300.2673">Landfill</text>
+
+          <rect class="node" data-name="Other Waste Processing" x="729.38" y="105.29" width="50" height="90.584" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="689.68091" y="153.68089">Other Waste Processing</text>
+
+          <rect class="node" data-name="Processing/Production C&D" x="1166.2" y="384.72" width="50" height="169.97" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="1149.6755" y="466.48859"><tspan id="tspan193695" x="1149.6755" y="466.48859" sodipodi:role="line">Processing /</tspan><tspan id="tspan193697" x="1149.6755" y="481.48859" sodipodi:role="line">Production C&D</tspan></text>
+
+          <rect class="node open-node" data-name="Use as Fill" data-link="Use" x="1166.2" y=".00010739" width="50" height="56.525" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label link-text" x="1163.1667" y="32.551727">Use as Fill</text>
+
+          <rect class="node" data-name="Stock" x="1167.5" y="87.021" width="50" height="129.89" style="fill:#a7e66f;stroke-width:0px"/>
+          <text class="node-label" x="1207.2548" y="156.25554" text-anchor="end">Stock</text>
+
+          <text class="node-label" x="214.04517" y="86.179741">Sand</text>
+          <text class="node-label" x="216.63916" y="66.596748">Gravel</text>
+          <text class="node-label" x="217.93616" y="34.195221">Crushed Rock</text>
+          <text class="node-label" x="217.29761" y="275.82758">C&D Waste</text>
+          <text class="node-label" x="199.93616" y="154.74844">Marine Dredged Sand</text>
+          <text class="node-label" x="198.53015" y="121.65347">Marine Dredged Gravel</text>
+          <text class="node-label" x="217.36206" y="234.29662">Sand</text>
+          <text class="node-label" x="217.30347" y="219.31972">Gravel</text>
+          <text class="node-label" x="217.29761" y="200.30074">Crushed Rock</text>
+          <text class="node-label" x="217.36206" y="257.62903">Secondary Aggregates</text>
+          <text class="node-label" x="577.48413" y="415.35095">Sand</text>
+          <text class="node-label" x="577.48413" y="399.95276">Gravel</text>
+          <text class="node-label" x="578.78113" y="373.32343">Rock</text>
+          <text class="node-label" x="580.75214" y="610.58746">Sand</text>
+          <text class="node-label" x="582.04913" y="591.55566">Gravel</text>
+          <text class="node-label" x="582.04913" y="559.34314">Crushed Rock</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn btn-light toggle-table my-4">
+    <i class="fa fa-caret-down me-2"></i> <span class="label">Data table</span>
+  </div>
+  <div id="table-wrapper" class="d-none mb-4">
+    <table class="table" data-name="global">
+        <thead>
+            <tr>
+                <th>Resource</th>
+                <th>From</th>
+                <th>To</th>
+                <th class="text-end">Quantity (kt)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Crushed Rock</td>
+                <td>Reserves</td>
+                <td>Extraction</td>
+                <td class="text-end">92560</td>
+            </tr>
+            <tr>
+                <td>Land Won Sand and Gravel</td>
+                <td>Reserves</td>
+                <td>Extraction</td>
+                <td class="text-end">44219</td>
+            </tr>
+            <tr>
+                <td>Marine Dredged Sand and Gravel</td>
+                <td>Reserves</td>
+                <td>Extraction</td>
+                <td class="text-end">12012</td>
+            </tr>
+            <tr>
+                <td>Crushed Rock</td>
+                <td>Extraction</td>
+                <td>Processing/Production</td>
+                <td class="text-end">84122</td>
+            </tr>
+            <tr>
+                <td>Sand and Gravel</td>
+                <td>Extraction</td>
+                <td>Processing/Production</td>
+                <td class="text-end">51248</td>
+            </tr>
+            <tr>
+                <td>Fill</td>
+                <td>Extraction</td>
+                <td>Use</td>
+                <td class="text-end">4258</td>
+            </tr>
+            <tr>
+                <td>Overburden and Interburden</td>
+                <td>Extraction</td>
+                <td>Waste Management</td>
+                <td class="text-end">9455</td>
+            </tr>
+            <tr>
+                <td>Marine Dredged Sand and Gravel</td>
+                <td>Marine Dredged Outside English Waters</td>
+                <td>Processing/Production</td>
+                <td class="text-end">598</td>
+            </tr>
+            <tr>
+                <td>Non-Primary</td>
+                <td>Secondary Aggregates</td>
+                <td>Processing/Production</td>
+                <td class="text-end">5175</td>
+            </tr>
+            <tr>
+                <td>All</td>
+                <td>Processing/Production</td>
+                <td>Export</td>
+                <td class="text-end">4954</td>
+            </tr>
+            <tr>
+                <td>C&amp;D Waste</td>
+                <td>Waste Management</td>
+                <td>Processing/Production</td>
+                <td class="text-end">33690</td>
+            </tr>
+            <tr>
+                <td>Recycled Processing/Production Waste</td>
+                <td>Waste Management</td>
+                <td>Processing/Production</td>
+                <td class="text-end">6700</td>
+            </tr>
+            <tr>
+                <td>Concrete Materials</td>
+                <td>Processing/Production</td>
+                <td>Manufacturing</td>
+                <td class="text-end">30746</td>
+            </tr>
+            <tr>
+                <td>Asphalt Materials</td>
+                <td>Processing/Production</td>
+                <td>Manufacturing</td>
+                <td class="text-end">3630</td>
+            </tr>
+            <tr>
+                <td>Mortar Sand</td>
+                <td>Processing/Production</td>
+                <td>Manufacturing</td>
+                <td class="text-end">3823</td>
+            </tr>
+            <tr>
+                <td>Scalpings and Fines</td>
+                <td>Processing/Production</td>
+                <td>Waste Management</td>
+                <td class="text-end">6082</td>
+            </tr>
+            <tr>
+                <td>Fill</td>
+                <td>Processing/Production</td>
+                <td>Use</td>
+                <td class="text-end">7787</td>
+            </tr>
+            <tr>
+                <td>Other Aggregate and Non-Aggregate Use</td>
+                <td>Processing/Production</td>
+                <td>Use</td>
+                <td class="text-end">40152</td>
+            </tr>
+            <tr>
+                <td>All</td>
+                <td>Import</td>
+                <td>Manufacturing</td>
+                <td class="text-end">8456</td>
+            </tr>
+            <tr>
+                <td>Infrastructure Materials</td>
+                <td>Manufacturing</td>
+                <td>Use</td>
+                <td class="text-end">30786</td>
+            </tr>
+            <tr>
+                <td>Building Materials</td>
+                <td>Manufacturing</td>
+                <td>Use</td>
+                <td class="text-end">57930</td>
+            </tr>
+            <tr>
+                <td>Manufacturing Waste</td>
+                <td>Manufacturing</td>
+                <td>Waste Management</td>
+                <td class="text-end">832</td>
+            </tr>
+            <tr>
+                <td>C&amp;D Waste</td>
+                <td>Waste Management</td>
+                <td>Manufacturing</td>
+                <td class="text-end">7071</td>
+            </tr>
+            <tr>
+                <td>Crushed Rock</td>
+                <td>Import</td>
+                <td>Use</td>
+                <td class="text-end">1117</td>
+            </tr>
+            <tr>
+                <td>C&amp;D Waste</td>
+                <td>Use</td>
+                <td>Waste Management</td>
+                <td class="text-end">46561</td>
+            </tr>
+            <tr>
+                <td>Deconstruction Materials</td>
+                <td>Waste Management</td>
+                <td>Use</td>
+                <td class="text-end">4046</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table" data-name="Reserves" hidden>
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>From</th>
+          <th>To</th>
+          <th class="text-end">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>All</td>
+              <td>Reserves</td>
+              <td>Terrestrial</td>
+              <td class="text-end">136779</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Reserves</td>
+              <td>Marine</td>
+              <td class="text-end">12012</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Reserves</td>
+              <td>Stock</td>
+              <td class="text-end">2338</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Terrestrial</td>
+              <td>Extraction</td>
+              <td class="text-end">92560</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Terrestrial</td>
+              <td>Extraction</td>
+              <td class="text-end">26524</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Terrestrial</td>
+              <td>Extraction</td>
+              <td class="text-end">17695</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Marine</td>
+              <td>Extraction</td>
+              <td class="text-end">7212</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Marine</td>
+              <td>Extraction</td>
+              <td class="text-end">4800</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Marine</td>
+              <td>Stock</td>
+              <td class="text-end">2338</td>
+          </tr>
+      </tbody>
+    </table>
+
+    <table class="table" data-name="Extraction" hidden>
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>From</th>
+          <th>To</th>
+          <th class="text-end">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Terrestrial</td>
+              <td>Extraction</td>
+              <td class="text-end">92560</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Terrestrial</td>
+              <td>Extraction</td>
+              <td class="text-end">26524</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Terrestrial</td>
+              <td>Extraction</td>
+              <td class="text-end">17695</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Marine</td>
+              <td>Extraction</td>
+              <td class="text-end">7212</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Marine</td>
+              <td>Extraction</td>
+              <td class="text-end">4800</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Extraction</td>
+              <td>Processing/Production</td>
+              <td class="text-end">84122</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Extraction</td>
+              <td>Processing/Production</td>
+              <td class="text-end">24106</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Extraction</td>
+              <td>Processing/Production</td>
+              <td class="text-end">16327</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Extraction</td>
+              <td>Use as Fill</td>
+              <td class="text-end">9814</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Extraction</td>
+              <td>Use as Fill</td>
+              <td class="text-end">2047</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Extraction</td>
+              <td>Use as Fill</td>
+              <td class="text-end">1381</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Extraction</td>
+              <td>Waste Processing</td>
+              <td class="text-end">6637</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Extraction</td>
+              <td>Waste Processing</td>
+              <td class="text-end">2047</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Extraction</td>
+              <td>Waste Processing</td>
+              <td class="text-end">1159</td>
+          </tr>
+      </tbody>
+    </table>
+
+    <table class="table" data-name="Processing/Production" hidden>
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>From</th>
+          <th>To</th>
+          <th class="text-end">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Crushed rock</td>
+              <td>Extraction</td>
+              <td>Overburden and Interburden</td>
+              <td class="text-end">6637</td>
+          </tr>
+          <tr>
+              <td>Crushed rock</td>
+              <td>Extraction</td>
+              <td>Use as Fill</td>
+              <td class="text-end">9814</td>
+          </tr>
+          <tr>
+              <td>Crushed rock</td>
+              <td>Extraction</td>
+              <td>Processing/Production</td>
+              <td class="text-end">84122</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Extraction</td>
+              <td>Overburden and Interburden</td>
+              <td class="text-end">1659</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Extraction</td>
+              <td>Processing/Production</td>
+              <td class="text-end">24106</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Extraction</td>
+              <td>Use as Fill</td>
+              <td class="text-end">2047</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Extraction</td>
+              <td>Overburden and Interburden</td>
+              <td class="text-end">1159</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Extraction</td>
+              <td>Processing/Production</td>
+              <td class="text-end">16327</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Extraction</td>
+              <td>Use as Fill</td>
+              <td class="text-end">1380</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Demolition</td>
+              <td>Processing/Production</td>
+              <td class="text-end">33690</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Secondary Aggregates</td>
+              <td>Processing/Production</td>
+              <td class="text-end">5175</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Marine Dredged Outside English Waters</td>
+              <td>Processing/Production</td>
+              <td class="text-end">597</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Scalpings and Fines</td>
+              <td>Processing/Production</td>
+              <td class="text-end">6900</td>
+          </tr>
+          <tr>
+              <td>Crushed rock</td>
+              <td>Processing/Production</td>
+              <td>Concreting Manufacturing</td>
+              <td class="text-end">8783</td>
+          </tr>
+          <tr>
+              <td>Crushed rock</td>
+              <td>Processing/Production</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">14046</td>
+          </tr>
+          <tr>
+              <td>Crushed rock</td>
+              <td>Processing/Production</td>
+              <td>Non-aggregate Use</td>
+              <td class="text-end">5728</td>
+          </tr>
+          <tr>
+              <td>Crushed rock</td>
+              <td>Processing/Production</td>
+              <td>Asphalt Manufacturing</td>
+              <td class="text-end">3019</td>
+          </tr>
+          <tr>
+              <td>Crushed rock</td>
+              <td>Processing/Production</td>
+              <td>Use as Fill</td>
+              <td class="text-end">4059</td>
+          </tr>
+          <tr>
+              <td>Crushed rock</td>
+              <td>Processing/Production</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">2977</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production</td>
+              <td>Concreting Manufacturing</td>
+              <td class="text-end">8252</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">4297</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production</td>
+              <td>Non-aggregate Use</td>
+              <td class="text-end">1667</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production</td>
+              <td>Asphalt Manufacturing</td>
+              <td class="text-end">238</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production</td>
+              <td>Use as Fill</td>
+              <td class="text-end">3349</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production</td>
+              <td>Land Won</td>
+              <td class="text-end">1993</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">981</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Concreting Manufacturing</td>
+              <td class="text-end">13711</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">2494</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Non-aggregate Use</td>
+              <td class="text-end">760</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Asphalt Manufacturing</td>
+              <td class="text-end">373</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Mortar Manufacturing</td>
+              <td class="text-end">3822</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Use as Fill</td>
+              <td class="text-end">1991</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Land Won</td>
+              <td class="text-end">1377</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Marine Dredged</td>
+              <td class="text-end">1377</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">399</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Processing/Production</td>
+              <td>C&amp;D Waste</td>
+              <td class="text-end">28770</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Processing/Production</td>
+              <td>Processing/Production Secondary Aggregates</td>
+              <td class="text-end">1293</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>C&amp;D Waste</td>
+              <td>Concreting Manufacturing</td>
+              <td class="text-end">11825</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>C&amp;D Waste</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">7572</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>C&amp;D Waste</td>
+              <td>Non-aggregate Use</td>
+              <td class="text-end">2865</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>C&amp;D Waste</td>
+              <td>Asphalt Manufacturing</td>
+              <td class="text-end">1097</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>C&amp;D Waste</td>
+              <td>Mortar Manufacturing</td>
+              <td class="text-end">1569</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>C&amp;D Waste</td>
+              <td>Use as Fill</td>
+              <td class="text-end">1410</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>C&amp;D Waste</td>
+              <td>Use as Fill</td>
+              <td class="text-end">1036</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>C&amp;D Waste</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">1396</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Processing/Production Secondary Aggregates</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">725</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Processing/Production Secondary Aggregates</td>
+              <td>Mortar Manufacturing</td>
+              <td class="text-end">239</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Processing/Production Secondary Aggregates</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">329</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Land Won</td>
+              <td>Trade</td>
+              <td class="text-end">3370</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Marine Dredged</td>
+              <td>Trade</td>
+              <td class="text-end">1377</td>
+          </tr>
+      </tbody>
+    </table>
+
+    <table class="table" data-name="Manufacturing" hidden>
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>From</th>
+          <th>To</th>
+          <th class="text-end">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Processing/Production</td>
+              <td>Railway Ballast</td>
+              <td class="text-end">23457</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Processing/Production</td>
+              <td>Asphalt Manufacturing</td>
+              <td class="text-end">3019</td>
+          </tr>
+              <tr>
+                  <td>Crushed Rock</td>
+                  <td>Processing/Production</td>
+                  <td>Concreting Manufacturing</td>
+                  <td class="text-end">8783</td>
+              </tr>
+              <tr>
+                  <td>Gravel</td>
+                  <td>Processing/Production</td>
+                  <td>Asphalt Manufacturing</td>
+                  <td class="text-end">238</td>
+              </tr>
+              <tr>
+                  <td>Gravel</td>
+                  <td>Processing/Production</td>
+                  <td>Concreting Manufacturing</td>
+                  <td class="text-end">8252</td>
+              </tr>
+              <tr>
+                  <td>Sand</td>
+                  <td>Processing/Production</td>
+                  <td>Asphalt Manufacturing</td>
+                  <td class="text-end">373</td>
+              </tr>
+              <tr>
+                  <td>Sand</td>
+                  <td>Processing/Production</td>
+                  <td>Concreting Manufacturing</td>
+                  <td class="text-end">13711</td>
+              </tr>
+              <tr>
+                  <td>Sand</td>
+                  <td>Processing/Production</td>
+                  <td>Mortar Manufacturing</td>
+                  <td class="text-end">3822</td>
+              </tr>
+              <tr>
+                  <td>C&amp;D Waste</td>
+                  <td>Processing/Production</td>
+                  <td>Processing/Production C&amp;D Waste</td>
+                  <td class="text-end">14491</td>
+              </tr>
+              <tr>
+                  <td>Secondary Aggregates</td>
+                  <td>Processing/Production</td>
+                  <td>Processing/Production Secondary Aggregates</td>
+                  <td class="text-end">239</td>
+              </tr>
+              <tr>
+                  <td>Non-Primary</td>
+                  <td>Processing/Production C&amp;D Waste</td>
+                  <td>Asphalt Manufacturing</td>
+                  <td class="text-end">1097</td>
+              </tr>
+              <tr>
+                  <td>Non-Primary</td>
+                  <td>Processing/Production C&amp;D Waste</td>
+                  <td>Concreting Manufacturing</td>
+                  <td class="text-end">11825</td>
+              </tr>
+              <tr>
+                  <td>Non-Primary</td>
+                  <td>Processing/Production C&amp;D Waste</td>
+                  <td>Mortar Manufacturing</td>
+                  <td class="text-end">1569</td>
+              </tr>
+              <tr>
+                  <td>C&amp;D Waste</td>
+                  <td>Demolition</td>
+                  <td>Concreting Manufacturing</td>
+                  <td class="text-end">7071</td>
+              </tr>
+              <tr>
+                  <td>All</td>
+                  <td>Trade</td>
+                  <td>Land Won</td>
+                  <td class="text-end">7983</td>
+              </tr>
+              <tr>
+                  <td>Crushed Rock</td>
+                  <td>Land Won</td>
+                  <td>Asphalt Manufacturing</td>
+                  <td class="text-end">984</td>
+              </tr>
+              <tr>
+                  <td>Crushed Rock</td>
+                  <td>Land Won</td>
+                  <td>Concreting Manufacturing</td>
+                  <td class="text-end">6999</td>
+              </tr>
+              <tr>
+                  <td>Gravel</td>
+                  <td>Land Won</td>
+                  <td>Concreting Manufacturing</td>
+                  <td class="text-end">473</td>
+              </tr>
+              <tr>
+                  <td>Crushed Rock</td>
+                  <td>Asphalt Manufacturing</td>
+                  <td>Road</td>
+                  <td class="text-end">10014</td>
+              </tr>
+              <tr>
+                  <td>Crushed Rock</td>
+                  <td>Concreting Manufacturing</td>
+                  <td>Buildings</td>
+                  <td class="text-end">26781</td>
+              </tr>
+              <tr>
+                  <td>Crushed Rock</td>
+                  <td>Concreting Manufacturing</td>
+                  <td>Reprocessing</td>
+                  <td class="text-end">257</td>
+              </tr>
+              <tr>
+                  <td>C&amp;D Waste</td>
+                  <td>Concreting Manufacturing</td>
+                  <td>Buildings</td>
+                  <td class="text-end">16245</td>
+              </tr>
+              <tr>
+                  <td>Gravel</td>
+                  <td>Concreting Manufacturing</td>
+                  <td>Other Infrastructure</td>
+                  <td class="text-end">5378</td>
+              </tr>
+              <tr>
+                  <td>Gravel</td>
+                  <td>Concreting Manufacturing</td>
+                  <td>Buildings</td>
+                  <td class="text-end">8793</td>
+              </tr>
+              <tr>
+                  <td>Sand</td>
+                  <td>Concreting Manufacturing</td>
+                  <td>Other Infrastructure</td>
+                  <td class="text-end">15394</td>
+              </tr>
+              <tr>
+                  <td>Sand</td>
+                  <td>Concreting Manufacturing</td>
+                  <td>Buildings</td>
+                  <td class="text-end">6111</td>
+              </tr>
+              <tr>
+                  <td>Sand</td>
+                  <td>Mortar Manufacturing</td>
+                  <td>Buildings</td>
+                  <td class="text-end">270</td>
+              </tr>
+              <tr>
+                  <td>Sand</td>
+                  <td>Mortar Manufacturing</td>
+                  <td>Reprocessing</td>
+                  <td class="text-end">346</td>
+              </tr>
+              <tr>
+                  <td>Sand</td>
+                  <td>Mortar Manufacturing</td>
+                  <td>Landfill</td>
+                  <td class="text-end">229</td>
+              </tr>
+              <tr>
+                  <td>All</td>
+                  <td>Landfill</td>
+                  <td>Waste Management</td>
+                  <td class="text-end">229</td>
+              </tr>
+              <tr>
+                  <td>All</td>
+                  <td>Reprocessing</td>
+                  <td>Waste Management</td>
+                  <td class="text-end">603</td>
+              </tr>
+              <tr>
+                  <td>Crushed Rock</td>
+                  <td>Railway Ballast</td>
+                  <td>Infrastructure</td>
+                  <td class="text-end">23457</td>
+              </tr>
+              <tr>
+                  <td>All</td>
+                  <td>Road</td>
+                  <td>Infrastructure</td>
+                  <td class="text-end">10014</td>
+              </tr>
+              <tr>
+                  <td>All</td>
+                  <td>Other Infrastructure</td>
+                  <td>Infrastructure</td>
+                  <td class="text-end">20772</td>
+              </tr>
+          </tbody>
+    </table>
+
+    <table class="table" data-name="Use" hidden>
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>From</th>
+          <th>To</th>
+          <th class="text-end">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Sand</td>
+              <td>Mortar Manufacturing</td>
+              <td>Buildings</td>
+              <td class="text-end">270</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Concreting Manufacturing</td>
+              <td>Buildings</td>
+              <td class="text-end">27038</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Concreting Manufacturing</td>
+              <td>Buildings</td>
+              <td class="text-end">8793</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Concreting Manufacturing</td>
+              <td>Other Infrastructure</td>
+              <td class="text-end">5378</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Concreting Manufacturing</td>
+              <td>Buildings</td>
+              <td class="text-end">5841</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Concreting Manufacturing</td>
+              <td>Other Infrastructure</td>
+              <td class="text-end">15394</td>
+          </tr>
+          <tr>
+              <td>C&amp;D Waste</td>
+              <td>Concreting Manufacturing</td>
+              <td>Buildings</td>
+              <td class="text-end">16245</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Asphalt Manufacturing</td>
+              <td>Road</td>
+              <td class="text-end">10014</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Processing/Production Crushed Rock</td>
+              <td>Railway Ballast</td>
+              <td class="text-end">23457</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Processing/Production Crushed Rock</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">14046</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Processing/Production Crushed Rock</td>
+              <td>Non-aggregate Use</td>
+              <td class="text-end">5728</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Processing/Production Crushed Rock</td>
+              <td>Use as Fill</td>
+              <td class="text-end">4059</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production Gravel</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">4297</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production Gravel</td>
+              <td>Non-aggregate Use</td>
+              <td class="text-end">1667</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production Gravel</td>
+              <td>Use as Fill</td>
+              <td class="text-end">3349</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production Sand</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">2494</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production Sand</td>
+              <td>Non-aggregate Use</td>
+              <td class="text-end">760</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production Sand</td>
+              <td>Use as Fill</td>
+              <td class="text-end">1991</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Processing/Production C&amp;D Waste</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">7572</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Processing/Production C&amp;D Waste</td>
+              <td>Non-aggregate Use</td>
+              <td class="text-end">2865</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production C&amp;D Waste</td>
+              <td>Fill Sand</td>
+              <td class="text-end">1036</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production C&amp;D Waste</td>
+              <td>Fill Gravel</td>
+              <td class="text-end">1410</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Processing/Production Secondary Aggregates</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">725</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Trade Crushed Rock</td>
+              <td>Aggregate Use</td>
+              <td class="text-end">1117</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Extraction</td>
+              <td>Use as Fill</td>
+              <td class="text-end">9814</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Extraction</td>
+              <td>Use as Fill</td>
+              <td class="text-end">2047</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Extraction</td>
+              <td>Use as Fill</td>
+              <td class="text-end">1381</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Other Infrastructure</td>
+              <td>Infrastructure</td>
+              <td class="text-end">20772</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Road</td>
+              <td>Infrastructure</td>
+              <td class="text-end">10014</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Railway Ballast</td>
+              <td>Infrastructure</td>
+              <td class="text-end">23457</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Buildings</td>
+              <td>Deconstruction</td>
+              <td class="text-end">2201</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Buildings</td>
+              <td>Demolition</td>
+              <td class="text-end">12211</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Buildings</td>
+              <td>Stock</td>
+              <td class="text-end">12115</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Deconstruction</td>
+              <td>Use</td>
+              <td class="text-end">4046</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Infrastructure</td>
+              <td>Deconstruction</td>
+              <td class="text-end">2492</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Infrastructure</td>
+              <td>Demolition</td>
+              <td class="text-end">29658</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Infrastructure</td>
+              <td>Stock</td>
+              <td class="text-end">16296</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Aggregate Use</td>
+              <td>Stock</td>
+              <td class="text-end">35998</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Non-aggregate Use</td>
+              <td>Stock</td>
+              <td class="text-end">4003</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Waste Management</td>
+              <td>Use as Fill</td>
+              <td class="text-end">11204</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Use as Fill</td>
+              <td>Stock</td>
+              <td class="text-end">38539</td>
+          </tr>
+      </tbody>
+    </table>
+
+    <table class="table" data-name="Infrastructure" hidden>
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>From</th>
+          <th>To</th>
+          <th class="text-end">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Processing/Production</td>
+              <td>Railway Ballast</td>
+              <td class="text-end">23457</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Concreting Manufacturing</td>
+              <td>Other Infrastructure</td>
+              <td class="text-end">5378</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Concreting Manufacturing</td>
+              <td>Other Infrastructure</td>
+              <td class="text-end">15394</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Asphalt Manufacturing</td>
+              <td>Road Crushed Rock</td>
+              <td class="text-end">10014</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Railway Ballast</td>
+              <td>Demolition</td>
+              <td class="text-end">1471</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Railway Ballast</td>
+              <td>Stock</td>
+              <td class="text-end">146</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Other Infrastructure</td>
+              <td>Demolition</td>
+              <td class="text-end">17260</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Other Infrastructure</td>
+              <td>Deconstruction</td>
+              <td class="text-end">2492</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Other Infrastructure</td>
+              <td>Stock</td>
+              <td class="text-end">3154</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Road Crushed Rock</td>
+              <td>Demolition</td>
+              <td class="text-end">6802</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Road Crushed Rock</td>
+              <td>Stock</td>
+              <td class="text-end">8468</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Road Gravel</td>
+              <td>Demolition</td>
+              <td class="text-end">2380</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Road Gravel</td>
+              <td>Stock</td>
+              <td class="text-end">2717</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Road Sand</td>
+              <td>Demolition</td>
+              <td class="text-end">1745</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Road Sand</td>
+              <td>Stock</td>
+              <td class="text-end">1811</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Demolition</td>
+              <td>Waste Management</td>
+              <td class="text-end">29658</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Deconstruction</td>
+              <td>Waste Management</td>
+              <td class="text-end">2492</td>
+          </tr>
+      </tbody>
+    </table>
+
+    <table class="table" data-name="Waste Management" hidden>
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>From</th>
+          <th>To</th>
+          <th class="text-end">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Extraction</td>
+              <td>Overburden and Interburden</td>
+              <td class="text-end">6637</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Extraction</td>
+              <td>Overburden and Interburden</td>
+              <td class="text-end">2047</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Extraction</td>
+              <td>Overburden and Interburden</td>
+              <td class="text-end">1159</td>
+          </tr>
+          <tr>
+              <td>Marine Dredged Gravel</td>
+              <td>Extraction</td>
+              <td>Overburden and Interburden</td>
+              <td class="text-end">814</td>
+          </tr>
+          <tr>
+              <td>Marine Dredged Sand</td>
+              <td>Extraction</td>
+              <td>Overburden and Interburden</td>
+              <td class="text-end">613</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Processing/Production</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">2977</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Processing/Production</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">981</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Processing/Production</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">399</td>
+          </tr>
+          <tr>
+              <td>Non-Primary</td>
+              <td>Processing/Production</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">329</td>
+          </tr>
+          <tr>
+              <td>C&amp;D Waste</td>
+              <td>Processing/Production</td>
+              <td>Scalpings and Fines</td>
+              <td class="text-end">1396</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Manufacturing</td>
+              <td>Concreting Crushed Rock</td>
+              <td class="text-end">257</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Manufacturing</td>
+              <td>Mortar Manufacturing</td>
+              <td class="text-end">575</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Deconstruction</td>
+              <td>Use</td>
+              <td class="text-end">4046</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Concreting Crushed Rock</td>
+              <td>Manufacturing Waste</td>
+              <td class="text-end">257</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Mortar Manufacturing</td>
+              <td>Manufacturing Waste</td>
+              <td class="text-end">346</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Mortar Manufacturing</td>
+              <td>Landfill</td>
+              <td class="text-end">229</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Use</td>
+              <td>Railway Ballast</td>
+              <td class="text-end">1471</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Use</td>
+              <td>Road</td>
+              <td class="text-end">10927</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Use</td>
+              <td>Other Infrastructure</td>
+              <td class="text-end">19752</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Use</td>
+              <td>Buildings</td>
+              <td class="text-end">14412</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Overburden and Interburden</td>
+              <td>Use as Fill</td>
+              <td class="text-end">11204</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Overburden and Interburden</td>
+              <td>Stock</td>
+              <td class="text-end">4498</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Overburden and Interburden</td>
+              <td>Other Waste Processing</td>
+              <td class="text-end">11270</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Scalpings and Fines</td>
+              <td>Other Waste Processing</td>
+              <td class="text-end">6082</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Scalpings and Fines</td>
+              <td>Stock</td>
+              <td class="text-end">250</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Scalpings and Fines</td>
+              <td>Recycled Waste</td>
+              <td class="text-end">6900</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Manufacturing Waste</td>
+              <td>Other Waste Processing</td>
+              <td class="text-end">603</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Manufacturing Waste</td>
+              <td>Stock</td>
+              <td class="text-end">1000</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Railway Ballast</td>
+              <td>Demolition</td>
+              <td class="text-end">1471</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Road</td>
+              <td>Demolition</td>
+              <td class="text-end">6802</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Road</td>
+              <td>Demolition</td>
+              <td class="text-end">2380</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Road</td>
+              <td>Demolition</td>
+              <td class="text-end">1745</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Other Infrastructure</td>
+              <td>Demolition</td>
+              <td class="text-end">17260</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Other Infrastructure</td>
+              <td>Deconstruction</td>
+              <td class="text-end">2492</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Buildings</td>
+              <td>Demolition</td>
+              <td class="text-end">7689</td>
+          </tr>
+          <tr>
+              <td>Crushed Rock</td>
+              <td>Buildings</td>
+              <td>Deconstruction</td>
+              <td class="text-end">1937</td>
+          </tr>
+          <tr>
+              <td>Gravel</td>
+              <td>Buildings</td>
+              <td>Demolition</td>
+              <td class="text-end">2619</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Buildings</td>
+              <td>Demolition</td>
+              <td class="text-end">1903</td>
+          </tr>
+          <tr>
+              <td>Sand</td>
+              <td>Buildings</td>
+              <td>Deconstruction</td>
+              <td class="text-end">264</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Demolition</td>
+              <td>Landfill</td>
+              <td class="text-end">13400</td>
+          </tr>
+          <tr>
+              <td>C&amp;D Waste</td>
+              <td>Demolition</td>
+              <td>Processing/Production C&amp;D</td>
+              <td class="text-end">33690</td>
+          </tr>
+          <tr>
+              <td>C&amp;D Waste</td>
+              <td>Demolition</td>
+              <td>Concreting C&amp;D</td>
+              <td class="text-end">7071</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Landfill</td>
+              <td>Stock</td>
+              <td class="text-end">15000</td>
+          </tr>
+          <tr>
+              <td>All</td>
+              <td>Other Waste Processing</td>
+              <td>Stock</td>
+              <td class="text-end">4998</td>
+          </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+  <script src="data.js"></script>
+
+  <script>
+    // some variables to keep track of things
+    let scope = "global";
+    let minimized = false;
+    let selectedNode = "global";
+    let selectedMaterial = false;
+
+    function getNodeVar(svgName) {
+      if (svgName == "global") {
+        return "global_flows"
+      } else if (svgName == "Use") {
+        return "use_flows"
+      } else if (svgName == "Buildings") {
+        return "buildings_flows"
+      } else if (svgName == "Extraction") {
+        return "extraction_flows"
+      } else if (svgName == "Processing/Production") {
+        return "processing_flows"
+      } else if (svgName == "Reserves") {
+        return "reserves_flows"
+      } else if (svgName == "Infrastructure") {
+        return "infrastructure_flows"
+      } else if (svgName == "Manufacturing") {
+        return "manufacturing_flows"
+      } else if (svgName == "Waste Management") {
+        return "waste_flows"
+      }
+    }
+
+    function highlightNode(svgName, nodeName) {
+      unhighlightNode(svgName)
+
+      let svg = $("svg[data-name='" + svgName + "']");
+      let node = svg.find(".node[data-name='" + nodeName + "']");
+
+      svg.find(".flow, .node").addClass("opaque");
+      node.addClass("active").removeClass("opaque")
+
+      let dataVar = getNodeVar(svgName);
+
+      $(window[dataVar]).each(function(i, flow) {
+        if (flow.from == nodeName || flow.to == nodeName) {
+          svg.find(".flow[data-index='" + i + "'], .node[data-name='" + flow.from + "'], .node[data-name='" + flow.to + "']").removeClass("opaque");
+        }
+      });
+    }
+
+    function unhighlightNode(svgName) {
+      $("svg[data-name='" + svgName + "'] .flow").removeClass("opaque")
+      $("svg[data-name='" + svgName + "'] .node").removeClass("active opaque")
+    }
+
+    function openNodeSankey(nodeName, subNode) {
+      minimized = true;
+
+      $("#col-svg").addClass("col-6 minimized").removeClass("col-12");
+      $("#nodesankey-wrapper .nodesankey").attr("hidden", "hidden")
+
+      $(".sankey-wrapper, #nodesankey-wrapper .nodesankey[data-name='" + nodeName + "']").removeAttr("hidden")
+
+      if (!subNode) {
+        highlightNode("global", nodeName)
+      } else {
+        unhighlightNode(selectedNode)
+      }
+
+      openTable(nodeName);
+
+      selectedNode = nodeName;
+
+      scrollTo(".sankey-wrapper")
+    }
+
+    function closeNodeSankey() {
+      $(".sankey-wrapper").attr("hidden", "hidden");
+      $("#col-svg").toggleClass("col-6 col-12 minimized");
+
+      openTable("global");
+
+      scrollTo("#col-svg")
+
+      unhighlightNode("global")
+      unhighlightNode(selectedNode)
+      selectedNode = "global"
+      minimized = false
+    }
+
+    function openTable(node) {
+      $("#table-wrapper table").attr("hidden", "hidden")
+      $("#table-wrapper table[data-name='" + node + "']").removeAttr("hidden")
+    }
+
+    $(".node").hover(
+      function() {
+        let svgName = $(this).parent("svg").data("name");
+        let nodeName = $(this).data("name");
+        highlightNode(svgName, nodeName)
+      }, function() {
+        if (minimized) {
+          unhighlightNode(selectedNode)
+        } else {
+          unhighlightNode("global")
+        }
+      }
+    );
+
+    $(".open-node").click(function() {
+      let thisNode = $(this)
+      let nodeName;
+
+      if (typeof thisNode.data("link") !== 'undefined' && thisNode.data("link") !== false) {
+        nodeName = thisNode.data("link");
+      } else {
+        nodeName = thisNode.data("name");
+      }
+
+      let subNode = false;
+
+      if (thisNode.attr("data-subnode")) {
+        subNode = true;
+      }
+
+      openNodeSankey(nodeName, subNode)
+    })
+
+    $(".close-sankey").click(function() {
+      closeNodeSankey()
+    })
+
+    // generic function to smoothly scroll to a jquery object
+    function scrollTo(object) {
+      $("html, body").animate({
+        scrollTop: $(object).offset().top - 200
+      }, 300);
+    }
+
+    $(".toggle-table").click(function() {
+      $("#table-wrapper").toggleClass("d-none");
+      $(".toggle-table i").toggleClass("fa-caret-down fa-caret-up")
+    })
+
+    const flowPopup = $("#popup");
+
+    // follow cursor around
+    $(".flow").mouseenter(function() {
+      $(this).addClass("hover")
+      flowPopup.show();
+      let flowIndex = $(this).data("index")
+      updatePopup(flowIndex)
+    });
+
+    $(".flow").mousemove(function(e) {
+      flowPopup.css({
+        left: e.pageX,
+        top:  e.pageY,
+      });
+    });
+
+    $(".flow").mouseleave(function() {
+      $(this).removeClass("hover")
+      flowPopup.hide();
+    });
+
+    // update popup
+    function updatePopup(flowIndex) {
+      let dataVar = getNodeVar(selectedNode);
+      let flowData = $(window[dataVar])[flowIndex]
+
+      $("#popup-from").html(flowData.from)
+      $("#popup-to").html(flowData.to)
+      $("#popup-value").html(flowData.value)
+      $("#popup-material").html(flowData.material)
+    }
+  </script>
+</body>
+</html>
+

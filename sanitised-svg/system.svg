@@ -1,0 +1,46 @@
+<svg class="global-view" width="1916" height="500" data-name="global" inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)" sodipodi:docname="system.svg" version="1.1" viewBox="0 0 484.63 132.03" xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
+ <sodipodi:namedview bordercolor="#666666" borderopacity="1.0" fit-margin-bottom="0" fit-margin-left="0" fit-margin-right="0" fit-margin-top="0" inkscape:current-layer="svg1110" inkscape:cx="196.2611" inkscape:cy="318.72375" inkscape:pagecheckerboard="0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="1051" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="0" inkscape:window-y="29" inkscape:zoom="0.93497897" pagecolor="#ffffff" showgrid="false"/>
+ <text x="191.82109" y="4.2285271" font-size="6px" style="font-family:'Liberation Sans';font-size:4.7531px">Export</text>
+ <text x="290.88" y="5" font-size="6" style="font-family:'Liberation Sans';font-size:4.7531px">Import</text>
+ <text x="377.82373" y="4.47188" font-size="6" style="font-family:'Liberation Sans';font-size:4.7531px">Import</text>
+ <path class="flow" d="m29.097 42.598h46.315l6.6025 11.428-6.6015 11.428-46.315-3e-6z" style="fill:#ae9e80;stroke-width:.96901" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m29.097 66.148h46.315l6.6015 5.821-6.6015 5.821-46.315 2e-6z" style="fill:#f9aab1;stroke-width:0" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m29.097 78.581 46.315 1e-3 6.6015 2.1156-6.6025 2.1174-46.315-7.01e-4z" style="fill:#f9aab1;stroke-width:0" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m122.23 69.806h46.315l6.6015 4.3656-6.6015 4.3656-46.315-1e-6z" style="fill:#f9aab1"/>
+ <path class="flow" d="m122.23 46.791h46.316l6.6015 10.716-6.6015 10.715-46.316 4e-6z" style="fill:#ae9e80"/>
+ <path class="flow" d="m97.89 82.814v49.213h385.53l1e-5 -42.611-1.4776-6.6015-1.4775 6.6015-1e-5 39.7h-379.62v-46.302z" style="fill:#d980b7" data-index="5" sodipodi:nodetypes="cccccccccc"/>
+ <path class="flow" d="m103.44 82.815v43.127h290.84l1e-5 -36.525-1.4662-6.6015-1.4662 6.6015 1e-5 33.615h-284.97v-40.217z" style="fill:#ca91fd" data-index="6" sodipodi:nodetypes="cccccccccc"/>
+ <path class="flow" d="m215.36 55.479h46.316l6.6015 3.496-6.6015 3.496-46.316 1e-6z" style="fill:#ca91fd;stroke-width:1.484" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m215.36 65.409h46.316l6.6015 0.74245-6.6015 0.74245-46.316 2e-6z" style="fill:#ca91fd;stroke-width:1.3678" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m215.36 69.14h46.316l6.6015 0.83491-6.6015 0.83492-46.316-3e-6z" style="fill:#f2f78a;stroke-width:1.4504" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m188.63 6.6015 0.79375-6.6015 0.79374 6.6015 1e-5 35.996h-1.5875z" style="fill:#e3a6aa" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m182.79 82.815v37.835h294.98v-31.233l-1.6119-6.6015-1.6119 6.6015-1e-5 28.058h-288.54v-34.66z" style="fill:#d980b7" data-index="15" sodipodi:nodetypes="cccccccccc"/>
+ <path class="flow" d="m187.88 82.815v32.999h196.77v-26.397l-1.3441-6.6015-1.344 6.6015-1e-5 23.625h-191.39v-30.227z" style="fill:#ca91fd" data-index="16" sodipodi:nodetypes="cccccccccc"/>
+ <path class="flow" d="m192.07 82.815v28.84h188.39v-7.6729h-6e-3l-1e-5 -14.565-3.8364-6.6015-3.8364 6.6015-1e-5 14.565h-173.04v-21.167z" style="fill:#ca91fd" data-index="17" sodipodi:nodetypes="cccccccccccc"/>
+ <path class="flow" d="m194.46 24.077 1e-5 11.919 5.2428 6.6015 5.2428-6.6015-1e-5 -1.0714h265.98v7.6729h10.486v-18.521h-10.486z" style="fill:#d980b7" data-index="18" sodipodi:nodetypes="ccccccccccc"/>
+ <path class="flow" d="m206.4 35.971-0.0109 2.9209 0.77042 3.7064 0.75918-3.7266 3.2e-4 -1.5296h260.26v5.2562h1.519v-6.6273h-261.78z" style="fill:#a2e39b" data-index="19" sodipodi:nodetypes="ccccccccccc"/>
+ <path class="flow" d="m308.5 52.096h46.315l6.6015 4.0259-6.6015 4.0259-46.315 2e-6z" style="fill:#ca91fd;stroke-width:2.7583" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m308.5 62.854h46.315l6.6015 6.6825-6.6015 6.6825-46.315 4e-6z" style="fill:#ca91fd;stroke-width:3.5537" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m286.93 0h2.1167v35.996l-1.0584 6.6015-1.0584-6.6015z" style="fill:#e3a6aa" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m374.31 0h1.4877l1e-5 35.996-0.74384 6.6015-0.74383-6.6015z" style="fill:#ae9e80;stroke-width:.77492" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m401.63 57.424h46.316l6.6015 5.2825-6.6015 5.2825-46.316 2e-6z" style="fill:#d980b7;stroke-width:1.1942" sodipodi:nodetypes="cccccc"/>
+ <path class="flow" d="m376.29 38.287-1e-5 2.4622 0.63936 1.8484 0.63936-1.8484-1e-5 -1.3845h87.465v3.233h1.2787v-4.3106h-88.742z" style="fill:#d980b7" data-index="26" sodipodi:nodetypes="ccccccccccc"/>
+ <rect class="node open-node" x="-11.12" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f" data-name="Reserves"/>
+ <text x="-4.2450385" y="65.075249" style="font-family:'Liberation Sans'"><tspan x="-4.2450385" y="65.075249" style="fill:#000000;font-family:'Liberation Sans';font-size:6.35px">Reserves</tspan></text>
+ <rect class="node open-node" x="82.013" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f" data-name="Extraction"/>
+ <text x="88.269211" y="65.075249" style="font-family:'Liberation Sans'"><tspan x="88.269211" y="65.075249" style="fill:#000000;font-family:'Liberation Sans';font-size:6.35px">Extraction</tspan></text>
+ <rect class="node open-node" x="175.15" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f" data-name="Processing/Production"/>
+ <text x="195.77563" y="60.359631" style="font-family:'Liberation Sans'"><tspan x="195.77563" y="60.359631" style="fill:#000000;font-family:'Liberation Sans';font-size:6.35px;text-align:center;text-anchor:middle">Processing /</tspan><tspan x="195.77563" y="68.55262" style="fill:#000000;font-family:'Liberation Sans';font-size:6.35px;text-align:center;text-anchor:middle">production</tspan></text>
+ <rect class="node open-node" x="268.28" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f" data-name="Manufacturing"/>
+ <text x="288.33194" y="64.284325" style="font-family:'Liberation Sans'"><tspan x="288.33194" y="64.284325" style="fill:#000000;font-family:'Liberation Sans';font-size:5.6444px;text-align:center;text-anchor:middle">Manufacturing</tspan></text>
+ <rect class="node open-node" x="361.41" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f" data-name="Use"/>
+ <text x="381.46527" y="64.284325" style="font-family:'Liberation Sans'"><tspan x="381.46527" y="64.284325" style="fill:#000000;font-family:'Liberation Sans';font-size:5.6444px;text-align:center;text-anchor:middle">Use</tspan></text>
+ <rect class="node open-node" x="454.55" y="42.598" width="40.217" height="40.217" fill="#ececec" style="fill:#a7e66f" data-name="Waste Management"/>
+ <text x="474.54218" y="60.634529" style="font-family:'Liberation Sans'"><tspan x="474.54218" y="60.634529" style="fill:#000000;font-family:'Liberation Sans';font-size:5.6444px;text-align:center;text-anchor:middle">Waste</tspan><tspan x="474.54218" y="67.917183" style="fill:#000000;font-family:'Liberation Sans';font-size:5.6444px;text-align:center;text-anchor:middle">management</tspan></text>
+ <path class="flow" d="m159.97 8.141v1.588h22.307v26.268l0.79373 6.6015 0.79372-6.6015v-26.268-1.588h-1.5874z" style="fill:#a5d7d4" data-index="5" sodipodi:nodetypes="cccccccccc"/>
+ <text x="134.76361" y="10.124794" style="font-family:'Liberation Sans';font-size:4.7531px;line-height:1.25;stroke-width:.26406;text-align:center;text-anchor:middle" xml:space="preserve"><tspan x="134.76361" y="10.124794" style="font-size:4.7531px;stroke-width:.26406" sodipodi:role="line">Secondary Aggregates</tspan></text>
+ <path class="flow" d="m159.81 21.742v0.52812h17.985l1e-5 13.726 0.26405 6.6015 0.26407-6.6015-1e-5 -14.255h-0.52812z" style="fill:#f9aab1" data-index="6" sodipodi:nodetypes="ccccccccc"/>
+ <text x="116.67602" y="23.31975" style="font-family:'Liberation Sans';font-size:4.7531px;line-height:1.25;stroke-width:.26406;text-align:center;text-anchor:middle" xml:space="preserve"><tspan x="116.67602" y="23.31975" style="font-size:4.7531px;stroke-width:.26406" sodipodi:role="line">Marine Dredged Outside English Waters</tspan></text>
+ <path d="m290.84 82.815v13.174h175.71l-1e-5 -6.5721-0.46629-6.6015-0.46629 6.6015-2e-5 5.6262h-173.84v-12.228z" style="fill-opacity:.99537;fill:#d980b7" sodipodi:nodetypes="ccccccccccccc"/>
+ <path d="m284.61 89.416 1e-5 8.8424v3.4962h187.26v-18.94h-3.5495v15.444h-180.16v-8.8424l-1.7748-6.6015z" style="fill:#d980b7" sodipodi:nodetypes="ccccccccccccc"/>
+</svg>

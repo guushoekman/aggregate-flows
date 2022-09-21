@@ -1,220 +1,186 @@
 var global_flows = [
-  {
-   "label": "Land won crushed rock",
+ {
+   "index": 0,
    "from": "Reserves",
    "to": "Extraction",
-   "value": 92195,
-   "material": "rock",
-   "color": "#e41a1c"
-  },
-  {
-   "label": "Land won sand and gravel",
+   "value": 92560,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 1,
    "from": "Reserves",
    "to": "Extraction",
-   "value": 44124,
-   "material": "Sand and gravel",
-   "color": "#377eb8"
-  },
-  {
-   "label": "Marine dredged sand and gravel",
+   "value": 44219,
+   "material": "Land Won Sand and Gravel"
+ },
+ {
+   "index": 2,
    "from": "Reserves",
    "to": "Extraction",
-   "value": 15946,
-   "material": "Sand and gravel",
-   "color": "#308edb"
-  },
-  {
-   "label": "Raw sand and gravel",
+   "value": 12012,
+   "material": "Marine Dredged Sand and Gravel"
+ },
+ {
+   "index": 3,
    "from": "Extraction",
    "to": "Processing/Production",
-   "value": 33419,
-   "material": "Sand and gravel",
-   "color": "#377eb8"
-  },
-  {
-   "label": "Raw crushed rock",
+   "value": 84122,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 4,
    "from": "Extraction",
    "to": "Processing/Production",
-   "value": 81488,
-   "material": "rock",
-   "color": "#e41a1c"
-  },
-  {
-   "label": "Overburden / interburden",
-   "from": "Extraction",
-   "to": "Waste management",
-   "value": 10706,
-   "material": false,
-   "color": "#b2b260"
-  },
-  {
-   "label": "Aggregates used as fill",
+   "value": 51248,
+   "material": "Sand and Gravel"
+ },
+ {
+   "index": 5,
    "from": "Extraction",
    "to": "Use",
-   "value": 10633,
-   "material": false,
-   "color": "#8e8e39"
-  },
-  {
-   "label": "Concreting crushed rock",
-   "from": "Processing/Production",
-   "to": "Manufacturing",
-   "value": 11886,
-   "material": "rock",
-   "color": "#e41a1c"
-  },
-  {
-   "label": "Concreting gravel",
-   "from": "Processing/Production",
-   "to": "Manufacturing",
-   "value": 11563,
-   "material": "Sand and gravel",
-   "color": "#377eb8"
-  },
-  {
-   "label": "Concreting sand",
-   "from": "Processing/Production",
-   "to": "Manufacturing",
-   "value": 19106,
-   "material": "Sand and gravel",
-   "color": "#a6cee3"
-  },
-  {
-   "label": "Asphalt sand",
-   "from": "Processing/Production",
-   "to": "Manufacturing",
-   "value": 929,
-   "material": "Sand and gravel",
-   "color": "#a6cee3"
-  },
-  {
-   "label": "Asphalt gravel",
-   "from": "Processing/Production",
-   "to": "Manufacturing",
-   "value": 458,
-   "material": "Sand and gravel",
-   "color": "#377eb8"
-  },
-  {
-   "label": "Asphalt crushed rock",
-   "from": "Processing/Production",
-   "to": "Manufacturing",
-   "value": 4025,
-   "material": "rock",
-   "color": "#e41a1c"
-  },
-  {
-   "label": "Mortal sand",
-   "from": "Processing/Production",
-   "to": "Manufacturing",
-   "value": 5634,
-   "material": "Sand and gravel",
-   "color": "#a6cee3"
-  },
-  {
-   "label": "Exports of processed sand, gravel and crushed rock",
+   "value": 4258,
+   "material": "Fill"
+ },
+ {
+   "index": 6,
+   "from": "Extraction",
+   "to": "Waste Management",
+   "value": 9455,
+   "material": "Overburden and Interburden"
+ },
+ {
+   "index": 7,
+   "from": "Marine Dredged Outside English Waters",
+   "to": "Processing/Production",
+   "value": 598,
+   "material": "Marine Dredged Sand and Gravel"
+ },
+ {
+   "index": 8,
+   "from": "Secondary Aggregates",
+   "to": "Processing/Production",
+   "value": 5175,
+   "material": "Non-Primary"
+ },
+ {
+   "index": 9,
    "from": "Processing/Production",
    "to": "Export",
-   "value": 4949,
-   "material": false,
-   "color": "#b15928"
-  },
-  {
-   "label": "Scalping and fines",
-   "from": "Processing/Production",
-   "to": "Waste management",
-   "value": 11886,
-   "material": false,
-   "color": "#967630"
-  },
-  {
-   "label": "Non-aggregate use",
-   "from": "Processing/Production",
-   "to": "Use",
-   "value": 9909,
-   "material": false,
-   "color": "#c93c7b"
-  },
-  {
-   "label": "Other aggregates",
-   "from": "Processing/Production",
-   "to": "Use",
-   "value": 29127,
-   "material": false,
-   "color": "#96305e"
-  },
-  {
-   "label": "Recycled C&D flows",
-   "from": "Waste management",
+   "value": 4954,
+   "material": "All"
+ },
+ {
+   "index": 10,
+   "from": "Waste Management",
    "to": "Processing/Production",
-   "value": 40790,
-   "material": false,
-   "color": "#96305e"
-  },
-  {
-   "label": "Recycled Processing/Production waste",
-   "from": "Waste management",
+   "value": 33690,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 11,
+   "from": "Waste Management",
    "to": "Processing/Production",
-   "value": 6535,
-   "material": false,
-   "color": "#458926"
-  },
-  {
-   "label": "Concrete, asphalt and mortar for infrastructure",
-   "from": "Manufacturing",
+   "value": 6700,
+   "material": "Recycled Processing/Production Waste"
+ },
+ {
+   "index": 12,
+   "from": "Processing/Production",
+   "to": "Manufacturing",
+   "value": 30746,
+   "material": "Concrete Materials"
+ },
+ {
+   "index": 13,
+   "from": "Processing/Production",
+   "to": "Manufacturing",
+   "value": 3630,
+   "material": "Asphalt Materials"
+ },
+ {
+   "index": 14,
+   "from": "Processing/Production",
+   "to": "Manufacturing",
+   "value": 3823,
+   "material": "Mortar Sand"
+ },
+ {
+   "index": 15,
+   "from": "Processing/Production",
+   "to": "Waste Management",
+   "value": 6082,
+   "material": "Scalpings and Fines"
+ },
+ {
+   "index": 16,
+   "from": "Processing/Production",
    "to": "Use",
-   "value": 676,
-   "material": "Concrete, asphalt and mortar ",
-   "color": "#c63574"
-  },
-  {
-   "label": "Concrete, asphalt and mortar for building",
-   "from": "Manufacturing",
+   "value": 7787,
+   "material": "Fill"
+ },
+ {
+   "index": 17,
+   "from": "Processing/Production",
    "to": "Use",
-   "value": 15564,
-   "material": "Concrete, asphalt and mortar ",
-   "color": "#ba7895"
-  },
-  {
-   "label": "Manufacturing waste",
-   "from": "Manufacturing",
-   "to": "Waste management",
-   "value": 10666,
-   "material": false,
-   "color": "#7a7a56"
-  },
-  {
-   "label": "Imports of processed sand, gravel and crushed rock",
+   "value": 40152,
+   "material": "Other Aggregate and Non-Aggregate Use"
+ },
+ {
+   "index": 18,
    "from": "Import",
    "to": "Manufacturing",
-   "value": 8467,
-   "material": false,
-   "color": "#6a3d9a"
-  },
-  {
-   "label": "Processed crushed rock imports",
+   "value": 8456,
+   "material": "All"
+ },
+ {
+   "index": 19,
+   "from": "Manufacturing",
+   "to": "Use",
+   "value": 30786,
+   "material": "Infrastructure Materials"
+ },
+ {
+   "index": 20,
+   "from": "Manufacturing",
+   "to": "Use",
+   "value": 57930,
+   "material": "Building Materials"
+ },
+ {
+   "index": 21,
+   "from": "Manufacturing",
+   "to": "Waste Management",
+   "value": 832,
+   "material": "Manufacturing Waste"
+ },
+ {
+   "index": 22,
+   "from": "Waste Management",
+   "to": "Manufacturing",
+   "value": 7071,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 23,
    "from": "Import",
    "to": "Use",
-   "value": 8922,
-   "material": "rock",
-   "color": "#e41a1c"
-  },
-  {
-   "label": "End-of-life",
+   "value": 1117,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 24,
    "from": "Use",
-   "to": "Waste management",
-   "value": 28024,
-   "material": false,
-   "color": "#7a7a56"
-  },
-  {
-   "label": "Recycling deconstruction flows",
-   "from": "Waste management",
+   "to": "Waste Management",
+   "value": 46561,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 25,
+   "from": "Waste Management",
    "to": "Use",
-   "value": 5237,
-   "material": false,
-   "color": "#7a7a56"
-  }
+   "value": 4046,
+   "material": "Deconstruction Materials"
+ }
 ]
 
 var extraction_flows = [
