@@ -739,158 +739,291 @@ var reserves_flows = [
 
 var use_flows = [
  {
-   "from": "Manufacturing",
-   "to": "Infrastructure",
-   "color": "gold",
-   "material": "sand",
-   "value": "333.769537678534"
- },
- {
-   "from": "Manufacturing",
-   "to": "Infrastructure",
-   "color": "red",
-   "material": "gravel",
-   "value": "324.387643446985"
- },
- {
-   "from": "Manufacturing",
-   "to": "Infrastructure",
-   "color": "brown",
-   "material": "rock",
-   "value": "17.6152694083819"
- },
- {
-   "from": "Manufacturing",
+   "index": 0,
+   "from": "Mortar Manufacturing",
    "to": "Buildings",
-   "color": "gold",
-   "material": "sand",
-   "value": "5186.6986485523"
+   "value": 270,
+   "material": "Sand"
  },
  {
-   "from": "Manufacturing",
+   "index": 1,
+   "from": "Concreting Manufacturing",
    "to": "Buildings",
-   "color": "red",
-   "material": "gravel",
-   "value": "5189.44859475411"
+   "value": 27038,
+   "material": "Crushed Rock"
  },
  {
-   "from": "Manufacturing",
+   "index": 2,
+   "from": "Concreting Manufacturing",
    "to": "Buildings",
-   "color": "brown",
-   "material": "rock",
-   "value": "5187.666340537"
+   "value": 8793,
+   "material": "Gravel"
  },
  {
-   "from": "Imports",
-   "to": "Infrastructure",
-   "color": "gray",
-   "material": "",
-   "value": "9706.04471936397"
+   "index": 3,
+   "from": "Concreting Manufacturing",
+   "to": "Other Infrastructure",
+   "value": 5378,
+   "material": "Gravel"
  },
  {
-   "from": "Imports",
-   "to": "Other",
-   "color": "gray",
-   "material": "",
-   "value": "69881.160220754"
+   "index": 4,
+   "from": "Concreting Manufacturing",
+   "to": "Buildings",
+   "value": 5841,
+   "material": "Sand"
  },
  {
+   "index": 5,
+   "from": "Concreting Manufacturing",
+   "to": "Other Infrastructure",
+   "value": 15394,
+   "material": "Sand"
+ },
+ {
+   "index": 6,
+   "from": "Concreting Manufacturing",
+   "to": "Buildings",
+   "value": 16245,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 7,
+   "from": "Asphalt Manufacturing",
+   "to": "Road",
+   "value": 10014,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 8,
+   "from": "Processing/Production Crushed Rock",
+   "to": "Railway Ballast",
+   "value": 23457,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 9,
+   "from": "Processing/Production Crushed Rock",
+   "to": "Aggregate Use",
+   "value": 14046,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 10,
+   "from": "Processing/Production Crushed Rock",
+   "to": "Non-aggregate Use",
+   "value": 5728,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 11,
+   "from": "Processing/Production Crushed Rock",
+   "to": "Use as Fill",
+   "value": 4059,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 12,
+   "from": "Processing/Production Gravel",
+   "to": "Aggregate Use",
+   "value": 4297,
+   "material": "Gravel"
+ },
+ {
+   "index": 13,
+   "from": "Processing/Production Gravel",
+   "to": "Non-aggregate Use",
+   "value": 1667,
+   "material": "Gravel"
+ },
+ {
+   "index": 14,
+   "from": "Processing/Production Gravel",
+   "to": "Use as Fill",
+   "value": 3349,
+   "material": "Gravel"
+ },
+ {
+   "index": 15,
+   "from": "Processing/Production Sand",
+   "to": "Aggregate Use",
+   "value": 2494,
+   "material": "Sand"
+ },
+ {
+   "index": 16,
+   "from": "Processing/Production Sand",
+   "to": "Non-aggregate Use",
+   "value": 760,
+   "material": "Sand"
+ },
+ {
+   "index": 17,
+   "from": "Processing/Production Sand",
+   "to": "Use as Fill",
+   "value": 1991,
+   "material": "Sand"
+ },
+ {
+   "index": 18,
+   "from": "Processing/Production C&D Waste",
+   "to": "Aggregate Use",
+   "value": 7572,
+   "material": "Non-Primary"
+ },
+ {
+   "index": 19,
+   "from": "Processing/Production C&D Waste",
+   "to": "Non-aggregate Use",
+   "value": 2865,
+   "material": "Non-Primary"
+ },
+ {
+   "index": 20,
+   "from": "Processing/Production C&D Waste",
+   "to": "Fill Sand",
+   "value": 1036,
+   "material": "Sand"
+ },
+ {
+   "index": 21,
+   "from": "Processing/Production C&D Waste",
+   "to": "Fill Gravel",
+   "value": 1410,
+   "material": "Gravel"
+ },
+ {
+   "index": 22,
+   "from": "Processing/Production Secondary Aggregates",
+   "to": "Aggregate Use",
+   "value": 725,
+   "material": "Non-Primary"
+ },
+ {
+   "index": 23,
+   "from": "Trade Crushed Rock",
+   "to": "Aggregate Use",
+   "value": 1117,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 24,
    "from": "Extraction",
-   "to": "Landscaping",
-   "color": "brown",
-   "material": "rock",
-   "value": "5316.48745884014"
+   "to": "Use as Fill",
+   "value": 9814,
+   "material": "Crushed Rock"
  },
  {
-   "from": "Infrastructure",
-   "to": "Waste management",
-   "color": "gold",
-   "material": "sand",
-   "value": "3.80843755851354"
- },
- {
-   "from": "Infrastructure",
-   "to": "Waste management",
-   "color": "red",
-   "material": "gravel",
-   "value": "3.47950718079574"
- },
- {
-   "from": "Infrastructure",
-   "to": "Waste management",
-   "color": "brown",
-   "material": "rock",
-   "value": "19287.4109486573"
- },
- {
-   "from": "Infrastructure",
-   "to": "Waste management",
-   "color": "gray",
-   "material": "",
-   "value": "5657.64303688887"
- },
- {
-   "from": "Buildings",
-   "to": "Waste management",
-   "color": "gold",
-   "material": "sand",
-   "value": "1151.18939038922"
- },
- {
-   "from": "Buildings",
-   "to": "Waste management",
-   "color": "red",
-   "material": "gravel",
-   "value": "1153.07241855671"
- },
- {
-   "from": "Buildings",
-   "to": "Waste management",
-   "color": "brown",
-   "material": "rock",
-   "value": "1152.4491695606"
- },
- {
-   "from": "Landscaping",
-   "to": "Waste management",
-   "color": "gray",
-   "material": "",
-   "value": "49924.4581933499"
- },
- {
+   "index": 25,
    "from": "Extraction",
-   "to": "Landscaping",
-   "color": "gray",
-   "material": "",
-   "value": "5316.90125055856"
+   "to": "Use as Fill",
+   "value": 2047,
+   "material": "Gravel"
  },
  {
-   "from": "Infrastructure",
-   "to": "Stock",
-   "color": "gray",
-   "material": "",
-   "value": "6788.51830932751"
+   "index": 26,
+   "from": "Extraction",
+   "to": "Use as Fill",
+   "value": 1381,
+   "material": "Sand"
  },
  {
+   "index": 27,
+   "from": "Other Infrastructure",
+   "to": "Infrastructure",
+   "value": 20772,
+   "material": "All"
+ },
+ {
+   "index": 28,
+   "from": "Road",
+   "to": "Infrastructure",
+   "value": 10014,
+   "material": "All"
+ },
+ {
+   "index": 29,
+   "from": "Railway Ballast",
+   "to": "Infrastructure",
+   "value": 23457,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 30,
+   "from": "Buildings",
+   "to": "Deconstruction",
+   "value": 2201,
+   "material": "All"
+ },
+ {
+   "index": 31,
+   "from": "Buildings",
+   "to": "Demolition",
+   "value": 12211,
+   "material": "All"
+ },
+ {
+   "index": 32,
    "from": "Buildings",
    "to": "Stock",
-   "color": "gray",
-   "material": "",
-   "value": "12102.4991191652"
+   "value": 12115,
+   "material": "All"
  },
  {
-   "from": "Landscaping",
-   "to": "Stock",
-   "color": "gray",
-   "material": "",
-   "value": "10705.0322836594"
+   "index": 33,
+   "from": "Deconstruction",
+   "to": "Use",
+   "value": 4046,
+   "material": "All"
  },
  {
-   "from": "Other",
+   "index": 34,
+   "from": "Infrastructure",
+   "to": "Deconstruction",
+   "value": 2492,
+   "material": "All"
+ },
+ {
+   "index": 35,
+   "from": "Infrastructure",
+   "to": "Demolition",
+   "value": 29658,
+   "material": "All"
+ },
+ {
+   "index": 36,
+   "from": "Infrastructure",
    "to": "Stock",
-   "color": "gray",
-   "material": "",
-   "value": "58872.9601151639"
+   "value": 16296,
+   "material": "All"
+ },
+ {
+   "index": 37,
+   "from": "Aggregate Use",
+   "to": "Stock",
+   "value": 35998,
+   "material": "All"
+ },
+ {
+   "index": 38,
+   "from": "Non-aggregate Use",
+   "to": "Stock",
+   "value": 4003,
+   "material": "All"
+ },
+ {
+   "index": 39,
+   "from": "Waste Management",
+   "to": "Use as Fill",
+   "value": 11204,
+   "material": "All"
+ },
+ {
+   "index": 40,
+   "from": "Use as Fill",
+   "to": "Stock",
+   "value": 38539,
+   "material": "All"
  }
 ]
 
