@@ -19,7 +19,7 @@
   <script>
     var data = [{
       type: "sankey",
-      arrangement: "perpendicular",
+      arrangement: "freeflow",
       // arrangement: "snap",
       valuesuffix: "kt",
       valueformat: ",",
@@ -27,7 +27,7 @@
         label: ["Demolition","Overburden and Interburden","Scalpings and Fines","Deconstruction","Extraction","Extraction Sand","Extraction Gravel","Extraction Crushed Rock","Marine Dredged Sand","Marine Dredged Gravel","Processing/Production","Processing/Production Sand","Processing/Production Gravel","Processing/Production Crushed Rock","Processing/Production Secondary Aggregates","Processing/Production recycled Waste","Processing/Production C&D Waste","Manufacturing","Concreting Sand","Concreting Gravel","Concreting Crushed Rock","Concreting C&D","Asphalt Sand","Asphalt Gravel","Asphalt Crushed Rock","Mortar Manufacturing","Manufacturing Waste","Use","Road","Buildings","Road Sand","Road Gravel","Road Crushed Rock","Railway Ballast","Building Sand","Building Gravel","Building Crushed Rock","Other Infrastructure","Landfill","Other Waste Processing","Processing/Production C&D","Use as Fill","Processing/Production Recycled Waste","Stock"],
         color: ["#d980b7","#d980b7","#d980b7","#d980b7","#a7e66f","#f2f78a","#dec580","#ae9e80","#f2f78a","#dec580","#a7e66f","#f2f78a","#dec580","#ae9e80","#a5d7d4","#a2e39b","#d980b7","#a7e66f","#f2f78a","#dec580","#ae9e80","#d980b7","#f2f78a","#dec580","#ae9e80","#f2f78a","#d980b7","#a7e66f","#ca91fd","#ca91fd","#f2f78a","#dec580","#ae9e80","#ca91fd","#f2f78a","#dec580","#ae9e80","#ca91fd","#d980b7","#d980b7","#d980b7","#ca91fd","#a2e39b","#a7e66f"],
         pad: 5,
-        thickness: 0,
+        thickness: 50,
         line: {
           width: 0,
         },
@@ -50,8 +50,8 @@
       toImageButtonOptions: {
         format: 'svg', // one of png, svg, jpeg, webp
         filename: 'waste management',
-        height: 1200,
-        width: 600,
+        height: 800,
+        width: 1400,
         scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
       }
     };
