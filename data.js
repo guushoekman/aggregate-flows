@@ -1389,3 +1389,314 @@ var manufacturing_flows = [
    "material": "All"
  }
 ]
+
+var waste_flows = [
+ {
+   "index": 0,
+   "from": "Extraction",
+   "to": "Overburden and Interburden",
+   "value": 6637,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 1,
+   "from": "Extraction",
+   "to": "Overburden and Interburden",
+   "value": 2047,
+   "material": "Gravel"
+ },
+ {
+   "index": 2,
+   "from": "Extraction",
+   "to": "Overburden and Interburden",
+   "value": 1159,
+   "material": "Sand"
+ },
+ {
+   "index": 3,
+   "from": "Extraction",
+   "to": "Overburden and Interburden",
+   "value": 814,
+   "material": "Marine Dredged Gravel"
+ },
+ {
+   "index": 4,
+   "from": "Extraction",
+   "to": "Overburden and Interburden",
+   "value": 613,
+   "material": "Marine Dredged Sand"
+ },
+ {
+   "index": 5,
+   "from": "Processing/Production",
+   "to": "Scalpings and Fines",
+   "value": 2977,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 6,
+   "from": "Processing/Production",
+   "to": "Scalpings and Fines",
+   "value": 981,
+   "material": "Gravel"
+ },
+ {
+   "index": 7,
+   "from": "Processing/Production",
+   "to": "Scalpings and Fines",
+   "value": 399,
+   "material": "Sand"
+ },
+ {
+   "index": 8,
+   "from": "Processing/Production",
+   "to": "Scalpings and Fines",
+   "value": 329,
+   "material": "Non-Primary"
+ },
+ {
+   "index": 9,
+   "from": "Processing/Production",
+   "to": "Scalpings and Fines",
+   "value": 1396,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 10,
+   "from": "Manufacturing",
+   "to": "Concreting Crushed Rock",
+   "value": 257,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 11,
+   "from": "Manufacturing",
+   "to": "Mortar Manufacturing",
+   "value": 575,
+   "material": "Sand"
+ },
+ {
+   "index": 12,
+   "from": "Deconstruction",
+   "to": "Use",
+   "value": 4046,
+   "material": "All"
+ },
+ {
+   "index": 13,
+   "from": "Concreting Crushed Rock",
+   "to": "Manufacturing Waste",
+   "value": 257,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 14,
+   "from": "Mortar Manufacturing",
+   "to": "Manufacturing Waste",
+   "value": 346,
+   "material": "Sand"
+ },
+ {
+   "index": 15,
+   "from": "Mortar Manufacturing",
+   "to": "Landfill",
+   "value": 229,
+   "material": "Sand"
+ },
+ {
+   "index": 16,
+   "from": "Use",
+   "to": "Railway Ballast",
+   "value": 1471,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 17,
+   "from": "Use",
+   "to": "Road",
+   "value": 10927,
+   "material": "All"
+ },
+ {
+   "index": 18,
+   "from": "Use",
+   "to": "Other Infrastructure",
+   "value": 19752,
+   "material": "All"
+ },
+ {
+   "index": 19,
+   "from": "Use",
+   "to": "Buildings",
+   "value": 14412,
+   "material": "All"
+ },
+ {
+   "index": 20,
+   "from": "Overburden and Interburden",
+   "to": "Use as Fill",
+   "value": 11204,
+   "material": "All"
+ },
+ {
+   "index": 21,
+   "from": "Overburden and Interburden",
+   "to": "Stock",
+   "value": 4498,
+   "material": "All"
+ },
+ {
+   "index": 22,
+   "from": "Overburden and Interburden",
+   "to": "Other Waste Processing",
+   "value": 11270,
+   "material": "All"
+ },
+ {
+   "index": 23,
+   "from": "Scalpings and Fines",
+   "to": "Other Waste Processing",
+   "value": 6082,
+   "material": "All"
+ },
+ {
+   "index": 24,
+   "from": "Scalpings and Fines",
+   "to": "Stock",
+   "value": 250,
+   "material": "All"
+ },
+ {
+   "index": 25,
+   "from": "Scalpings and Fines",
+   "to": "Recycled Waste",
+   "value": 6900,
+   "material": "All"
+ },
+ {
+   "index": 26,
+   "from": "Manufacturing Waste",
+   "to": "Other Waste Processing",
+   "value": 603,
+   "material": "All"
+ },
+ {
+   "index": 27,
+   "from": "Manufacturing Waste",
+   "to": "Stock",
+   "value": 1000,
+   "material": "All"
+ },
+ {
+   "index": 28,
+   "from": "Railway Ballast",
+   "to": "Demolition",
+   "value": 1471,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 29,
+   "from": "Road",
+   "to": "Demolition",
+   "value": 6802,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 30,
+   "from": "Road",
+   "to": "Demolition",
+   "value": 2380,
+   "material": "Gravel"
+ },
+ {
+   "index": 31,
+   "from": "Road",
+   "to": "Demolition",
+   "value": 1745,
+   "material": "Sand"
+ },
+ {
+   "index": 32,
+   "from": "Other Infrastructure",
+   "to": "Demolition",
+   "value": 17260,
+   "material": "All"
+ },
+ {
+   "index": 33,
+   "from": "Other Infrastructure",
+   "to": "Deconstruction",
+   "value": 2492,
+   "material": "All"
+ },
+ {
+   "index": 34,
+   "from": "Buildings",
+   "to": "Demolition",
+   "value": 7689,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 35,
+   "from": "Buildings",
+   "to": "Deconstruction",
+   "value": 1937,
+   "material": "Crushed Rock"
+ },
+ {
+   "index": 36,
+   "from": "Buildings",
+   "to": "Demolition",
+   "value": 2619,
+   "material": "Gravel"
+ },
+ {
+   "index": 37,
+   "from": "Buildings",
+   "to": "Demolition",
+   "value": 1903,
+   "material": "Sand"
+ },
+ {
+   "index": 38,
+   "from": "Buildings",
+   "to": "Deconstruction",
+   "value": 264,
+   "material": "Sand"
+ },
+ {
+   "index": 39,
+   "from": "Demolition",
+   "to": "Landfill",
+   "value": 13400,
+   "material": "All"
+ },
+ {
+   "index": 40,
+   "from": "Demolition",
+   "to": "Processing/Production C&D",
+   "value": 33690,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 41,
+   "from": "Demolition",
+   "to": "Concreting C&D",
+   "value": 7071,
+   "material": "C&D Waste"
+ },
+ {
+   "index": 42,
+   "from": "Landfill",
+   "to": "Stock",
+   "value": 15000,
+   "material": "All"
+ },
+ {
+   "index": 43,
+   "from": "Other Waste Processing",
+   "to": "Stock",
+   "value": 4998,
+   "material": "All"
+ }
+]

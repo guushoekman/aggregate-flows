@@ -41,6 +41,11 @@
       cursor: pointer;
     }
 
+    .node,
+    .flow {
+      transition: opacity .2s;
+    }
+
     .node.opaque,
     .flow.opaque {
       opacity: .1;
@@ -57,6 +62,14 @@
 
     .node.active {
       stroke: #000;
+    }
+
+    @font-face {
+      font-family: 'Liberation Sans';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Liberation Sans'),
+           url(bodoni.woff) format('woff');
     }
 
     text {
@@ -226,7 +239,7 @@
             <rect class="node open-node" data-name="Use" x="372.53" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
             <text x="392.58527" y="64.284325"><tspan x="392.58527" y="64.284325" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle">Use</tspan></text>
 
-            <rect class="node open-node" data-name="Waste management" x="465.67" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
+            <rect class="node open-node" data-name="Waste Management" x="465.67" y="42.598" width="40.217" height="40.217" fill="#ececec"/>
             <text x="485.66217" y="60.634529"><tspan x="485.66217" y="60.634529" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle">Waste</tspan><tspan x="485.66217" y="67.917183" style="fill:#000000;font-family:FreeSans;font-size:5.6444px;text-align:center;text-anchor:middle">management</tspan></text>
           </svg>
         </div>
@@ -320,7 +333,7 @@
             <rect class="node open-node" data-name="Use as Fill" data-link="Use" x="1080.8" y="326.97" width="50" height="31.93" style="fill:#ca91fd"/>
             <text class="node-label link-text" x="1133.7146" y="347.40802" text-anchor="end">Use as Fill</text>
 
-            <rect class="node open-node" data-name="Waste Processing" x="1080.8" y="383.81" width="50" height="23.734" style="fill:#d980b7"/>
+            <rect class="node open-node" data-name="Waste Processing" data-link="Waste Management" x="1080.8" y="383.81" width="50" height="23.734" style="fill:#d980b7"/>
             <text class="node-label link-text" x="1154.2605" y="399.88309" text-anchor="end">Waste Processing</text>
           </svg>
 
@@ -740,121 +753,136 @@
             <text class="node-label" x="406.01178" y="545.38965">Crushed Rock</text>
           </svg>
         </div>
-      <div class="nodesankey" data-name="Waste management" hidden>
-        <h4 class="text-center mb-4">Waste management</h4>
-        <svg data-name="Waste management" viewBox="0 0 1267 653" xmlns="http://www.w3.org/2000/svg">
-          <path class="flow" id="0"  d="m409.9 2.0478c-62.481 0-62.482 11.205-124.96 11.205h-50c-63.778 0-73.778 26.393-137.56 26.393v33.484c63.778 0 73.778-26.393 137.56-26.393h50c62.481 0 62.482-11.205 124.96-11.205l10-16.742z" style="fill:#ae9e80;stroke-width:0px"/>
-          <path class="flow" id="1"  d="m409.9 35.532c-63.13 0-63.13 21.701-126.26 21.701h-50c-63.13 0-73.13 15.896-136.26 15.896v10.328c63.13 0 73.13-15.898 136.26-15.898h50v2e-3c63.13 0 63.13-21.701 126.26-21.701l10-5.1641z" style="fill:#dec580;stroke-width:0px"/>
-          <path class="flow" id="2"  d="m409.9 45.86c-64.427 0-64.427 33.195-128.85 33.195h-50c-61.833 0-71.833 4.4024-133.67 4.4024v5.8457c61.833 0 71.833-4.4004 133.67-4.4004h50c64.427 0 64.427-33.195 128.85-33.195l10-2.9238z" style="fill:#f2f78a;stroke-width:0px"/>
-          <path class="flow" id="3"  d="m409.9 51.708c-61.184 0-61.183 73.691-122.37 73.691v4.1074c61.184 0 61.183-73.693 122.37-73.693l10-2.0527zm-312.52 37.596v4.1074c65.075 0 75.075 36.096 140.15 36.096h50v-4.1074h-50c-65.075 0-75.075-36.096-140.15-36.096z" style="fill:#dec580;stroke-width:0px"/>
-          <path class="flow" id="4"  d="m409.9 55.813c-62.481 0-62.482 85.189-124.96 85.189h-50c-63.778 0-73.778-47.592-137.56-47.592v3.0918c63.778 0 73.778 47.592 137.56 47.592h50c62.481 0 62.482-85.187 124.96-85.187l10-1.5469z" style="fill:#f2f78a;stroke-width:0px"/>
-          <path class="flow" id="5"  d="m234.94 189.59c-63.778 0-73.778 26.342-137.56 26.342v15.02c63.778 0 73.778-26.342 137.56-26.342h50c63.13 0 63.13 2.2598 126.26 2.2598l10-7.5098-10-7.5078c-63.13 0-63.13-2.2617-126.26-2.2617z" style="fill:#ae9e80;stroke-width:0px"/>
-          <path class="flow" id="6"  d="m411.2 206.87c-64.427 0-64.427 6.7754-128.85 6.7754h-50c-62.481-1e-5 -72.482 17.307-134.96 17.307v4.9492c62.481 0 72.482-17.307 134.96-17.307h50c64.427 0 64.427-6.7754 128.85-6.7754l10-2.4746z" style="fill:#dec580;stroke-width:0px"/>
-          <path class="flow" id="7"  d="m411.2 211.82c-65.075 0-65.075 18.271-130.15 18.271h-50c-61.833 0-71.833 5.8105-133.67 5.8105v2.0117c61.833 0 71.833-5.8105 133.67-5.8105h50c65.075 0 65.075-18.27 130.15-18.27l10-1.0059z" style="fill:#f2f78a;stroke-width:0px"/>
-          <path class="flow" id="8"  d="m411.2 213.83c-63.778 0-63.778 39.766-127.56 39.766h-50c-63.13 0-73.13-15.686-136.26-15.686v1.6602c63.13 0 73.13 15.686 136.26 15.686h50c63.778 0 63.778-39.766 127.56-39.766l10-0.83008z" style="fill:#a5d7d4;stroke-width:0px"/>
-          <path class="flow" id="9"  d="m411.2 215.49c-64.427 0-64.427 53.613-128.85 53.613h-50c-62.481 0-72.482-29.533-134.96-29.533v7.043c62.481 0 72.482 29.533 134.96 29.533h50c64.427 0 64.427-53.613 128.85-53.613l10-3.5215z" style="fill:#d980b7;stroke-width:0px"/>
-          <path class="flow" id="10" d="m98.677 344.1c59.887 0 59.887-32.347 119.77-32.347l10 0.64829-10 0.64829c-59.887 0-59.887 32.347-119.77 32.347z" style="fill:#ae9e80;stroke-width:0px"/>
-          <path class="flow" id="11" d="m98.677 345.4c59.239 0 59.239-15.851 118.48-15.851l10 1.4505-10 1.4505c-59.238 0-59.238 15.851-118.48 15.851z" style="fill:#f2f78a;stroke-width:0px"/>
-          <path class="flow" id="12" d="m98.677 385.18c56.644 0 56.644-9.2326 113.29-9.2326l10 10.206-10 10.206c-56.644 0-56.644 9.2326-113.29 9.2326z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="13" d="m278.45 311.75c65.724 0 65.724-24.882 131.45-24.882l10 0.64829-10 0.6483c-65.724 0-65.724 24.882-131.45 24.882z" style="fill:#ae9e80;stroke-width:0px"/>
-          <path class="flow" id="14" d="m277.15 329.55c66.372 0 66.372-41.378 132.74-41.378l10 0.8728-10 0.8728c-66.372 0-66.372 41.378-132.74 41.378z" style="fill:#f2f78a;stroke-width:0px"/>
-          <path class="flow" id="15" d="m277.15 331.29c356.79 0 356.79-73.153 713.57-73.153l10 0.57767-10 0.57766c-356.79 0-356.79 73.153-713.57 73.153z" style="fill:#f2f78a;stroke-width:0px"/>
-          <path class="flow" id="16" d="m271.97 375.94c69.615 0 69.615-35.864 139.23-35.864l10 3.7107-10 3.7107c-69.615 0-69.615 35.864-139.23 35.864z" style="fill:#ae9e80;stroke-width:0px"/>
-          <path class="flow" id="17" d="m271.97 383.37c70.264 0 70.264-14.678 140.53-14.678l10 27.564-10 27.564c-70.264 0-70.264 14.678-140.53 14.678z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="18" d="m271.97 438.49c70.264 0 70.264-9.2902 140.53-9.2902l10 49.825-10 49.825c-70.264 0-70.264 9.2903-140.53 9.2903z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="19" d="m271.97 538.14c69.615 0 69.615-4.1464 139.23-4.1464l10 36.355-10 36.355c-69.615 0-69.615 4.1464-139.23 4.1464z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="20" d="m469.9 2.0487c343.17 0 343.17-2.0487 686.33-2.0487l10 28.263-10 28.263c-343.17 0-343.17 2.0487-686.33 2.0487z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="21" d="m469.9 58.574c343.82 0 343.82 28.447 687.63 28.447l10 11.346-10 11.346c-343.82 0-343.82-28.447-687.63-28.447z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="22" d="m469.9 81.267c124.74 0 124.74 24.02 249.48 24.02l10 28.429-10 28.429c-124.74 0-124.74-24.02-249.48-24.02z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="23" d="m471.2 191.85c124.09 0 124.09-29.707 248.18-29.707l10 15.342-10 15.342c-124.09 0-124.09 29.707-248.18 29.707z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="24" d="m471.2 222.54c343.17 0 343.17-87.607 686.33-87.607l10 0.63063-10 0.63064c-343.17 0-343.17 87.607-686.33 87.607z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="25" d="m471.2 223.8c85.356 0 85.356-1.3894 170.71-1.3894l8.8843 17.406-8.8843 17.406c-85.356 0-85.356 1.3894-170.71 1.3894z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="26" d="m469.9 286.87c124.74 0 124.74-94.045 249.48-94.045l10 1.5211-10 1.5211c-124.74 0-124.74 94.045-249.48 94.045z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="27" d="m469.9 289.92c343.82 0 343.82-153.72 687.63-153.72l10 2.5225-10 2.5225c-343.82 0-343.82 153.72-687.63 153.72z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="28" d="m471.2 340.08c172.47 0 172.47 4.5266 344.95 4.5266l10 3.7107-10 3.7107c-172.47 0-172.47-4.5266-344.95-4.5266z" style="fill:#ae9e80;stroke-width:0px"/>
-          <path class="flow" id="29" d="m595.78 351.97c-56.644 0-66.645 16.721-123.29 16.721v34.318c56.644 0 66.645-16.723 123.29-16.723h50c85.18 0 85.179 0.0625 170.36 0.0625l10-17.158-10-17.158c-85.18 0-85.179-0.0625-170.36-0.0625z" style="fill:#ae9e80;stroke-width:0px"/>
-          <path class="flow" id="30" d="m816.14 386.34c-85.828 0-85.828 3.4043-171.66 3.4043h-50c-55.996 0-65.996 13.256-121.99 13.256v12.006c55.996 0 65.996-13.254 121.99-13.254h50c85.828 0 85.828-3.4043 171.66-3.4043l10-6.0039z" style="fill:#dec580;stroke-width:0px"/>
-          <path class="flow" id="31" d="m816.14 398.35c-85.828 0-144.42 8.3965-171.66 8.3965h-50c-55.996 0-65.996 8.2617-121.99 8.2617v8.8047c55.996 0 65.996-8.2617 121.99-8.2617h50c14.88 0 40.177-7.9761 171.66-8.3984l10-4.4023z" style="fill:#f2f78a;stroke-width:0px" sodipodi:nodetypes="cssccssccc"/>
-          <path class="flow" id="32" d="m472.49 429.2c171.82 0 171.82-22.047 343.65-22.047l10 43.539-10 43.539c-171.82 0-171.82 22.047-343.65 22.047z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="33" d="m38.677 396.28h-5a22.572 22.572 0 0 0-22.572 22.572v200a22.572 22.572 0 0 0 22.572 22.572h443.82a22.572 22.572 0 0 0 22.572-22.572v-80a22.572 22.572 0 0 0-22.572-22.572h-5v12.572h5a10 10 0 0 1 10 10v80a10 10 0 0 1-10 10h-443.82a10 10 0 0 1-10-10v-200a10 10 0 0 1 10-10h5l10-6.2862z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="34" d="m816.14 494.23c-78.046 0-78.046 36.627-156.09 36.627v2e-3h-50c-64.427 0-74.427 3.1367-138.85 3.1367v38.791c64.427 0 74.427-3.1367 138.85-3.1367h50c78.046 0 78.046-36.629 156.09-36.629l10-19.395z" style="fill:#ae9e80;stroke-width:0px"/>
-          <path class="flow" id="35" d="m33.678 385.18a33.677 33.677 0 0 0-33.678 33.676v200a33.677 33.677 0 0 0 33.678 33.678h631.37a21.104 21.104 0 0 0 21.105-21.105v-40.668a21.104 21.104 0 0 0-21.105-21.104h-55c-64.427 0-74.427 3.1367-138.85 3.1367v9.7734c64.427 0 74.427-3.1367 138.85-3.1367h50v-2e-3h5a11.332 11.332 0 0 1 11.332 11.332v40.668a11.332 11.332 0 0 1-11.332 11.332h-631.37a23.904 23.904 0 0 1-23.904-23.904v-200a23.904 23.904 0 0 1 23.904-23.904h5l10-4.8848-10-4.8867z" style="fill:#ae9e80;stroke-width:0px"/>
-          <path class="flow" id="36" d="m816.14 533.02c-78.046 0-78.046 47.725-156.09 47.725h-50c-64.427 0-74.427 1.8125-138.85 1.8125v13.213c64.427 0 74.427-1.8125 138.85-1.8125h50c78.046 0 78.046-47.723 156.09-47.723l10-6.6074z" style="fill:#dec580;stroke-width:0px"/>
-          <path class="flow" id="37" d="m816.14 546.24c-78.695 1e-5 -78.694 54.682-157.39 54.682h-50c-63.778 0-73.778-5.1465-137.56-5.1465v9.6016c63.778 0 73.778 5.1465 137.56 5.1465h50v-2e-3c78.695-1e-5 78.694-54.682 157.39-54.682l10-4.8008z" style="fill:#f2f78a;stroke-width:0px"/>
-          <path class="flow" id="38" d="m33.678 394.95a23.904 23.904 0 0 0-23.904 23.904v208a23.904 23.904 0 0 0 23.904 23.904h630.07a11.332 11.332 0 0 0 11.332-11.332v-17.572a11.332 11.332 0 0 0-11.332-11.332h-5v4e-3h-50c-63.778 0-73.778-5.1484-137.56-5.1484v1.332c63.778 0 73.778 5.1484 137.56 5.1484h50v-4e-3h5a10 10 0 0 1 10 10v17.572a10 10 0 0 1-10 10h-630.07a22.572 22.572 0 0 1-22.574-22.572v-208a22.572 22.572 0 0 1 22.574-22.572h5l10-0.66602-10-0.66601z" style="fill:#f2f78a;stroke-width:0px"/>
-          <path class="flow" id="39" d="m876.14 344.61c57.293 0 57.293-85.311 114.59-85.311l10 33.802-10 33.802c-57.293 0-57.293 85.311-114.59 85.311z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="40" d="m876.14 412.21c140.05 0 140.05-27.496 280.09-27.496l10 84.984-10 84.984c-140.05 0-140.05 27.496-280.09 27.496z" style="fill:#d980b7;stroke-width:0px"/>
-          <path class="flow" id="41" d="m876.14 582.18c140.05 0 140.05-14 280.09-14l10 17.837-10 17.837c-140.05 0-140.05 14-280.09 14z" style="fill:#d980b7;stroke-width:0px"/>
-          <path class="flow" id="42" d="m1050.7 258.14c53.402 0 53.402-116.9 106.8-116.9l10 37.838-10 37.838c-53.402 0-53.402 116.9-106.8 116.9z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <path class="flow" id="43" d="m779.38 105.29c189.08 0 189.08 4.4277 378.15 4.4277l10 12.608-10 12.608c-189.08 0-189.08-4.4277-378.15-4.4277z" style="fill:#e3a6aa;stroke-width:0px"/>
-          <rect id="rect160967" class="node-rect" x="826.14" y="344.61" width="50" height="273.25" style="fill:#d980b7;stroke-width:0px"/>
-          <text id="text160969" class="node-label" x="822.69391" y="485.51852" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Demolition</text>
-          <rect id="rect160973" class="node-rect" x="419.9" y="2.0491" width="50" height="136.08" style="fill:#d980b7;stroke-width:0px"/>
-          <text id="text160975" class="node-label" x="402.66669" y="66.876167" style="font-family:'Liberation Sans';font-size:12px" data-notex="1"><tspan id="tspan190300" x="402.66669" y="66.876167" sodipodi:role="line">Overburden</tspan><tspan id="tspan190302" x="402.66669" y="81.876167" sodipodi:role="line">and Interburden</tspan></text>
-          <rect id="rect160979" class="node-rect" x="421.2" y="191.85" width="50" height="66.757" style="fill:#d980b7;stroke-width:0px"/>
-          <text id="text160981" class="node-label" x="400.88895" y="227.89595" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Scalpings and Fines</text>
-          <rect id="rect160985" class="node-rect" x="48.677" y="385.18" width="50" height="23.677" style="fill:#d980b7;stroke-width:0px"/>
-          <text id="text160987" class="node-label" x="35.912689" y="401.51221" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Deconstruction</text>
-          <rect id="rect160991" class="node-rect" x="47.38" y="39.646" width="50" height="56.858" style="fill:#a7e66f;stroke-width:0px"/>
-          <g>
-           <text id="text160993" class="node-label" x="46.520569" y="71.22123" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Extraction</text>
-           <text id="text160999" class="node-label" x="214.04517" y="86.179741" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Sand</text>
-           <text id="text161005" class="node-label" x="216.63916" y="66.596748" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Gravel</text>
-           <text id="text161011" class="node-label" x="217.93616" y="34.195221" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Crushed Rock</text>
-           <text id="text161017" class="node-label" x="199.93616" y="154.74844" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Marine Dredged Sand</text>
-           <text id="text161023" class="node-label" x="198.53015" y="121.65347" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Marine Dredged Gravel</text>
-          </g>
-          <rect id="rect161027" class="node-rect" x="47.38" y="215.93" width="50" height="30.684" style="fill:#a7e66f;stroke-width:0px"/>
-          <g>
-           <text id="text161029" class="node-label" x="10.866585" y="233.907" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Processing/Production</text>
-           <text id="text161035" class="node-label" x="217.36206" y="234.29662" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Sand</text>
-           <text id="text161041" class="node-label" x="217.30347" y="219.31972" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Gravel</text>
-           <text id="text161047" class="node-label" x="217.29761" y="200.30074" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Crushed Rock</text>
-           <text id="text161053" class="node-label" x="217.36206" y="257.62903" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Secondary Aggregates</text>
-          </g>
-          <rect id="rect161057" class="node-rect" x="650.86" y="222.41" width="50" height="34.811" style="fill:#a2e39b;stroke-width:0px"/>
-          <text id="text161059" class="node-label" x="615.81927" y="235.41621" style="font-family:'Liberation Sans';font-size:12px" data-notex="1"><tspan id="tspan188148" x="615.81927" y="235.41621" sodipodi:role="line">Processing/Production</tspan><tspan id="tspan188150" x="615.81927" y="250.41621" sodipodi:role="line">recycled Waste</tspan></text>
-          <text id="text161065" class="node-label" x="217.29761" y="275.82758" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">C&amp;D Waste</text>
-          <rect id="rect161069" class="node-rect" x="48.677" y="344.1" width="50" height="4.1975" style="fill:#a7e66f;stroke-width:0px"/>
-          <text id="text161071" class="node-label" x="28.778603" y="349.94455" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Manufacturing</text>
-          <rect id="rect161075" class="node-rect" x="228.45" y="311.76" width="50" height="1.2966" style="fill:#ae9e80;stroke-width:0px"/>
-          <text id="text161077" class="node-label" x="193.82745" y="308.71768" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Concreting Crushed Rock</text>
-          <rect id="rect161081" class="node-rect" x="1166.2" y="568.18" width="50" height="35.674" style="fill:#d980b7;stroke-width:0px"/>
-          <text id="text161083" class="node-label" x="1146.7992" y="589.88922" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Concreting C&amp;D</text>
-          <rect id="rect161087" class="node-rect" x="227.15" y="329.55" width="50" height="2.9009" style="fill:#f2f78a;stroke-width:0px"/>
-          <text id="text161089" class="node-label" x="201.45245" y="342.43301" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Mortar Manufacturing</text>
-          <rect id="rect161093" class="node-rect" x="419.9" y="286.87" width="50" height="8.0873" style="fill:#d980b7;stroke-width:0px"/>
-          <text id="text161095" class="node-label" x="402.82153" y="303.75674" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Manufacturing Waste</text>
-          <rect id="rect161099" class="node-rect" x="221.97" y="375.94" width="50" height="234.91" style="fill:#a7e66f;stroke-width:0px"/>
-          <text id="text161101" class="node-label" x="235.47873" y="498.46817" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Use</text>
-          <rect id="rect161105" class="node-rect" x="422.49" y="368.69" width="50" height="55.128" style="fill:#ca91fd;stroke-width:0px"/>
-          <text id="text161107" class="node-label" x="433.04395" y="400.53998" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Road</text>
-          <rect id="rect161111" class="node-rect" x="421.2" y="534" width="50" height="72.71" style="fill:#ca91fd;stroke-width:0px"/>
-          <g>
-           <text id="text161113" class="node-label" x="421.57111" y="573.45453" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Buildings</text>
-           <text id="text161119" class="node-label" x="577.48413" y="415.35095" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Sand</text>
-           <text id="text161125" class="node-label" x="577.48413" y="399.95276" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Gravel</text>
-           <text id="text161131" class="node-label" x="578.78113" y="373.32343" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Rock</text>
-          </g>
-          <rect id="rect161135" class="node-rect" x="421.2" y="340.08" width="50" height="7.4213" style="fill:#ca91fd;stroke-width:0px"/>
-          <g>
-           <text id="text161137" class="node-label" x="417.53107" y="347.86768" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Railway Ballast</text>
-           <text id="text161143" class="node-label" x="580.75214" y="610.58746" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Sand</text>
-           <text id="text161149" class="node-label" x="582.04913" y="591.55566" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Gravel</text>
-           <text id="text161155" class="node-label" x="582.04913" y="559.34314" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Crushed Rock</text>
-          </g>
-          <rect id="rect161159" class="node-rect" x="422.49" y="429.2" width="50" height="99.65" style="fill:#ca91fd;stroke-width:0px"/>
-          <text id="text161161" class="node-label" x="395.45605" y="485.39554" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Other Infrastructure</text>
-          <rect id="rect161165" class="node-rect" x="1000.7" y="258.14" width="50" height="75.676" style="fill:#d980b7;stroke-width:0px"/>
-          <text id="text161167" class="node-label" x="1006.6227" y="300.2673" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Landfill</text>
-          <rect id="rect161171" class="node-rect" x="729.38" y="105.29" width="50" height="90.584" style="fill:#d980b7;stroke-width:0px"/>
-          <text id="text161173" class="node-label" x="689.68091" y="153.68089" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Other Waste Processing</text>
-          <rect id="rect161177" class="node-rect" x="1166.2" y="384.72" width="50" height="169.97" style="fill:#d980b7;stroke-width:0px"/>
-          <text id="text161179" class="node-label" x="1149.6755" y="466.48859" style="font-family:'Liberation Sans';font-size:12px" data-notex="1"><tspan id="tspan193695" x="1149.6755" y="466.48859" sodipodi:role="line">Processing /</tspan><tspan id="tspan193697" x="1149.6755" y="481.48859" sodipodi:role="line">ProductionC&amp;D</tspan></text>
-          <rect id="rect161183" class="node-rect" x="1166.2" y=".00010739" width="50" height="56.525" style="fill:#ca91fd;stroke-width:0px"/>
-          <text id="text161185" class="node-label" x="1163.1667" y="32.551727" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Use as Fill</text>
-          <rect id="rect161189" class="node-rect" x="1167.5" y="87.021" width="50" height="129.89" style="fill:#a7e66f;stroke-width:0px"/>
-          <text id="text161191" class="node-label" x="1207.2548" y="156.25554" text-anchor="end" style="font-family:'Liberation Sans';font-size:12px" data-notex="1">Stock</text>
+      <div class="nodesankey" data-name="Waste Management" hidden>
+        <h4 class="text-center mb-4">Waste Management</h4>
+        <svg data-name="Waste Management" viewBox="0 0 1267 653" xmlns="http://www.w3.org/2000/svg">
+          <path class="flow" data-index="0"  d="m409.9 2.0478c-62.481 0-62.482 11.205-124.96 11.205h-50c-63.778 0-73.778 26.393-137.56 26.393v33.484c63.778 0 73.778-26.393 137.56-26.393h50c62.481 0 62.482-11.205 124.96-11.205l10-16.742z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="1"  d="m409.9 35.532c-63.13 0-63.13 21.701-126.26 21.701h-50c-63.13 0-73.13 15.896-136.26 15.896v10.328c63.13 0 73.13-15.898 136.26-15.898h50v2e-3c63.13 0 63.13-21.701 126.26-21.701l10-5.1641z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="2"  d="m409.9 45.86c-64.427 0-64.427 33.195-128.85 33.195h-50c-61.833 0-71.833 4.4024-133.67 4.4024v5.8457c61.833 0 71.833-4.4004 133.67-4.4004h50c64.427 0 64.427-33.195 128.85-33.195l10-2.9238z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="3"  d="m409.9 51.708c-61.184 0-61.183 73.691-122.37 73.691v4.1074c61.184 0 61.183-73.693 122.37-73.693l10-2.0527zm-312.52 37.596v4.1074c65.075 0 75.075 36.096 140.15 36.096h50v-4.1074h-50c-65.075 0-75.075-36.096-140.15-36.096z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="4"  d="m409.9 55.813c-62.481 0-62.482 85.189-124.96 85.189h-50c-63.778 0-73.778-47.592-137.56-47.592v3.0918c63.778 0 73.778 47.592 137.56 47.592h50c62.481 0 62.482-85.187 124.96-85.187l10-1.5469z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="5"  d="m234.94 189.59c-63.778 0-73.778 26.342-137.56 26.342v15.02c63.778 0 73.778-26.342 137.56-26.342h50c63.13 0 63.13 2.2598 126.26 2.2598l10-7.5098-10-7.5078c-63.13 0-63.13-2.2617-126.26-2.2617z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="6"  d="m411.2 206.87c-64.427 0-64.427 6.7754-128.85 6.7754h-50c-62.481-1e-5 -72.482 17.307-134.96 17.307v4.9492c62.481 0 72.482-17.307 134.96-17.307h50c64.427 0 64.427-6.7754 128.85-6.7754l10-2.4746z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="7"  d="m411.2 211.82c-65.075 0-65.075 18.271-130.15 18.271h-50c-61.833 0-71.833 5.8105-133.67 5.8105v2.0117c61.833 0 71.833-5.8105 133.67-5.8105h50c65.075 0 65.075-18.27 130.15-18.27l10-1.0059z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="8"  d="m411.2 213.83c-63.778 0-63.778 39.766-127.56 39.766h-50c-63.13 0-73.13-15.686-136.26-15.686v1.6602c63.13 0 73.13 15.686 136.26 15.686h50c63.778 0 63.778-39.766 127.56-39.766l10-0.83008z" style="fill:#a5d7d4;stroke-width:0px"/>
+          <path class="flow" data-index="9"  d="m411.2 215.49c-64.427 0-64.427 53.613-128.85 53.613h-50c-62.481 0-72.482-29.533-134.96-29.533v7.043c62.481 0 72.482 29.533 134.96 29.533h50c64.427 0 64.427-53.613 128.85-53.613l10-3.5215z" style="fill:#d980b7;stroke-width:0px"/>
+          <path class="flow" data-index="10" d="m98.677 344.1c59.887 0 59.887-32.347 119.77-32.347l10 0.64829-10 0.64829c-59.887 0-59.887 32.347-119.77 32.347z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="11" d="m98.677 345.4c59.239 0 59.239-15.851 118.48-15.851l10 1.4505-10 1.4505c-59.238 0-59.238 15.851-118.48 15.851z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="12" d="m98.677 385.18c56.644 0 56.644-9.2326 113.29-9.2326l10 10.206-10 10.206c-56.644 0-56.644 9.2326-113.29 9.2326z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="13" d="m278.45 311.75c65.724 0 65.724-24.882 131.45-24.882l10 0.64829-10 0.6483c-65.724 0-65.724 24.882-131.45 24.882z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="14" d="m277.15 329.55c66.372 0 66.372-41.378 132.74-41.378l10 0.8728-10 0.8728c-66.372 0-66.372 41.378-132.74 41.378z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="15" d="m277.15 331.29c356.79 0 356.79-73.153 713.57-73.153l10 0.57767-10 0.57766c-356.79 0-356.79 73.153-713.57 73.153z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="16" d="m271.97 375.94c69.615 0 69.615-35.864 139.23-35.864l10 3.7107-10 3.7107c-69.615 0-69.615 35.864-139.23 35.864z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="17" d="m271.97 383.37c70.264 0 70.264-14.678 140.53-14.678l10 27.564-10 27.564c-70.264 0-70.264 14.678-140.53 14.678z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="18" d="m271.97 438.49c70.264 0 70.264-9.2902 140.53-9.2902l10 49.825-10 49.825c-70.264 0-70.264 9.2903-140.53 9.2903z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="19" d="m271.97 538.14c69.615 0 69.615-4.1464 139.23-4.1464l10 36.355-10 36.355c-69.615 0-69.615 4.1464-139.23 4.1464z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="20" d="m469.9 2.0487c343.17 0 343.17-2.0487 686.33-2.0487l10 28.263-10 28.263c-343.17 0-343.17 2.0487-686.33 2.0487z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="21" d="m469.9 58.574c343.82 0 343.82 28.447 687.63 28.447l10 11.346-10 11.346c-343.82 0-343.82-28.447-687.63-28.447z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="22" d="m469.9 81.267c124.74 0 124.74 24.02 249.48 24.02l10 28.429-10 28.429c-124.74 0-124.74-24.02-249.48-24.02z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="23" d="m471.2 191.85c124.09 0 124.09-29.707 248.18-29.707l10 15.342-10 15.342c-124.09 0-124.09 29.707-248.18 29.707z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="24" d="m471.2 222.54c343.17 0 343.17-87.607 686.33-87.607l10 0.63063-10 0.63064c-343.17 0-343.17 87.607-686.33 87.607z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="25" d="m471.2 223.8c85.356 0 85.356-1.3894 170.71-1.3894l8.8843 17.406-8.8843 17.406c-85.356 0-85.356 1.3894-170.71 1.3894z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="26" d="m469.9 286.87c124.74 0 124.74-94.045 249.48-94.045l10 1.5211-10 1.5211c-124.74 0-124.74 94.045-249.48 94.045z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="27" d="m469.9 289.92c343.82 0 343.82-153.72 687.63-153.72l10 2.5225-10 2.5225c-343.82 0-343.82 153.72-687.63 153.72z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="28" d="m471.2 340.08c172.47 0 172.47 4.5266 344.95 4.5266l10 3.7107-10 3.7107c-172.47 0-172.47-4.5266-344.95-4.5266z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="29" d="m595.78 351.97c-56.644 0-66.645 16.721-123.29 16.721v34.318c56.644 0 66.645-16.723 123.29-16.723h50c85.18 0 85.179 0.0625 170.36 0.0625l10-17.158-10-17.158c-85.18 0-85.179-0.0625-170.36-0.0625z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="30" d="m816.14 386.34c-85.828 0-85.828 3.4043-171.66 3.4043h-50c-55.996 0-65.996 13.256-121.99 13.256v12.006c55.996 0 65.996-13.254 121.99-13.254h50c85.828 0 85.828-3.4043 171.66-3.4043l10-6.0039z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="31" d="m816.14 398.35c-85.828 0-144.42 8.3965-171.66 8.3965h-50c-55.996 0-65.996 8.2617-121.99 8.2617v8.8047c55.996 0 65.996-8.2617 121.99-8.2617h50c14.88 0 40.177-7.9761 171.66-8.3984l10-4.4023z" style="fill:#f2f78a;stroke-width:0px" sodipodi:nodetypes="cssccssccc"/>
+          <path class="flow" data-index="32" d="m472.49 429.2c171.82 0 171.82-22.047 343.65-22.047l10 43.539-10 43.539c-171.82 0-171.82 22.047-343.65 22.047z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="33" d="m38.677 396.28h-5a22.572 22.572 0 0 0-22.572 22.572v200a22.572 22.572 0 0 0 22.572 22.572h443.82a22.572 22.572 0 0 0 22.572-22.572v-80a22.572 22.572 0 0 0-22.572-22.572h-5v12.572h5a10 10 0 0 1 10 10v80a10 10 0 0 1-10 10h-443.82a10 10 0 0 1-10-10v-200a10 10 0 0 1 10-10h5l10-6.2862z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="34" d="m816.14 494.23c-78.046 0-78.046 36.627-156.09 36.627v2e-3h-50c-64.427 0-74.427 3.1367-138.85 3.1367v38.791c64.427 0 74.427-3.1367 138.85-3.1367h50c78.046 0 78.046-36.629 156.09-36.629l10-19.395z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="35" d="m33.678 385.18a33.677 33.677 0 0 0-33.678 33.676v200a33.677 33.677 0 0 0 33.678 33.678h631.37a21.104 21.104 0 0 0 21.105-21.105v-40.668a21.104 21.104 0 0 0-21.105-21.104h-55c-64.427 0-74.427 3.1367-138.85 3.1367v9.7734c64.427 0 74.427-3.1367 138.85-3.1367h50v-2e-3h5a11.332 11.332 0 0 1 11.332 11.332v40.668a11.332 11.332 0 0 1-11.332 11.332h-631.37a23.904 23.904 0 0 1-23.904-23.904v-200a23.904 23.904 0 0 1 23.904-23.904h5l10-4.8848-10-4.8867z" style="fill:#ae9e80;stroke-width:0px"/>
+          <path class="flow" data-index="36" d="m816.14 533.02c-78.046 0-78.046 47.725-156.09 47.725h-50c-64.427 0-74.427 1.8125-138.85 1.8125v13.213c64.427 0 74.427-1.8125 138.85-1.8125h50c78.046 0 78.046-47.723 156.09-47.723l10-6.6074z" style="fill:#dec580;stroke-width:0px"/>
+          <path class="flow" data-index="37" d="m816.14 546.24c-78.695 1e-5 -78.694 54.682-157.39 54.682h-50c-63.778 0-73.778-5.1465-137.56-5.1465v9.6016c63.778 0 73.778 5.1465 137.56 5.1465h50v-2e-3c78.695-1e-5 78.694-54.682 157.39-54.682l10-4.8008z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="38" d="m33.678 394.95a23.904 23.904 0 0 0-23.904 23.904v208a23.904 23.904 0 0 0 23.904 23.904h630.07a11.332 11.332 0 0 0 11.332-11.332v-17.572a11.332 11.332 0 0 0-11.332-11.332h-5v4e-3h-50c-63.778 0-73.778-5.1484-137.56-5.1484v1.332c63.778 0 73.778 5.1484 137.56 5.1484h50v-4e-3h5a10 10 0 0 1 10 10v17.572a10 10 0 0 1-10 10h-630.07a22.572 22.572 0 0 1-22.574-22.572v-208a22.572 22.572 0 0 1 22.574-22.572h5l10-0.66602-10-0.66601z" style="fill:#f2f78a;stroke-width:0px"/>
+          <path class="flow" data-index="39" d="m876.14 344.61c57.293 0 57.293-85.311 114.59-85.311l10 33.802-10 33.802c-57.293 0-57.293 85.311-114.59 85.311z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="40" d="m876.14 412.21c140.05 0 140.05-27.496 280.09-27.496l10 84.984-10 84.984c-140.05 0-140.05 27.496-280.09 27.496z" style="fill:#d980b7;stroke-width:0px"/>
+          <path class="flow" data-index="41" d="m876.14 582.18c140.05 0 140.05-14 280.09-14l10 17.837-10 17.837c-140.05 0-140.05 14-280.09 14z" style="fill:#d980b7;stroke-width:0px"/>
+          <path class="flow" data-index="42" d="m1050.7 258.14c53.402 0 53.402-116.9 106.8-116.9l10 37.838-10 37.838c-53.402 0-53.402 116.9-106.8 116.9z" style="fill:#e3a6aa;stroke-width:0px"/>
+          <path class="flow" data-index="43" d="m779.38 105.29c189.08 0 189.08 4.4277 378.15 4.4277l10 12.608-10 12.608c-189.08 0-189.08-4.4277-378.15-4.4277z" style="fill:#e3a6aa;stroke-width:0px"/>
+
+          <rect class="node open-node" data-name="Extraction" x="47.38" y="39.646" width="50" height="56.858" style="fill:#a7e66f;stroke-width:0px"/>
+          <text class="node-label link-text" x="46.520569" y="71.22123">Extraction</text>
+
+          <rect class="node open-node" data-name="Processing/Production" x="47.38" y="215.93" width="50" height="30.684" style="fill:#a7e66f;stroke-width:0px"/>
+           <text class="node-label link-text" x="10.866585" y="233.907">Processing/Production</text>
+
+          <rect class="node open-node" data-name="Manufacturing" x="48.677" y="344.1" width="50" height="4.1975" style="fill:#a7e66f;stroke-width:0px"/>
+          <text class="node-label link-text" x="28.778603" y="349.94455">Manufacturing</text>
+
+          <rect class="node" data-name="Deconstruction" x="48.677" y="385.18" width="50" height="23.677" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="35.912689" y="401.51221">Deconstruction</text>
+
+          <rect class="node" data-name="Concreting Crushed Rock" x="228.45" y="311.76" width="50" height="1.2966" style="fill:#ae9e80;stroke-width:0px"/>
+          <text class="node-label" x="193.82745" y="308.71768">Concreting Crushed Rock</text>
+
+          <rect class="node open-node" data-name="Mortar Manufacturing" data-link="Manufacturing" x="227.15" y="329.55" width="50" height="2.9009" style="fill:#f2f78a;stroke-width:0px"/>
+          <text class="node-label link-text" x="201.45245" y="342.43301">Mortar Manufacturing</text>
+
+          <rect class="node open-node" data-name="Use" x="221.97" y="375.94" width="50" height="234.91" style="fill:#a7e66f;stroke-width:0px"/>
+          <text class="node-label link-text" x="235.47873" y="498.46817">Use</text>
+
+          <rect class="node" data-name="Overburden and Interburden" x="419.9" y="2.0491" width="50" height="136.08" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="402.66669" y="66.876167"><tspan x="402.66669" y="66.876167" sodipodi:role="line">Overburden</tspan><tspan id="tspan190302" x="402.66669" y="81.876167" sodipodi:role="line">and Interburden</tspan></text>
+
+          <rect class="node" data-name="Demolition" x="826.14" y="344.61" width="50" height="273.25" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="822.69391" y="485.51852">Demolition</text>
+
+          <rect class="node" data-name="Scalpings and Fines" x="421.2" y="191.85" width="50" height="66.757" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="400.88895" y="227.89595">Scalpings and Fines</text>
+
+          <rect class="node" data-name="Manufacturing Waste" x="419.9" y="286.87" width="50" height="8.0873" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="402.82153" y="303.75674">Manufacturing Waste</text>
+
+          <rect class="node" data-name="Railway Ballast" x="421.2" y="340.08" width="50" height="7.4213" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label" x="417.53107" y="347.86768">Railway Ballast</text>
+
+          <rect class="node" data-name="Road" x="422.49" y="368.69" width="50" height="55.128" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label" x="433.04395" y="400.53998">Road</text>
+
+          <rect class="node" data-name="Other Infrastructure" x="422.49" y="429.2" width="50" height="99.65" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label" x="395.45605" y="485.39554">Other Infrastructure</text>
+
+          <rect class="node" data-name="Buildings" x="421.2" y="534" width="50" height="72.71" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label" x="421.57111" y="573.45453">Buildings</text>
+
+          <rect class="node" data-name="Recycled Waste" x="650.86" y="222.41" width="50" height="34.811" style="fill:#a2e39b;stroke-width:0px"/>
+          <text class="node-label" x="615.81927" y="235.41621"><tspan x="615.81927" y="235.41621" sodipodi:role="line">Processing/Production</tspan><tspan id="tspan188150" x="615.81927" y="250.41621" sodipodi:role="line">recycled Waste</tspan></text>
+
+          <rect class="node" data-name="Concreting C&D" x="1166.2" y="568.18" width="50" height="35.674" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="1146.7992" y="589.88922">Concreting C&D</text>
+
+          <rect class="node" data-name="Landfill" x="1000.7" y="258.14" width="50" height="75.676" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="1006.6227" y="300.2673">Landfill</text>
+
+          <rect class="node" data-name="Other Waste Processing" x="729.38" y="105.29" width="50" height="90.584" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="689.68091" y="153.68089">Other Waste Processing</text>
+
+          <rect class="node" data-name="Processing/Production C&D" x="1166.2" y="384.72" width="50" height="169.97" style="fill:#d980b7;stroke-width:0px"/>
+          <text class="node-label" x="1149.6755" y="466.48859"><tspan id="tspan193695" x="1149.6755" y="466.48859" sodipodi:role="line">Processing /</tspan><tspan id="tspan193697" x="1149.6755" y="481.48859" sodipodi:role="line">Production C&D</tspan></text>
+
+          <rect class="node open-node" data-name="Use as Fill" data-link="Use" x="1166.2" y=".00010739" width="50" height="56.525" style="fill:#ca91fd;stroke-width:0px"/>
+          <text class="node-label link-text" x="1163.1667" y="32.551727">Use as Fill</text>
+
+          <rect class="node" data-name="Stock" x="1167.5" y="87.021" width="50" height="129.89" style="fill:#a7e66f;stroke-width:0px"/>
+          <text class="node-label" x="1207.2548" y="156.25554" text-anchor="end">Stock</text>
+
+          <text class="node-label" x="214.04517" y="86.179741">Sand</text>
+          <text class="node-label" x="216.63916" y="66.596748">Gravel</text>
+          <text class="node-label" x="217.93616" y="34.195221">Crushed Rock</text>
+          <text class="node-label" x="217.29761" y="275.82758">C&D Waste</text>
+          <text class="node-label" x="199.93616" y="154.74844">Marine Dredged Sand</text>
+          <text class="node-label" x="198.53015" y="121.65347">Marine Dredged Gravel</text>
+          <text class="node-label" x="217.36206" y="234.29662">Sand</text>
+          <text class="node-label" x="217.30347" y="219.31972">Gravel</text>
+          <text class="node-label" x="217.29761" y="200.30074">Crushed Rock</text>
+          <text class="node-label" x="217.36206" y="257.62903">Secondary Aggregates</text>
+          <text class="node-label" x="577.48413" y="415.35095">Sand</text>
+          <text class="node-label" x="577.48413" y="399.95276">Gravel</text>
+          <text class="node-label" x="578.78113" y="373.32343">Rock</text>
+          <text class="node-label" x="580.75214" y="610.58746">Sand</text>
+          <text class="node-label" x="582.04913" y="591.55566">Gravel</text>
+          <text class="node-label" x="582.04913" y="559.34314">Crushed Rock</text>
         </svg>
       </div>
     </div>
@@ -929,6 +957,8 @@
         return "infrastructure_flows"
       } else if (svgName == "Manufacturing") {
         return "manufacturing_flows"
+      } else if (svgName == "Waste Management") {
+        return "waste_flows"
       }
     }
 
